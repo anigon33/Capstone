@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import <ParseUI/ParseUI.h>
 @interface ViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *BarList;
+@property (weak, nonatomic) IBOutlet MKMapView *myMapView;
 
 @end
 

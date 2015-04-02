@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>subtitle</key>
+		<string>Come in now were giving away T-Shirts</string>
+		<key>image</key>
+		<string>GinnMill.png</string>
+		<key>title</key>
+		<string>Gin Mill</string>
+		<key>latitude</key>
+		<real>39.753721</real>
+		<key>longitude</key>
+		<real>-104.991927</real>
+	</dict>
+	<dict>
+		<key>subtitle</key>
+		<string>Bring the whole family!!</string>
+		<key>image</key>
+		<string>TiltedKilt.png</string>
+		<key>title</key>
+		<string>Tilted Kilt</string>
+		<key>latitude</key>
+		<real>39.748451</real>
+		<key>longitude</key>
+		<real>-104.996092</real>
+	</dict>
+	<dict>
+		<key>subtitle</key>
+		<string>Come enjoy drinks on our rooftop patio!</string>
+		<key>image</key>
+		<string>Tavern.png</string>
+		<key>title</key>
+		<string>The Tavern Downtown</string>
+		<key>latitude</key>
+		<real>39.753546</real>
+		<key>longitude</key>
+		<real>-104.993723</real>
+	</dict>
+	<dict>
+		<key>subtitle </key>
+		<string>Cant wait to see you!</string>
+		<key>image</key>
+		<string>ViewHouse.png</string>
+		<key>title</key>
+		<string>View House</string>
+		<key>latitude</key>
+		<real>39.754211</real>
+		<key>longitude</key>
+		<real>-104.993234</real>
+	</dict>
+</array>
+</plist>

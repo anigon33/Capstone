@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "CoreData+MagicalRecord.h"
 @interface AppDelegate ()
 
 @end
@@ -16,7 +16,16 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    //[Parse enableLocalDatastore];
+    [Parse setApplicationId:@"sZre86lG4ulrSGqA50KmG9Fef1nv9IUKwmtc8aC6"
+                  clientKey:@"EqZMxxzkIszmTyplXiDgRFiJZY5AyQCDXTR8nPlI"];
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    [PFUser currentUser];
+   // [PFUser logOut];
+    //[MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"BarChat"];
+    // call parse, get latest bars
+    // save all to CoreData
+       
     return YES;
 }
 
@@ -39,7 +48,8 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [MagicalRecord cleanUp];
+
 }
 
 @end

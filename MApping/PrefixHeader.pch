@@ -1,0 +1,16 @@
+//
+//  PrefixHeader.pch
+//  MApping
+//
+//  Created by Nigon's on 3/22/15.
+//  Copyright (c) 2015 Adam Nigon. All rights reserved.
+//
+
+#ifndef MApping_PrefixHeader_pch
+#define MApping_PrefixHeader_pch
+#import “CoreData+MagicalRecord.h”
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif
