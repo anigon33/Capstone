@@ -127,6 +127,7 @@
         [annotations addObject:annotation];
     }
     return annotations;
+    //working annotations
 }
 - (void)zoomToLocation
 {
