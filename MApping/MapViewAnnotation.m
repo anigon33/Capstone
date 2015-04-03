@@ -13,7 +13,7 @@
 @synthesize title=_title;
 @synthesize image=_image;
 @synthesize subtitle = _subtitle;
--(id) initWithTitle:(NSString *)title AndCoordinate:(CLLocationCoordinate2D)coordinate andImage:(UIImage *)image andSubtitle:(NSString *)subtitle;
+-(id) initWithTitle:(NSString *)title AndCoordinate:(CLLocationCoordinate2D)coordinate andImage:(PFImageView *)image andSubtitle:(NSString *)subtitle;
 {
     self = [super init];
     _title = title;

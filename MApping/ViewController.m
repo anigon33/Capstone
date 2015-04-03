@@ -15,6 +15,7 @@
 #import "BarChatSignUpViewController.h"
 #import "AdditionalSurveyQuestionsViewController.h"
 #import <ParseUI/ParseUI.h>
+#import "DetailsViewController.h"
 
 @interface ViewController () <CLLocationManagerDelegate, MKMapViewDelegate,UINavigationControllerDelegate, PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate>
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -120,9 +121,11 @@
         
         
         NSString *title = [row objectForKey:@"name"];
-        PFFile *image = [row objectForKey:@"image"];
-        
-        MapViewAnnotation *annotation = [[MapViewAnnotation alloc] initWithTitle:title AndCoordinate:coordinate andImage:image andSubtitle:subtitle];
+       
+        PFImageView *imageView = [[PFImageView alloc] init];
+        imageView.file = [row objectForKey:@"image"];
+        [imageView loadInBackground];
+        MapViewAnnotation *annotation = [[MapViewAnnotation alloc] initWithTitle:title AndCoordinate:coordinate andImage:imageView andSubtitle:subtitle];
         
         [annotations addObject:annotation];
     }
@@ -134,7 +137,7 @@
     CLLocationCoordinate2D zoomLocation;
     zoomLocation.latitude = 39.750661;
     zoomLocation.longitude= -104.992028;
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 1*METERS_PER_MILE,1*METERS_PER_MILE);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 3*METERS_PER_MILE,3*METERS_PER_MILE);
     [self.myMapView regionThatFits:viewRegion];
 
     [self.myMapView setRegion:viewRegion animated:YES];
@@ -145,6 +148,17 @@ calloutAccessoryControlTapped:(UIControl *)control{
     
     [self performSegueWithIdentifier:@"toDetails" sender:self];
     
+}
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([[segue identifier] isEqualToString:@"toDetails"]) {
+//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+//        PFObject *object = [self.objects objectAtIndex:indexPath.row];
+//        
+//        DetailsViewController *detailsViewController = [segue destinationViewController];
+//        detailsViewController.establishmentObject = object;
+        NSLog(@"Yay!");
+        
+    }
 }
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id)annotation
@@ -158,6 +172,8 @@ calloutAccessoryControlTapped:(UIControl *)control{
     {
         av = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
         
+
+   //     av.leftCalloutAccessoryView = [[PFImageView alloc]initWithImage:self.locations[@"image"]];
         
         av.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         
@@ -185,6 +201,21 @@ calloutAccessoryControlTapped:(UIControl *)control{
 }
                                  
  
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
+    MKAnnotationView *aV;
+    for (aV in views) {
+        CGRect endFrame = aV.frame;
+        
+        aV.frame = CGRectMake(aV.frame.origin.x, aV.frame.origin.y - 230.0, aV.frame.size.width, aV.frame.size.height);
+        
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.8];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+        [aV setFrame:endFrame];
+        [UIView commitAnimations];
+        
+    }
+}
 
                                  
                                  

@@ -176,6 +176,9 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="enterBarButtonPressed:" destination="do9-uA-d6h" eventType="touchUpInside" id="MkA-ky-ehG"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iii-Vm-mUu" customClass="PFImageView">
                                 <rect key="frame" x="16" y="113" width="288" height="214"/>
@@ -196,11 +199,39 @@
                         <outlet property="BarLogo" destination="Iii-Vm-mUu" id="aRW-Jd-3Dh"/>
                         <outlet property="BarNameLabel" destination="OFs-xx-39K" id="qav-Qt-TNg"/>
                         <outlet property="BarSubtitleDetailsLabel" destination="o33-MN-lxS" id="dor-l7-mOu"/>
+                        <segue destination="2Ha-r9-nH2" kind="push" identifier="toCouponPage" id="62b-6d-aEf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rVz-4k-wgx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="278" y="896"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Oyl-37-aY5">
+            <objects>
+                <viewController id="2Ha-r9-nH2" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Tmf-RR-x8n"/>
+                        <viewControllerLayoutGuide type="bottom" id="yld-x6-6D2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dO1-Ek-ayZ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Coupons Bitch!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qt-h9-SQw">
+                                <rect key="frame" x="57" y="72" width="207" height="53"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ezH-AV-HlI"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iHG-jB-wYb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="753" y="896"/>
         </scene>
         <!--BAR LIST-->
         <scene sceneID="kRh-Qe-FKC">
@@ -252,6 +283,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mg6-Wm-4uZ"/>
+        <segue reference="8xb-H0-F0L"/>
     </inferredMetricsTieBreakers>
 </document>

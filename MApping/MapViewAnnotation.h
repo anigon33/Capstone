@@ -14,6 +14,6 @@
 @property (nonatomic,copy) NSString *title;
 @property (nonatomic, copy)NSString *subtitle;
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
-@property (nonatomic, readonly) UIImage *image;
--(id) initWithTitle:(NSString *) title AndCoordinate:(CLLocationCoordinate2D)coordinate andImage:image andSubtitle:(NSString *)subtitle;
+@property (nonatomic, readonly) PFImageView *image;
+-(id) initWithTitle:(NSString *) title AndCoordinate:(CLLocationCoordinate2D)coordinate andImage:(PFImageView *)image andSubtitle:(NSString *)subtitle;
 @end
