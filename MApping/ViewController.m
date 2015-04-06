@@ -20,6 +20,8 @@
 @interface ViewController () <CLLocationManagerDelegate, MKMapViewDelegate,UINavigationControllerDelegate, PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate>
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSArray *locations;
+@property (nonatomic, strong) PFObject *annotationTapped;
+@property (nonatomic, assign) NSUInteger index;
 @end
 
 @implementation ViewController
@@ -97,19 +99,10 @@
     [self performSegueWithIdentifier:@"surveySegue" sender:self];
     
 }
-- (IBAction)segmentedPushed:(id)sender {
-    if (self.BarList.selectedSegmentIndex == 0){
-    }
-    if (self.BarList.selectedSegmentIndex == 1) {
-        BarListTableViewController *barController = [[BarListTableViewController alloc] init];
-        
-        UINavigationController *bar = [[UINavigationController alloc]init];
-        [bar pushViewController:barController animated:YES];
-    }
-}
 - (NSMutableArray *)createAnnotations
 {
     NSMutableArray *annotations = [[NSMutableArray alloc] init];
+    
     
     for (NSDictionary *row in self.locations) {
         PFGeoPoint *barCoordinates = [row objectForKey:@"GeoCoordinates"];
@@ -119,13 +112,15 @@
         NSString *subtitle = [row objectForKey:@"subtitle"];
         
         
+        NSInteger index = [self.locations objectAtIndex:row];
+        
         
         NSString *title = [row objectForKey:@"name"];
        
         PFImageView *imageView = [[PFImageView alloc] init];
         imageView.file = [row objectForKey:@"image"];
         [imageView loadInBackground];
-        MapViewAnnotation *annotation = [[MapViewAnnotation alloc] initWithTitle:title AndCoordinate:coordinate andImage:imageView andSubtitle:subtitle];
+        MapViewAnnotation *annotation = [[MapViewAnnotation alloc] initWithTitle:title AndCoordinate:coordinate andImage:imageView andSubtitle:subtitle andEstablishmentIndex:index];
         
         [annotations addObject:annotation];
     }
@@ -145,17 +140,23 @@
 - (void)mapView:(MKMapView *)mapView
  annotationView:(MKAnnotationView *)view
 calloutAccessoryControlTapped:(UIControl *)control{
-    
-    [self performSegueWithIdentifier:@"toDetails" sender:self];
-    
+    if ([view.annotation isKindOfClass:[MapViewAnnotation class]])
+    {
+        
+        
+        MapViewAnnotation *mapVA = view.annotation;
+        self.annotationTapped = [self.locations objectAtIndex:mapVA.establishmentIndex];
+        
+        
+        [self performSegueWithIdentifier:@"toDetails" sender:self];
+    }
 }
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([[segue identifier] isEqualToString:@"toDetails"]) {
-//        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-//        PFObject *object = [self.objects objectAtIndex:indexPath.row];
-//        
-//        DetailsViewController *detailsViewController = [segue destinationViewController];
-//        detailsViewController.establishmentObject = object;
+        DetailsViewController *destination = [segue destinationViewController];
+        destination.establishmentObject = self.annotationTapped;
+
+        
         NSLog(@"Yay!");
         
     }
@@ -173,10 +174,11 @@ calloutAccessoryControlTapped:(UIControl *)control{
         av = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
         
 
+
    //     av.leftCalloutAccessoryView = [[PFImageView alloc]initWithImage:self.locations[@"image"]];
         
         av.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-        
+       
         
         UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 20)];
         lbl.backgroundColor = [UIColor clearColor];

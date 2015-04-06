@@ -13,13 +13,15 @@
 @synthesize title=_title;
 @synthesize image=_image;
 @synthesize subtitle = _subtitle;
--(id) initWithTitle:(NSString *)title AndCoordinate:(CLLocationCoordinate2D)coordinate andImage:(PFImageView *)image andSubtitle:(NSString *)subtitle;
+@synthesize establishmentIndex = _establishmentIndex;
+-(id) initWithTitle:(NSString *) title AndCoordinate:(CLLocationCoordinate2D)coordinate andImage:(PFImageView *)image andSubtitle:(NSString *)subtitle andEstablishmentIndex:(NSInteger)establishmentIndex;
 {
     self = [super init];
     _title = title;
     _coordinate = coordinate;
     _image = image;
     _subtitle = subtitle;
+    _establishmentIndex = establishmentIndex;
     return self;
 }
 @end

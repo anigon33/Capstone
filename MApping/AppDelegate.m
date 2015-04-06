@@ -21,7 +21,7 @@
                   clientKey:@"EqZMxxzkIszmTyplXiDgRFiJZY5AyQCDXTR8nPlI"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     [PFUser currentUser];
-    //[PFUser logOut];
+    [PFUser logOut];
     //[MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"BarChat"];
     // call parse, get latest bars
     // save all to CoreData

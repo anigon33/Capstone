@@ -50,10 +50,6 @@
 
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
 
@@ -148,15 +144,6 @@
         }
 }
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
- //   DetailsViewController *destinationVC = segue.destinationViewController;
-    // in DetailsVC create a ParseObject Property in h file
-    // pass the selected parse object to the destinactionVC
-    //destinationVC.NameOFPropertyOfParseOPbject = [barsarray objectAtIndex:row];
-    
-//}
 
 
 @end

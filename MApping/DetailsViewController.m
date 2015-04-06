@@ -29,6 +29,7 @@
     [self.BarLogo loadInBackground];
     
     self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.spinner.center = CGPointMake(200, 160);
     [self.view addSubview:self.spinner];
     
 }
@@ -51,7 +52,7 @@
                     [self.spinner stopAnimating];
                 }
                 else{
-                    NSString *title = @"Sorry";
+                    NSString *title = @"Oops!";
                     NSString *message = @"Coup' users must be inside each bar to see the specials, so get over there already!!";
                     
                     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
@@ -62,6 +63,7 @@
                     [alertView show];
 
                 }
+                [self.spinner stopAnimating];
             }
             
             // do something with the new geoPoint
