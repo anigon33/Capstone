@@ -15,6 +15,6 @@
 @property (nonatomic, copy)NSString *subtitle;
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 @property (nonatomic, readonly) PFImageView *image;
-@property (nonatomic, readonly) NSUInteger establishmentIndex;
--(id) initWithTitle:(NSString *) title AndCoordinate:(CLLocationCoordinate2D)coordinate andImage:(PFImageView *)image andSubtitle:(NSString *)subtitle andEstablishmentIndex:(NSUInteger)establishmentIndex;
+@property (nonatomic, readonly) int establishmentIndex;
+-(id) initWithTitle:(NSString *) title AndCoordinate:(CLLocationCoordinate2D)coordinate andImage:(PFImageView *)image andSubtitle:(NSString *)subtitle andEstablishmentIndex:(int)establishmentIndex;
 @end

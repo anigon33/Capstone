@@ -104,7 +104,9 @@
     NSMutableArray *annotations = [[NSMutableArray alloc]init];
     
     
-    for (NSDictionary *row in self.locations) {
+    for (int i = 0; i < self.locations.count; i++) {
+        PFObject *row = [self.locations objectAtIndex:i];
+        
         PFGeoPoint *barCoordinates = [row objectForKey:@"GeoCoordinates"];
         CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(barCoordinates.latitude, barCoordinates.longitude);
         
@@ -112,7 +114,7 @@
         NSString *subtitle = [row objectForKey:@"subtitle"];
         
         
-        NSUInteger index = [self.locations indexOfObject:row];
+     
         
         
         NSString *title = [row objectForKey:@"name"];
@@ -120,7 +122,7 @@
         PFImageView *imageView = [[PFImageView alloc] init];
         imageView.file = [row objectForKey:@"image"];
         [imageView loadInBackground];
-        MapViewAnnotation *annotation = [[MapViewAnnotation alloc] initWithTitle:title AndCoordinate:coordinate andImage:imageView andSubtitle:subtitle andEstablishmentIndex:index];
+        MapViewAnnotation *annotation = [[MapViewAnnotation alloc] initWithTitle:title AndCoordinate:coordinate andImage:imageView andSubtitle:subtitle andEstablishmentIndex:i];
         
         [annotations addObject:annotation];
     }
