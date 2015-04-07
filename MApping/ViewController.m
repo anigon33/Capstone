@@ -21,7 +21,7 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSArray *locations;
 @property (nonatomic, strong) PFObject *annotationTapped;
-@property (nonatomic, assign) NSUInteger index;
+
 @end
 
 @implementation ViewController
@@ -101,7 +101,7 @@
 }
 - (NSMutableArray *)createAnnotations
 {
-    NSMutableArray *annotations = [[NSMutableArray alloc] init];
+    NSMutableArray *annotations = [[NSMutableArray alloc]init];
     
     
     for (NSDictionary *row in self.locations) {
@@ -112,7 +112,7 @@
         NSString *subtitle = [row objectForKey:@"subtitle"];
         
         
-        NSInteger index = [self.locations objectAtIndex:row];
+        NSUInteger index = [self.locations indexOfObject:row];
         
         
         NSString *title = [row objectForKey:@"name"];
@@ -173,11 +173,17 @@ calloutAccessoryControlTapped:(UIControl *)control{
     {
         av = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
         
-
-
-   //     av.leftCalloutAccessoryView = [[PFImageView alloc]initWithImage:self.locations[@"image"]];
-        
         av.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        
+//        MapViewAnnotation *customAnnotation = annotation;
+//        
+//
+//        PFImageView *imageView = [[PFImageView alloc] init];
+//        imageView = customAnnotation.image;
+//        [imageView loadInBackground];
+//
+//        av.leftCalloutAccessoryView = imageView;
+
        
         
         UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 20)];

@@ -29,7 +29,7 @@
     [self.BarLogo loadInBackground];
     
     self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    self.spinner.center = CGPointMake(200, 160);
+    self.spinner.center = CGPointMake(160, 270);
     [self.view addSubview:self.spinner];
     
 }
@@ -37,7 +37,7 @@
     
     
     [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
-            if (!error) {
+        if (!error) {
             [self.spinner startAnimating];
             PFQuery *query = [PFQuery queryWithClassName:@"Establishment"];
             // Interested in locations near user.
@@ -60,10 +60,11 @@
                                                                        delegate:self
                                                               cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
                     
+                    [self.spinner stopAnimating];
+                    
                     [alertView show];
-
+                    
                 }
-                [self.spinner stopAnimating];
             }
             
             // do something with the new geoPoint

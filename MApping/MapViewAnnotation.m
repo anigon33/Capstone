@@ -14,7 +14,7 @@
 @synthesize image=_image;
 @synthesize subtitle = _subtitle;
 @synthesize establishmentIndex = _establishmentIndex;
--(id) initWithTitle:(NSString *) title AndCoordinate:(CLLocationCoordinate2D)coordinate andImage:(PFImageView *)image andSubtitle:(NSString *)subtitle andEstablishmentIndex:(NSInteger)establishmentIndex;
+-(id) initWithTitle:(NSString *) title AndCoordinate:(CLLocationCoordinate2D)coordinate andImage:(PFImageView *)image andSubtitle:(NSString *)subtitle andEstablishmentIndex:(NSUInteger)establishmentIndex;
 {
     self = [super init];
     _title = title;
