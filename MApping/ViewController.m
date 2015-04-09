@@ -51,7 +51,7 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             self.locations = [[NSArray alloc]initWithArray:objects];
-            [self.myMapView addAnnotations:[self createAnnotations]];
+            
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
@@ -59,7 +59,8 @@
     }];
     
 
-
+    
+    
     if (![PFUser currentUser]) { // No user logged in
         // Create the log in view controller
         BarChatLogInViewController *logInViewController = [[BarChatLogInViewController alloc] init];
@@ -88,6 +89,7 @@
 }
 -(void) logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user{
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [self.myMapView addAnnotations:[self createAnnotations]];
 
 }
 -(void) signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user{

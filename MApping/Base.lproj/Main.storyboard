@@ -102,7 +102,7 @@
         <!--Bar List-->
         <scene sceneID="aKt-8A-KnM">
             <objects>
-                <navigationController id="Scg-44-0tq" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BarListNavigationController" id="Scg-44-0tq" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Bar List" image="beermug" id="kiK-Pi-dXE"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qtb-8R-Hfz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -125,7 +125,7 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUQ-CE-7NT">
@@ -141,7 +141,9 @@
                         <color key="backgroundColor" red="0.55116948453222669" green="0.53616633680336023" blue="0.55656171085858586" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="hWQ-my-Sov"/>
-                    <navigationItem key="navigationItem" id="iOg-R2-HHu"/>
+                    <navigationItem key="navigationItem" id="iOg-R2-HHu">
+                        <barButtonItem key="backBarButtonItem" title="Map VIew" id="WCW-LF-2mk"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="myMapView" destination="bUQ-CE-7NT" id="REm-Jt-B5x"/>
                         <segue destination="do9-uA-d6h" kind="push" identifier="toDetails" id="8xb-H0-F0L"/>
@@ -161,15 +163,9 @@
                         <viewControllerLayoutGuide type="bottom" id="L8f-xB-QDh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="FK8-y8-GSR">
-                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="94" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome To View House!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFs-xx-39K">
-                                <rect key="frame" x="60" y="80" width="200" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Mj-xk-hfV">
                                 <rect key="frame" x="101" y="416" width="119" height="69"/>
                                 <state key="normal" image="barchatlogo3">
@@ -180,15 +176,21 @@
                                     <action selector="enterBarButtonPressed:" destination="do9-uA-d6h" eventType="touchUpInside" id="MkA-ky-ehG"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iii-Vm-mUu" customClass="PFImageView">
-                                <rect key="frame" x="16" y="113" width="288" height="214"/>
-                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome To View House!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFs-xx-39K">
+                                <rect key="frame" x="60" y="46" width="200" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o33-MN-lxS">
                                 <rect key="frame" x="89" y="335" width="143" height="73"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iii-Vm-mUu" customClass="PFImageView">
+                                <rect key="frame" x="16" y="73" width="288" height="335"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.88095801767676774" green="0.88095801767676774" blue="0.88095801767676774" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.067392676767676796" green="0.067392676767676796" blue="0.067392676767676796" alpha="1" colorSpace="calibratedRGB"/>
@@ -215,7 +217,7 @@
                         <viewControllerLayoutGuide type="bottom" id="yld-x6-6D2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dO1-Ek-ayZ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Coupons Bitch!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qt-h9-SQw">
@@ -224,6 +226,9 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TavernCouponHomePage" translatesAutoresizingMaskIntoConstraints="NO" id="4C5-j3-uaL">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -273,6 +278,7 @@
     </scenes>
     <resources>
         <image name="MiniMap3" width="41" height="41"/>
+        <image name="TavernCouponHomePage" width="320" height="568"/>
         <image name="barchatlogo3" width="175" height="130"/>
         <image name="beermug" width="23" height="21"/>
         <image name="lettersBest" width="312" height="164"/>

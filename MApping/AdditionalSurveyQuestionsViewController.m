@@ -120,6 +120,7 @@
     self.demographicsSurvey[@"Gender"] = self.goOutFrequency.text;
     [self.demographicsSurvey saveEventually];
     [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 /*
 #pragma mark - Navigation
