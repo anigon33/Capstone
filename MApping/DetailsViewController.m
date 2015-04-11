@@ -28,6 +28,8 @@
     self.BarLogo.file = [self.establishmentObject objectForKey:@"image"];
     [self.BarLogo loadInBackground];
     
+    
+    
     self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.spinner.center = CGPointMake(160, 270);
     [self.view addSubview:self.spinner];

@@ -8,6 +8,7 @@
         <scene sceneID="1Cw-dg-H5c">
             <objects>
                 <tabBarController id="nr4-E7-Zxf" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="VxE-1f-uPr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -85,8 +86,9 @@
         <!--Bars Around Town-->
         <scene sceneID="HLM-rs-cmm">
             <objects>
-                <navigationController navigationBarHidden="YES" id="zH9-h0-G7e" sceneMemberID="viewController">
+                <navigationController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="zH9-h0-G7e" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Bars Around Town" image="MiniMap3" id="ws5-mu-fMi"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Msj-Qc-qw5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -104,10 +106,14 @@
             <objects>
                 <navigationController storyboardIdentifier="BarListNavigationController" id="Scg-44-0tq" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Bar List" image="beermug" id="kiK-Pi-dXE"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Qtb-8R-Hfz">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Qtb-8R-Hfz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="xx9-VG-XUW">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="agC-oe-AGN" kind="relationship" relationship="rootViewController" id="Vww-Ky-D7l"/>
                     </connections>
@@ -144,6 +150,7 @@
                     <navigationItem key="navigationItem" id="iOg-R2-HHu">
                         <barButtonItem key="backBarButtonItem" title="Map VIew" id="WCW-LF-2mk"/>
                     </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="myMapView" destination="bUQ-CE-7NT" id="REm-Jt-B5x"/>
                         <segue destination="do9-uA-d6h" kind="push" identifier="toDetails" id="8xb-H0-F0L"/>
@@ -152,7 +159,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-217" y="896"/>
+            <point key="canvasLocation" x="-217" y="912"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="Oy0-1X-whW">
@@ -163,11 +170,11 @@
                         <viewControllerLayoutGuide type="bottom" id="L8f-xB-QDh"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="FK8-y8-GSR">
-                        <rect key="frame" x="0.0" y="94" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Mj-xk-hfV">
-                                <rect key="frame" x="101" y="416" width="119" height="69"/>
+                                <rect key="frame" x="101" y="380" width="119" height="69"/>
                                 <state key="normal" image="barchatlogo3">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -176,42 +183,29 @@
                                     <action selector="enterBarButtonPressed:" destination="do9-uA-d6h" eventType="touchUpInside" id="MkA-ky-ehG"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Welcome To View House!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFs-xx-39K">
-                                <rect key="frame" x="60" y="46" width="200" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o33-MN-lxS">
-                                <rect key="frame" x="89" y="335" width="143" height="73"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iii-Vm-mUu" customClass="PFImageView">
-                                <rect key="frame" x="16" y="73" width="288" height="335"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="252"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.88095801767676774" green="0.88095801767676774" blue="0.88095801767676774" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.067392676767676796" green="0.067392676767676796" blue="0.067392676767676796" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="ZIT-S2-XXd"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="BarImageView" destination="Iii-Vm-mUu" id="bvg-Yh-LAg"/>
                         <outlet property="BarLogo" destination="Iii-Vm-mUu" id="aRW-Jd-3Dh"/>
-                        <outlet property="BarNameLabel" destination="OFs-xx-39K" id="qav-Qt-TNg"/>
-                        <outlet property="BarSubtitleDetailsLabel" destination="o33-MN-lxS" id="dor-l7-mOu"/>
                         <segue destination="2Ha-r9-nH2" kind="push" identifier="toCouponPage" id="62b-6d-aEf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rVz-4k-wgx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="278" y="896"/>
+            <point key="canvasLocation" x="278" y="912"/>
         </scene>
-        <!--View Controller-->
+        <!--Coupon View Controller-->
         <scene sceneID="Oyl-37-aY5">
             <objects>
-                <viewController id="2Ha-r9-nH2" sceneMemberID="viewController">
+                <viewController id="2Ha-r9-nH2" customClass="CouponViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Tmf-RR-x8n"/>
                         <viewControllerLayoutGuide type="bottom" id="yld-x6-6D2"/>
@@ -220,30 +214,93 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Coupons Bitch!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7qt-h9-SQw">
-                                <rect key="frame" x="57" y="72" width="207" height="53"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TavernCouponHomePage" translatesAutoresizingMaskIntoConstraints="NO" id="4C5-j3-uaL">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                            <view autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="md8-JA-h9f" customClass="iCarousel">
+                                <rect key="frame" x="0.0" y="265" width="320" height="216"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" none="YES" image="YES"/>
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
+                            </view>
+                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TavernCouponHomePage" translatesAutoresizingMaskIntoConstraints="NO" id="4C5-j3-uaL">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="520"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="ezH-AV-HlI"/>
+                    <connections>
+                        <outlet property="carousel" destination="md8-JA-h9f" id="vWv-aF-n0w"/>
+                        <segue destination="TjL-TS-tSU" kind="modal" identifier="toFullScreenCoupon" modalTransitionStyle="crossDissolve" id="qZt-9D-tyQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iHG-jB-wYb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="753" y="896"/>
+            <point key="canvasLocation" x="749" y="912"/>
+        </scene>
+        <!--Coupon Redeem View Controller-->
+        <scene sceneID="yrd-lC-kuG">
+            <objects>
+                <viewController id="TjL-TS-tSU" customClass="CouponRedeemViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OGu-Ty-8HI"/>
+                        <viewControllerLayoutGuide type="bottom" id="aqS-Ee-u6x"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="817-e8-09W">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Bitmap9" translatesAutoresizingMaskIntoConstraints="NO" id="2pr-Ov-1M2">
+                                <rect key="frame" x="0.0" y="0.0" width="365" height="556"/>
+                            </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="GreyGooseCoupon" translatesAutoresizingMaskIntoConstraints="NO" id="auU-Ne-Lyj">
+                                <rect key="frame" x="20" y="93" width="280" height="400"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="mAg-xN-PlP" appends="YES" id="gfL-1o-ssS"/>
+                                </connections>
+                            </imageView>
+                            <button opaque="NO" alpha="0.59999999999999964" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GQr-WM-kI5">
+                                <rect key="frame" x="0.0" y="8" width="88" height="71"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="20"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" red="0.072643659598302282" green="0.48883012588722996" blue="0.92941176470588238" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="2Ha-r9-nH2" kind="modal" identifier="backToCouponHome" modalTransitionStyle="crossDissolve" id="5eM-b1-Qyp"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" alpha="0.49999999999999961" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Rectangle 159 + COUCHBUM23" translatesAutoresizingMaskIntoConstraints="NO" id="5Tb-rm-I4x">
+                                <rect key="frame" x="0.0" y="28" width="320" height="540"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Du8-cl-MLe"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <connections>
+                        <outlet property="IndiviualCouponImage" destination="auU-Ne-Lyj" id="BvY-SZ-MQP"/>
+                        <outlet property="PromoCodeImage" destination="5Tb-rm-I4x" id="VYR-64-78F"/>
+                        <outlet property="longPressGesture" destination="mAg-xN-PlP" id="h8y-fM-lbY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dhp-qE-7D3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="mAg-xN-PlP">
+                    <connections>
+                        <action selector="CouponPressed:" destination="TjL-TS-tSU" id="0g6-qJ-bzK"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1219" y="912"/>
         </scene>
         <!--BAR LIST-->
         <scene sceneID="kRh-Qe-FKC">
             <objects>
                 <tableViewController title="BAR LIST" id="agC-oe-AGN" customClass="BarListTableViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" sectionHeaderHeight="22" sectionFooterHeight="22" id="vjV-RS-pAR">
-                        <rect key="frame" x="0.0" y="64" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.6819168244949495" green="0.6819168244949495" blue="0.6819168244949495" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
@@ -263,6 +320,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Bar List" id="GRD-sn-LZq"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ay3-oy-lkn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AyG-ID-Tc2">
@@ -277,7 +335,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Bitmap9" width="365" height="556"/>
+        <image name="GreyGooseCoupon" width="280" height="400"/>
         <image name="MiniMap3" width="41" height="41"/>
+        <image name="Rectangle 159 + COUCHBUM23" width="320" height="400"/>
         <image name="TavernCouponHomePage" width="320" height="568"/>
         <image name="barchatlogo3" width="175" height="130"/>
         <image name="beermug" width="23" height="21"/>
@@ -290,5 +351,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="8xb-H0-F0L"/>
+        <segue reference="5eM-b1-Qyp"/>
     </inferredMetricsTieBreakers>
 </document>

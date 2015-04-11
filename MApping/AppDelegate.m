@@ -29,7 +29,8 @@
     // save all to CoreData
     UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
     tabController.delegate = self;
-    
+//    [[UITabBar appearance] setBarTintColor:[UIColor clearColor]];
+//    [[UITabBar appearance] setBackgroundImage:[UIImage new]];
 
     return YES;
 }
