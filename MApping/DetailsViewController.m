@@ -9,6 +9,7 @@
 #import "DetailsViewController.h"
 #import "MapViewAnnotation.h"
 #import <ParseUI/ParseUI.h>
+#import "CouponViewController.h"
 @interface DetailsViewController ()
 
 @property (weak, nonatomic) IBOutlet PFImageView *BarLogo;
@@ -37,13 +38,15 @@
 }
 - (IBAction)enterBarButtonPressed:(UIButton *)sender {
     
+//    [self performSegueWithIdentifier:@"toCouponPage" sender:self];
     
+
     [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
         if (!error) {
             [self.spinner startAnimating];
             PFQuery *query = [PFQuery queryWithClassName:@"Establishment"];
             // Interested in locations near user.
-            [query whereKey:@"GeoCoordinates" nearGeoPoint:geoPoint withinMiles:.1f];
+        [query whereKey:@"GeoCoordinates" nearGeoPoint:geoPoint withinMiles:.1f];
             NSArray *barsAroundCurrentLocation;
             barsAroundCurrentLocation = [query findObjects];
             for (PFObject *bar in barsAroundCurrentLocation) {
@@ -75,7 +78,10 @@
         }
     }];
 }
-
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    CouponViewController *destination = segue.destinationViewController;
+    destination.establishmentObject = self.establishmentObject;
+}
 /*
 #pragma mark - Navigation
 

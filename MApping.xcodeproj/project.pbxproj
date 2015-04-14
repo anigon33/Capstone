@@ -10,6 +10,7 @@
 		E03D6BE21AB751F800E3EFB6 /* BarListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E03D6BE11AB751F800E3EFB6 /* BarListTableViewController.m */; };
 		E05C73D71ABA64C400FE8309 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05C73D61ABA64C400FE8309 /* DetailsViewController.m */; };
 		E07130B31AD857EC00C95E29 /* CouponRedeemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E07130B21AD857EC00C95E29 /* CouponRedeemViewController.m */; };
+		E07130B61AD8A6F000C95E29 /* CustomerReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E07130B51AD8A6F000C95E29 /* CustomerReviewViewController.m */; };
 		E079E01A1ACAD7E100D5A6E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E079E0181ACAD7E100D5A6E2 /* Main.storyboard */; };
 		E07E0C391AC21E8D00FD44EA /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E07E0C341AC21E8D00FD44EA /* Bolts.framework */; };
 		E07E0C3A1AC21E8D00FD44EA /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E07E0C351AC21E8D00FD44EA /* Parse.framework */; };
@@ -93,6 +94,8 @@
 		E05C73D61ABA64C400FE8309 /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		E07130B11AD857EC00C95E29 /* CouponRedeemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponRedeemViewController.h; sourceTree = "<group>"; };
 		E07130B21AD857EC00C95E29 /* CouponRedeemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponRedeemViewController.m; sourceTree = "<group>"; };
+		E07130B41AD8A6F000C95E29 /* CustomerReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerReviewViewController.h; sourceTree = "<group>"; };
+		E07130B51AD8A6F000C95E29 /* CustomerReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerReviewViewController.m; sourceTree = "<group>"; };
 		E079E0191ACAD7E100D5A6E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E07E0C341AC21E8D00FD44EA /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		E07E0C351AC21E8D00FD44EA /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
@@ -410,6 +413,8 @@
 				E0DA1B711AB38B0100D23CD7 /* AppDelegate.m */,
 				E07E0C611AC49CCD00FD44EA /* AdditionalSurveyQuestionsViewController.h */,
 				E07E0C621AC49CCD00FD44EA /* AdditionalSurveyQuestionsViewController.m */,
+				E07130B41AD8A6F000C95E29 /* CustomerReviewViewController.h */,
+				E07130B51AD8A6F000C95E29 /* CustomerReviewViewController.m */,
 				E07E0C581AC2271100FD44EA /* BarChatLogInViewController.h */,
 				E07E0C591AC2271100FD44EA /* BarChatLogInViewController.m */,
 				E07E0C5B1AC22DDD00FD44EA /* BarChatSignUpViewController.h */,
@@ -596,6 +601,7 @@
 				E0C8EA661ABF9A6200E9456E /* NSAttributeDescription+MagicalDataImport.m in Sources */,
 				E07E0C5D1AC22DDD00FD44EA /* BarChatSignUpViewController.m in Sources */,
 				E0C8EA7D1ABF9A6200E9456E /* MagicalRecord+Setup.m in Sources */,
+				E07130B61AD8A6F000C95E29 /* CustomerReviewViewController.m in Sources */,
 				E0DA1B6F1AB38B0100D23CD7 /* main.m in Sources */,
 				E0C8EA6A1ABF9A6200E9456E /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				E0DA1B9D1AB3AA6F00D23CD7 /* MapViewAnnotation.m in Sources */,

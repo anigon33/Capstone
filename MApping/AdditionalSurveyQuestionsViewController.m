@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSArray *maleFemale;
 @property (nonatomic, strong) UIPickerView *goOutPicker;
 
+
 @property (nonatomic, strong) PFObject *surveyAnswers;
 @property (weak, nonatomic) IBOutlet UIButton *nextButton;
 @property (weak, nonatomic) IBOutlet UITextField *goOutFrequency;
@@ -36,7 +37,7 @@
     // Do any additional setup after loading the view.
    self.demographicsSurvey = [PFObject objectWithClassName:@"DemographicSurvey"];
     
-    self.frequency = [NSArray arrayWithObjects:@"1 time a week or less", @"2-3 times a week", @"4-5 tiems a week", @"Party Animal", nil];
+    self.frequency = [NSArray arrayWithObjects:@"1 time a week or less", @"2-3 times a week", @"4-5 times a week", @"Party Animal", nil];
     self.drinks = [NSArray arrayWithObjects:@"Beer", @"Wine", @"Spirits", nil];
     self.musicType =[NSArray arrayWithObjects:@"Hip Hop", @"RnB", @"Country",@"Electronic", @"Rock", @"Classical", nil];
     self.maleFemale = [NSArray arrayWithObjects:@"Male", @"Female", nil];

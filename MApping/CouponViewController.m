@@ -7,15 +7,22 @@
 //
 
 #import "CouponViewController.h"
-
+#import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
+#import "CouponRedeemViewController.h"
 @interface CouponViewController ()
 @property (weak, nonatomic) IBOutlet iCarousel *carousel;
-@property (nonatomic, assign) BOOL wrap;
-@property (weak, nonatomic) IBOutlet UIView *fullScreenCoupon;
 
+
+@property (weak, nonatomic) IBOutlet PFImageView *BarHomePage;
+
+
+@property (nonatomic, strong) NSMutableArray *couponImages;
 @end
 
 @implementation CouponViewController
+
+
 - (void)dealloc
 {
     //it's a good idea to set these to nil here to avoid
@@ -29,8 +36,26 @@
     // Do any additional setup after loading the view.
     self.carousel.delegate = self;
     self.carousel.dataSource = self;
-    self.carousel.type = iCarouselTypeCoverFlow;
+    self.carousel.type = iCarouselTypeCoverFlow2;
     self.carousel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.carousel.backgroundColor = [UIColor whiteColor];
+    
+    self.BarHomePage.file = [self.establishmentObject objectForKey:@"image"];
+    [self.BarHomePage loadInBackground];
+    
+    [self.view addSubview:self.BarHomePage];
+    PFQuery *couponQuery = [PFQuery queryWithClassName:@"TavernCoupons"];
+    [couponQuery whereKey:@"establishmentId" equalTo:self.establishmentObject[@"establishmentId"]];
+    [couponQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            
+            self.couponImages = [NSMutableArray arrayWithArray:objects];
+            
+         
+
+            [self.carousel reloadData];
+        }
+    }];
     
     [self.view addSubview:self.carousel];
 }
@@ -41,13 +66,14 @@
     self.carousel = nil;
     
 }
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
 }
 - (NSInteger)numberOfItemsInCarousel:(iCarousel *)carousel
 {
-    return 10;
+    return self.couponImages.count;
 }
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
@@ -57,15 +83,17 @@
     //create new view if no view is available for recycling
     if (view == nil)
     {
-        view = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 200.0f, 200.0f)];
-        ((UIImageView *)view).image = [UIImage imageNamed:@"greygoose"];
+        view = [[PFImageView alloc] initWithFrame:CGRectMake(0, 0, 200.0f, 200.0f)];
+        ((PFImageView *)view).file = [self.couponImages objectAtIndex:index][@"Coupon"];
+        [((PFImageView *)view) loadInBackground];
         view.contentMode = UIViewContentModeCenter;
-        label = [[UILabel alloc] initWithFrame:view.bounds];
-        label.backgroundColor = [UIColor clearColor];
-      //  label.textAlignment = UITextAlignmentCenter;
-        label.font = [label.font fontWithSize:50];
-        label.tag = 1;
-        [view addSubview:label];
+
+//        label = [[UILabel alloc] initWithFrame:view.bounds];
+//        label.backgroundColor = [UIColor clearColor];
+//        label.textAlignment = UITextAlignmentCenter;
+//        label.font = [label.font fontWithSize:50];
+//        label.tag = 1;
+//        [view addSubview:label];
     }
     else
     {
@@ -86,7 +114,13 @@
 {
     if (option == iCarouselOptionSpacing)
     {
-        return value * 1.1;
+        return value * 1.5;
+    }
+    if (option == iCarouselOptionTilt) {
+        return value = .65f;
+    }
+    if (option == iCarouselOptionWrap){
+        return YES;
     }
     return value;
 }
@@ -99,7 +133,12 @@
 }
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index{
     
+    
     [self performSegueWithIdentifier:@"toFullScreenCoupon" sender:self];
+}
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    CouponRedeemViewController *destination = segue.destinationViewController;
+    destination.establishmentObject = self.couponImages;
 }
 
 /*

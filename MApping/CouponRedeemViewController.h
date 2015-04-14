@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <Parse/Parse.h>
 @interface CouponRedeemViewController : UIViewController
+@property (nonatomic, strong)PFObject *establishmentObject;
 
 @end

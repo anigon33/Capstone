@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "iCarousel.h"
+#import <Parse/Parse.h>
 @interface CouponViewController : UIViewController <iCarouselDataSource, iCarouselDelegate>
+@property (nonatomic, strong) PFObject *establishmentObject;
 
 @end

@@ -7,11 +7,13 @@
 //
 
 #import "CouponRedeemViewController.h"
-
+#import <ParseUI/ParseUI.h>
 @interface CouponRedeemViewController ()
 @property (strong, nonatomic) IBOutlet UILongPressGestureRecognizer *longPressGesture;
-@property (weak, nonatomic) IBOutlet UIImageView *IndiviualCouponImage;
-@property (weak, nonatomic) IBOutlet UIImageView *PromoCodeImage;
+
+@property (weak, nonatomic) IBOutlet UILabel *promoLabelText;
+
+@property (weak, nonatomic) IBOutlet PFImageView *IndividualCouponImage;
 
 @end
 
@@ -21,36 +23,41 @@
     [super viewDidLoad];
     self.longPressGesture.minimumPressDuration = .5;
     self.longPressGesture.numberOfTouchesRequired = 1;
-    [self.IndiviualCouponImage addGestureRecognizer:self.longPressGesture];
-    self.PromoCodeImage.hidden = YES;
+    
+    self.promoLabelText.hidden = YES;
+    self.promoLabelText.text = [self.establishmentObject objectAtIndex:2];
+    
+    
+    self.IndividualCouponImage.file = [self.establishmentObject objectAtIndex:0];
+    [self.IndividualCouponImage loadInBackground];
+    self.IndividualCouponImage.contentMode = UIViewContentModeScaleAspectFill;
+    [self.IndividualCouponImage addGestureRecognizer:self.longPressGesture];
     
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+
 - (IBAction)CouponPressed:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan){
         NSLog(@"UIGestureRecognizerStateBegan.");
         //Do Whatever You want on Began of Gesture
-        self.PromoCodeImage.hidden = NO;
-        self.PromoCodeImage.alpha = 1.0f;
+        self.promoLabelText.hidden = NO;
+        self.promoLabelText.alpha = 1.0f;
         // Then fades it away after 2 seconds (the cross-fade animation will take 0.5s)
-        [UIView animateWithDuration:0.5 delay:4.0 options:0 animations:^{
+        [UIView animateWithDuration:0.5 delay:4.0 options:UIViewAnimationOptionShowHideTransitionViews animations:^{
             // Animate the alpha value of your imageView from 1.0 to 0.0 here
-            self.PromoCodeImage.alpha = 0.0f;
+            self.promoLabelText.alpha = 0.0f;
         } completion:^(BOOL finished) {
             // Once the animation is completed and the alpha has gone to 0.0, hide the view for good
-            self.PromoCodeImage.hidden = YES;
-            
+            self.promoLabelText.hidden = YES;
+        
         }];
     }else if (sender.state == UIGestureRecognizerStateEnded){
-        
-        [self performSegueWithIdentifier:@"backToCouponHome" sender:self];
-
+        [self performSegueWithIdentifier:@"toCustomerReview" sender:self];
     }
+}
+- (IBAction)backButtonPressed:(UIButton *)sender {
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 /*
