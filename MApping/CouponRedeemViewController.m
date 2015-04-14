@@ -25,10 +25,10 @@
     self.longPressGesture.numberOfTouchesRequired = 1;
     
     self.promoLabelText.hidden = YES;
-    self.promoLabelText.text = [self.establishmentObject objectAtIndex:2];
+    self.promoLabelText.text = [self.establishmentObject valueForKey:@"promoCode"];
     
     
-    self.IndividualCouponImage.file = [self.establishmentObject objectAtIndex:0];
+    self.IndividualCouponImage.file = [self.establishmentObject valueForKey:@"Coupon"];
     [self.IndividualCouponImage loadInBackground];
     self.IndividualCouponImage.contentMode = UIViewContentModeScaleAspectFill;
     [self.IndividualCouponImage addGestureRecognizer:self.longPressGesture];

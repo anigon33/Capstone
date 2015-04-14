@@ -15,6 +15,7 @@
 
 
 @property (weak, nonatomic) IBOutlet PFImageView *BarHomePage;
+@property (strong, nonatomic) PFObject *selectedCoupon;
 
 
 @property (nonatomic, strong) NSMutableArray *couponImages;
@@ -133,12 +134,12 @@
 }
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index{
     
-    
+    self.selectedCoupon = [self.couponImages objectAtIndex:index];
     [self performSegueWithIdentifier:@"toFullScreenCoupon" sender:self];
 }
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     CouponRedeemViewController *destination = segue.destinationViewController;
-    destination.establishmentObject = self.couponImages;
+    destination.establishmentObject = self.selectedCoupon;
 }
 
 /*
