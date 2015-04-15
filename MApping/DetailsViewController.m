@@ -55,16 +55,34 @@
     [self.spinner startAnimating];
     PFQuery *query = [PFQuery queryWithClassName:@"Establishment"];
     // Interested in locations near user.
-    [query whereKey:@"GeoCoordinates" nearGeoPoint:userLocation withinMiles:.1f];
+    [query whereKey:@"GeoCoordinates" nearGeoPoint:userLocation withinMiles:.02f];
     NSArray *barsAroundCurrentLocation;
     barsAroundCurrentLocation = [query findObjects];
-    for (PFObject *bar in barsAroundCurrentLocation) {
+    
+    if (barsAroundCurrentLocation.count != 0){
+        
+    
+    
+        for (PFObject *bar in barsAroundCurrentLocation) {
         
         if ([self.establishmentObject[@"name"] isEqualToString:bar[@"name"]]) {
             [self performSegueWithIdentifier:@"toCouponPage" sender:self];
             NSLog(@"Test");
             [self.spinner stopAnimating];
         }
+//        if (barsAroundCurrentLocation == nil){
+//            NSString *title = @"Oops!";
+//            NSString *message = @"Coup' users must be inside each bar to see the specials, so get over there already!!";
+//            
+//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+//                                                                message:message
+//                                                               delegate:self
+//                                                      cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+//            
+//            [self.spinner stopAnimating];
+//            
+//            [alertView show];
+//        }
         else{
             NSString *title = @"Oops!";
             NSString *message = @"Coup' users must be inside each bar to see the specials, so get over there already!!";
@@ -77,6 +95,11 @@
             [self.spinner stopAnimating];
             
             [alertView show];
+
+        }
+//            39.94320113,-104.95623392
+//            
+//            39.943191,  -104.956193
             
         }
     }

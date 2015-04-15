@@ -13,7 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *promoLabelText;
 
-@property (weak, nonatomic) IBOutlet PFImageView *IndividualCouponImage;
+@property (weak, nonatomic) IBOutlet UIImageView *IndividualCouponImage;
 
 @end
 
@@ -24,18 +24,25 @@
     self.longPressGesture.minimumPressDuration = .5;
     self.longPressGesture.numberOfTouchesRequired = 1;
     
-    self.promoLabelText.hidden = YES;
     self.promoLabelText.text = [self.establishmentObject valueForKey:@"promoCode"];
     
+    PFFile *userImageFile = self.establishmentObject[@"Coupon"];
+    [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+        if (!error) {
+            self.IndividualCouponImage.image = [UIImage imageWithData:imageData];
+            self.IndividualCouponImage.contentMode = UIViewContentModeScaleAspectFill;
+            
+            self.promoLabelText.hidden = YES;
+
+            [self.IndividualCouponImage addGestureRecognizer:self.longPressGesture];
+            [self.IndividualCouponImage addSubview:self.promoLabelText];
+
+        }
+    }];
         
-    self.IndividualCouponImage.file = [self.establishmentObject valueForKey:@"Coupon"];
-    [self.IndividualCouponImage loadInBackground];
-    self.IndividualCouponImage.contentMode = UIViewContentModeScaleAspectFill;
-//    if (self.IndividualCouponImage.file != nil) {
-//        [self.IndividualCouponImage addGestureRecognizer:self.longPressGesture];
-//
-//    }
-    
+//    self.IndividualCouponImage.file = [self.establishmentObject valueForKey:@"Coupon"];
+//    [self.IndividualCouponImage loadInBackground];
+   
     // Do any additional setup after loading the view.
 }
 

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MApping/CouponRedeemViewController.m"
-            timestampString = "450730579.791933"
+            timestampString = "450820625.498067"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
             landmarkName = "-CouponPressed:"
             landmarkType = "5">
          </BreakpointContent>
