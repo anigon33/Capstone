@@ -9,10 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate, CLLocationManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
 
 @end
 

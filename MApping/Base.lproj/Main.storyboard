@@ -215,15 +215,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4C5-j3-uaL" customClass="PFImageView">
-                                <rect key="frame" x="0.0" y="20" width="320" height="267"/>
+                                <rect key="frame" x="0.0" y="20" width="320" height="200"/>
                             </imageView>
                             <view autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="md8-JA-h9f" customClass="iCarousel">
-                                <rect key="frame" x="0.0" y="265" width="320" height="254"/>
+                                <rect key="frame" x="0.0" y="310" width="320" height="209"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" none="YES" image="YES"/>
                                     <bool key="isElement" value="NO"/>
                                 </accessibility>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Single Men" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ABl-W1-3uy">
+                                <rect key="frame" x="32" y="226" width="103" height="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Single Women" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7br-84-hE8">
+                                <rect key="frame" x="174" y="226" width="130" height="25"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zMe-6D-tuW">
+                                <rect key="frame" x="56" y="261" width="54" height="39"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQH-6z-26T">
+                                <rect key="frame" x="212" y="261" width="54" height="39"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -232,6 +256,8 @@
                     <connections>
                         <outlet property="BarHomePage" destination="4C5-j3-uaL" id="UH9-cU-go7"/>
                         <outlet property="carousel" destination="md8-JA-h9f" id="vWv-aF-n0w"/>
+                        <outlet property="singleMenLabel" destination="zMe-6D-tuW" id="3h5-tc-Gr7"/>
+                        <outlet property="singleWomenLabel" destination="QQH-6z-26T" id="sWr-x9-oJe"/>
                         <segue destination="TjL-TS-tSU" kind="modal" identifier="toFullScreenCoupon" modalTransitionStyle="crossDissolve" id="qZt-9D-tyQ"/>
                     </connections>
                 </viewController>

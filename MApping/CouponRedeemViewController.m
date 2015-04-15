@@ -27,11 +27,14 @@
     self.promoLabelText.hidden = YES;
     self.promoLabelText.text = [self.establishmentObject valueForKey:@"promoCode"];
     
-    
+        
     self.IndividualCouponImage.file = [self.establishmentObject valueForKey:@"Coupon"];
     [self.IndividualCouponImage loadInBackground];
     self.IndividualCouponImage.contentMode = UIViewContentModeScaleAspectFill;
-    [self.IndividualCouponImage addGestureRecognizer:self.longPressGesture];
+//    if (self.IndividualCouponImage.file != nil) {
+//        [self.IndividualCouponImage addGestureRecognizer:self.longPressGesture];
+//
+//    }
     
     // Do any additional setup after loading the view.
 }
@@ -57,7 +60,7 @@
     }
 }
 - (IBAction)backButtonPressed:(UIButton *)sender {
-    [self.navigationController popViewControllerAnimated:NO];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

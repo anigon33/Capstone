@@ -13,6 +13,8 @@
 @interface CouponViewController ()
 @property (weak, nonatomic) IBOutlet iCarousel *carousel;
 
+@property (weak, nonatomic) IBOutlet UILabel *singleMenLabel;
+@property (weak, nonatomic) IBOutlet UILabel *singleWomenLabel;
 
 @property (weak, nonatomic) IBOutlet PFImageView *BarHomePage;
 @property (strong, nonatomic) PFObject *selectedCoupon;
@@ -43,6 +45,23 @@
     
     self.BarHomePage.file = [self.establishmentObject objectForKey:@"image"];
     [self.BarHomePage loadInBackground];
+    
+    PFQuery *maleStatus = [PFQuery queryWithClassName:@"DemographicSurvey"];
+    [maleStatus whereKey:@"Gender" equalTo:@"Male"];
+    [maleStatus findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            self.singleMenLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)objects.count];
+        }
+    }];
+    
+    PFQuery *femaleStatus = [PFQuery queryWithClassName:@"DemographicSurvey"];
+    [femaleStatus whereKey:@"Gender" equalTo:@"Female"];
+    [femaleStatus findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            self.singleWomenLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)objects.count];
+        }
+    }];
+    
     
     [self.view addSubview:self.BarHomePage];
     PFQuery *couponQuery = [PFQuery queryWithClassName:@"TavernCoupons"];

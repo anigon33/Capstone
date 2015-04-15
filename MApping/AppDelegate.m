@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "CoreData+MagicalRecord.h"
 @interface AppDelegate ()
+@property (strong, nonatomic) CLLocationManager *locationManager;
 
 @end
 
@@ -31,9 +32,59 @@
     tabController.delegate = self;
 //    [[UITabBar appearance] setBarTintColor:[UIColor clearColor]];
 //    [[UITabBar appearance] setBackgroundImage:[UIImage new]];
+    
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.distanceFilter = kCLLocationAccuracyBest;
+    [self.locationManager startUpdatingLocation];
+    
+    //  Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
+    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+        [self.locationManager requestAlwaysAuthorization];
+    }
+
 
     return YES;
 }
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+     CLLocation *newLocation = [locations lastObject];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"newLocationNotif"
+                                                        object:self
+                                                      userInfo:[NSDictionary dictionaryWithObject:newLocation
+                                                                                           forKey:@"newLocationResult"]];
+    NSLog(@"current location = %@", [locations lastObject]);
+    
+    
+
+  
+}
+- (void)requestAlwaysAuthorization
+{
+    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
+    
+    // If the status is denied or only granted for when in use, display an alert
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusDenied) {
+        NSString *title;
+        title = (status == kCLAuthorizationStatusDenied) ? @"Location services are off" : @"Background location is not enabled";
+        NSString *message = @"To use background location you must turn on 'Always' in the Location Services Settings";
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                            message:message
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:@"Settings", nil];
+        [alertView show];
+    }
+    // The user has not enabled any location services. Request background authorization.
+    else if (status == kCLAuthorizationStatusNotDetermined) {
+        [self.locationManager requestAlwaysAuthorization];
+    }
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -18,10 +18,9 @@
 #import "DetailsViewController.h"
 
 @interface ViewController () <CLLocationManagerDelegate, MKMapViewDelegate,UINavigationControllerDelegate, PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate>
-@property (strong, nonatomic) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSArray *locations;
 @property (nonatomic, strong) PFObject *annotationTapped;
-
+@property (nonatomic, strong) CLLocation *userLocation;
 @end
 
 @implementation ViewController
@@ -34,15 +33,12 @@
     // ** Don't forget to add NSLocationWhenInUseUsageDescription in MyApp-Info.plist and give it a string
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"login"]];
   
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updatedLocation:)
+                                                 name:@"newLocationNotif"
+                                               object:nil];
     
-    
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-   //  Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
-    if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-        [self.locationManager requestAlwaysAuthorization];
-    }
-    self.myMapView.delegate = self;
+        self.myMapView.delegate = self;
     self.myMapView.showsUserLocation = YES;
     [self zoomToLocation];
     
@@ -87,6 +83,10 @@
     }
     
 }
+-(void) updatedLocation:(NSNotification*)notif {
+    self.userLocation = (CLLocation*)[[notif userInfo] valueForKey:@"newLocationResult"];
+}
+
 -(void) logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user{
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
     [self.myMapView addAnnotations:[self createAnnotations]];
@@ -141,6 +141,7 @@
 
     [self.myMapView setRegion:viewRegion animated:YES];
 }
+
 - (void)mapView:(MKMapView *)mapView
  annotationView:(MKAnnotationView *)view
 calloutAccessoryControlTapped:(UIControl *)control{
@@ -235,33 +236,6 @@ calloutAccessoryControlTapped:(UIControl *)control{
                                  
                                  
                                  
-// Location Manager Delegate Methods
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-    NSLog(@"%@", [locations lastObject]);
-}
-- (void)requestAlwaysAuthorization
-{
-    CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
-    
-    // If the status is denied or only granted for when in use, display an alert
-    if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusDenied) {
-        NSString *title;
-        title = (status == kCLAuthorizationStatusDenied) ? @"Location services are off" : @"Background location is not enabled";
-        NSString *message = @"To use background location you must turn on 'Always' in the Location Services Settings";
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                            message:message
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Cancel"
-                                                  otherButtonTitles:@"Settings", nil];
-        [alertView show];
-    }
-    // The user has not enabled any location services. Request background authorization.
-    else if (status == kCLAuthorizationStatusNotDetermined) {
-        [self.locationManager requestAlwaysAuthorization];
-    }
-}
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
