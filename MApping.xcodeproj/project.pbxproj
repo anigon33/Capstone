@@ -75,6 +75,7 @@
 		E0DA1B951AB38B3700D23CD7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0DA1B941AB38B3700D23CD7 /* MapKit.framework */; };
 		E0DA1B9A1AB3A82A00D23CD7 /* locations.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0DA1B991AB3A82A00D23CD7 /* locations.plist */; };
 		E0DA1B9D1AB3AA6F00D23CD7 /* MapViewAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E0DA1B9C1AB3AA6F00D23CD7 /* MapViewAnnotation.m */; };
+		E0ECDA8B1AE3208B00DAE67D /* EstablishmentRegion.m in Sources */ = {isa = PBXBuildFile; fileRef = E0ECDA8A1AE3208A00DAE67D /* EstablishmentRegion.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -205,6 +206,8 @@
 		E0DA1B991AB3A82A00D23CD7 /* locations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = locations.plist; sourceTree = "<group>"; };
 		E0DA1B9B1AB3AA6F00D23CD7 /* MapViewAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewAnnotation.h; sourceTree = "<group>"; };
 		E0DA1B9C1AB3AA6F00D23CD7 /* MapViewAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewAnnotation.m; sourceTree = "<group>"; };
+		E0ECDA891AE3208A00DAE67D /* EstablishmentRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstablishmentRegion.h; sourceTree = "<group>"; };
+		E0ECDA8A1AE3208A00DAE67D /* EstablishmentRegion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstablishmentRegion.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -409,6 +412,8 @@
 				E085304C1AD7638800F12AA1 /* CouponViewController.m */,
 				E07130B11AD857EC00C95E29 /* CouponRedeemViewController.h */,
 				E07130B21AD857EC00C95E29 /* CouponRedeemViewController.m */,
+				E0ECDA891AE3208A00DAE67D /* EstablishmentRegion.h */,
+				E0ECDA8A1AE3208A00DAE67D /* EstablishmentRegion.m */,
 				E0DA1B701AB38B0100D23CD7 /* AppDelegate.h */,
 				E0DA1B711AB38B0100D23CD7 /* AppDelegate.m */,
 				E07E0C611AC49CCD00FD44EA /* AdditionalSurveyQuestionsViewController.h */,
@@ -604,6 +609,7 @@
 				E07130B61AD8A6F000C95E29 /* CustomerReviewViewController.m in Sources */,
 				E0DA1B6F1AB38B0100D23CD7 /* main.m in Sources */,
 				E0C8EA6A1ABF9A6200E9456E /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
+				E0ECDA8B1AE3208B00DAE67D /* EstablishmentRegion.m in Sources */,
 				E0DA1B9D1AB3AA6F00D23CD7 /* MapViewAnnotation.m in Sources */,
 				E0C8EA681ABF9A6200E9456E /* NSNumber+MagicalDataImport.m in Sources */,
 				E0C8EA6E1ABF9A6200E9456E /* NSManagedObject+MagicalFinders.m in Sources */,

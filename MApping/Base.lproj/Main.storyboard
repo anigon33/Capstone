@@ -291,16 +291,26 @@
                                     <action selector="backButtonPressed:" destination="TjL-TS-tSU" eventType="touchUpInside" id="ShB-fC-3JH"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YZ8-Mv-3DB">
-                                <rect key="frame" x="30" y="110" width="260" height="360"/>
-                            </imageView>
                             <label opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aem-fQ-euV">
-                                <rect key="frame" x="16" y="237" width="280" height="80"/>
+                                <rect key="frame" x="16" y="110" width="280" height="360"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g23-EN-zOC">
+                                <rect key="frame" x="83" y="499" width="146" height="40"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Pay With Tweet">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="twitterPost:" destination="TjL-TS-tSU" eventType="touchUpInside" id="ARE-em-LML"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YZ8-Mv-3DB">
+                                <rect key="frame" x="30" y="110" width="260" height="360"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
@@ -310,6 +320,7 @@
                     <connections>
                         <outlet property="IndividualCouponImage" destination="YZ8-Mv-3DB" id="Jx2-1S-Wtb"/>
                         <outlet property="longPressGesture" destination="mAg-xN-PlP" id="h8y-fM-lbY"/>
+                        <outlet property="payWithTweetButton" destination="g23-EN-zOC" id="rBK-T5-ca6"/>
                         <outlet property="promoLabelText" destination="Aem-fQ-euV" id="T84-LN-qeX"/>
                         <segue destination="StN-Nb-pfw" kind="modal" identifier="toCustomerReview" modalTransitionStyle="flipHorizontal" id="5Lf-Yw-Are"/>
                     </connections>
@@ -318,6 +329,7 @@
                 <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="mAg-xN-PlP">
                     <connections>
                         <action selector="CouponPressed:" destination="TjL-TS-tSU" id="0g6-qJ-bzK"/>
+                        <outlet property="delegate" destination="TjL-TS-tSU" id="GM8-yy-HTG"/>
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>

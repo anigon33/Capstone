@@ -8,9 +8,12 @@
 
 #import "AppDelegate.h"
 #import "CoreData+MagicalRecord.h"
+#import "EstablishmentRegion.h"
 @interface AppDelegate ()
 @property (strong, nonatomic) CLLocationManager *locationManager;
-
+@property (strong, nonatomic) CLCircularRegion *region;
+@property (strong, nonatomic) NSArray *establishmentObjects;
+@property (strong, nonatomic) NSSet *barRegions;
 @end
 
 @implementation AppDelegate
@@ -44,24 +47,85 @@
         [self.locationManager requestAlwaysAuthorization];
     }
 
-
+    
+    
+    PFQuery *establishments = [PFQuery queryWithClassName:@"Establishment"];
+    PFGeoPoint *currentLocation = [PFGeoPoint geoPointWithLocation:self.locationManager.location];
+    
+    [establishments whereKey:@"GeoCoordinates" nearGeoPoint:currentLocation];
+    [establishments findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        for (PFObject *object in objects){
+            self.establishmentObjects = [NSArray arrayWithArray:objects];
+            PFGeoPoint *geopoint = [object objectForKey:@"GeoCoordinates"];
+            
+            
+            CLLocationCoordinate2D center = CLLocationCoordinate2DMake(geopoint.latitude, geopoint.longitude);
+            
+           CLRegion *region = [[CLCircularRegion alloc] initWithCenter:center
+                                                                         radius:50.00
+                                                                     identifier:[object objectForKey:@"name"]];
+            self.region.notifyOnEntry = YES;
+            self.region.notifyOnExit = YES;
+            // Then cast the instance for use with your CLLocationManager instance
+            
+            self.barRegions = [[NSSet alloc]initWithObjects:region, nil];
+            [self.locationManager startMonitoringForRegion:(CLRegion *)self.region];
+            
+            
+        }
+    }];
+    
     return YES;
 }
+-(void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
+    
+    PFObject *visitObject = [PFObject objectWithClassName:@"visit"];
+    [visitObject setObject:[NSDate date] forKey:@"start"];
+    PFObject *bar = [[self.establishmentObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:[NSString stringWithFormat:@"name == %@", region.identifier]]]firstObject];
+    
+    [visitObject setObject:bar forKey:@"establishment"];
+    [visitObject saveInBackground];
+    
+}
+-(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region{
+    
+    
+}
+
+-(void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+    
+    NSLog(@"Region not monitored :(");
+}
+
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
      CLLocation *newLocation = [locations lastObject];
-    
+    CLLocationCoordinate2D currentLocationCoordinate = newLocation.coordinate;
+   
     [[NSNotificationCenter defaultCenter] postNotificationName:@"newLocationNotif"
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:newLocation
                                                                                            forKey:@"newLocationResult"]];
     NSLog(@"current location = %@", [locations lastObject]);
     
+    if ([[self.establishmentObjects valueForKey:@"GeoCoordinates"] containsCoordinate:currentLocationCoordinate]){
+        // User is in region stuff
+        
+        
+        NSLog(@"Log Me in then!!");
+    } else {
+        
+        
+        NSLog(@"NOT in region");
+        // User is not in region stuff
+    }
+    
     
 
   
 }
+
 - (void)requestAlwaysAuthorization
 {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
