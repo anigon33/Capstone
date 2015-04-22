@@ -14,6 +14,7 @@
 @property (strong, nonatomic) CLCircularRegion *region;
 @property (strong, nonatomic) NSArray *establishmentObjects;
 @property (strong, nonatomic) NSSet *barRegions;
+@property (strong, nonatomic) PFObject *visitObject;
 @end
 
 @implementation AppDelegate
@@ -34,7 +35,7 @@
     UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
     tabController.delegate = self;
     [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
-//    [[UITabBar appearance] setBackgroundImage:[UIImage new]];
+    //    [[UITabBar appearance] setBackgroundImage:[UIImage new]];
     
     
     self.locationManager = [[CLLocationManager alloc] init];
@@ -46,7 +47,7 @@
     if ([self.locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
         [self.locationManager requestAlwaysAuthorization];
     }
-
+    
     
     
     PFQuery *establishments = [PFQuery queryWithClassName:@"Establishment"];
@@ -61,9 +62,9 @@
             
             CLLocationCoordinate2D center = CLLocationCoordinate2DMake(geopoint.latitude, geopoint.longitude);
             
-           CLRegion *region = [[CLCircularRegion alloc] initWithCenter:center
-                                                                         radius:50.00
-                                                                     identifier:[object objectForKey:@"name"]];
+            CLRegion *region = [[CLCircularRegion alloc] initWithCenter:center
+                                                                 radius:50.00
+                                                             identifier:[object objectForKey:@"name"]];
             self.region.notifyOnEntry = YES;
             self.region.notifyOnExit = YES;
             // Then cast the instance for use with your CLLocationManager instance
@@ -79,13 +80,6 @@
 }
 -(void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
     
-    PFObject *visitObject = [PFObject objectWithClassName:@"visit"];
-    [visitObject setObject:[NSDate date] forKey:@"start"];
-    PFObject *bar = [[self.establishmentObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:[NSString stringWithFormat:@"name == %@", region.identifier]]]firstObject];
-    
-    [visitObject setObject:bar forKey:@"establishment"];
-    [visitObject saveInBackground];
-    
 }
 -(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region{
     
@@ -100,30 +94,57 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-     CLLocation *newLocation = [locations lastObject];
+    CLLocation *newLocation = [locations lastObject];
     CLLocationCoordinate2D currentLocationCoordinate = newLocation.coordinate;
-   
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"newLocationNotif"
                                                         object:self
                                                       userInfo:[NSDictionary dictionaryWithObject:newLocation
                                                                                            forKey:@"newLocationResult"]];
     NSLog(@"current location = %@", [locations lastObject]);
     
-    if ([[self.establishmentObjects valueForKey:@"GeoCoordinates"] containsCoordinate:currentLocationCoordinate]){
-        // User is in region stuff
+    // looping through establishment region to see if user is in one of the bars
+    for (CLCircularRegion *establishmentRegion in self.locationManager.monitoredRegions){
+        if ([establishmentRegion containsCoordinate:currentLocationCoordinate]){
+            
+            NSLog(@"logged into bar");
+            //checking name of visit bar object is equal to the name of the region identifier
+            if ([[[self.visitObject objectForKey:@"establishments"] objectForKey:@"name"] isEqualToString:establishmentRegion.identifier]) {
+                
+                //do nothing because they have already created visit
+                
+            } else {
+                if(self.establishmentObjects == nil) {
+                    
+                } else {
+                    
+                    
+                    self.visitObject = [PFObject objectWithClassName:@"Visit"];
+                    [self.visitObject setObject:[NSDate date] forKey:@"start"];
+                    NSString *barName = establishmentRegion.identifier;
+                    for (PFObject *establishmentObject in self.establishmentObjects){
+                        
+                        if ([barName isEqualToString:[establishmentObject valueForKey:@"name"]]) {
+                            self.visitObject [@"establishments"] = establishmentObject;
+                        }
+                        
+                    }
+                    
+                    [self.visitObject saveInBackground];
+                }
+            }
+        }
         
+    }
+    if([[self.visitObject objectForKey:@"establishments"] objectForKey:@"name"]!= nil){
         
-        NSLog(@"Log Me in then!!");
-    } else {
+        NSLog(@"holla");
+        [self.visitObject setObject:[NSDate date] forKey:@"end"];
+        [self.visitObject saveInBackground];
         
-        
-        NSLog(@"NOT in region");
-        // User is not in region stuff
+        [[self.visitObject objectForKey:@"establishments"] setValue:@"" forKey:@"name"];
     }
     
-    
-
-  
 }
 
 - (void)requestAlwaysAuthorization
@@ -170,7 +191,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     [MagicalRecord cleanUp];
-
+    
 }
 -(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
     if ([viewController isKindOfClass:[UINavigationController class]])

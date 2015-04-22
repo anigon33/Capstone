@@ -64,9 +64,7 @@
         logInViewController.fields = (PFLogInFieldsUsernameAndPassword
                                       | PFLogInFieldsLogInButton
                                       | PFLogInFieldsSignUpButton
-                                      | PFLogInFieldsPasswordForgotten
-                                      | PFLogInFieldsFacebook
-                                      | PFLogInFieldsTwitter);
+                                      | PFLogInFieldsPasswordForgotten);
         
         // Create the sign up view controller
         BarChatSignUpViewController *signUpViewController = [[BarChatSignUpViewController alloc] init];
