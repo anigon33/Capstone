@@ -13,7 +13,7 @@
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLCircularRegion *region;
 @property (strong, nonatomic) NSArray *establishmentObjects;
-@property (strong, nonatomic) NSSet *barRegions;
+@property (strong, nonatomic) NSMutableArray *barRegions;
 @property (strong, nonatomic) PFObject *visitObject;
 @end
 
@@ -49,28 +49,31 @@
     }
     
     
+    self.barRegions = [[NSMutableArray alloc]init];
     
     PFQuery *establishments = [PFQuery queryWithClassName:@"Establishment"];
     PFGeoPoint *currentLocation = [PFGeoPoint geoPointWithLocation:self.locationManager.location];
     
     [establishments whereKey:@"GeoCoordinates" nearGeoPoint:currentLocation];
     [establishments findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        self.establishmentObjects = [NSArray arrayWithArray:objects];
+        
         for (PFObject *object in objects){
-            self.establishmentObjects = [NSArray arrayWithArray:objects];
             PFGeoPoint *geopoint = [object objectForKey:@"GeoCoordinates"];
             
             
             CLLocationCoordinate2D center = CLLocationCoordinate2DMake(geopoint.latitude, geopoint.longitude);
             
             CLRegion *region = [[CLCircularRegion alloc] initWithCenter:center
-                                                                 radius:50.00
+                                                                 radius:25.00
                                                              identifier:[object objectForKey:@"name"]];
             self.region.notifyOnEntry = YES;
             self.region.notifyOnExit = YES;
             // Then cast the instance for use with your CLLocationManager instance
             
-            self.barRegions = [[NSSet alloc]initWithObjects:region, nil];
-            [self.locationManager startMonitoringForRegion:(CLRegion *)self.region];
+            [self.barRegions addObject:region];
+            
             
             
         }
@@ -78,14 +81,6 @@
     
     return YES;
 }
--(void) locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region {
-    
-}
--(void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region{
-    
-    
-}
-
 -(void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
     
     NSLog(@"Region not monitored :(");
@@ -104,20 +99,15 @@
     NSLog(@"current location = %@", [locations lastObject]);
     
     // looping through establishment region to see if user is in one of the bars
-    for (CLCircularRegion *establishmentRegion in self.locationManager.monitoredRegions){
+    for (CLCircularRegion *establishmentRegion in self.barRegions){
         if ([establishmentRegion containsCoordinate:currentLocationCoordinate]){
-            
-            NSLog(@"logged into bar");
             //checking name of visit bar object is equal to the name of the region identifier
             if ([[[self.visitObject objectForKey:@"establishments"] objectForKey:@"name"] isEqualToString:establishmentRegion.identifier]) {
                 
                 //do nothing because they have already created visit
                 
             } else {
-                if(self.establishmentObjects == nil) {
-                    
-                } else {
-                    
+                if (self.establishmentObjects != nil) {
                     
                     self.visitObject = [PFObject objectWithClassName:@"Visit"];
                     [self.visitObject setObject:[NSDate date] forKey:@"start"];
@@ -128,25 +118,27 @@
                             self.visitObject [@"establishments"] = establishmentObject;
                         }
                         
+                        
                     }
                     
                     [self.visitObject saveInBackground];
                 }
             }
+        } else {
+            if (self.visitObject != nil && [[[self.visitObject objectForKey:@"establishments"] objectForKey:@"name"] isEqualToString:establishmentRegion.identifier]){
+                
+                NSLog(@"holla");
+                [self.visitObject setObject:[NSDate date] forKey:@"end"];
+                [self.visitObject saveInBackground];
+                
+                self.visitObject = nil;
+                
+            }
         }
         
     }
-    if([[self.visitObject objectForKey:@"establishments"] objectForKey:@"name"]!= nil){
-        
-        NSLog(@"holla");
-        [self.visitObject setObject:[NSDate date] forKey:@"end"];
-        [self.visitObject saveInBackground];
-        
-        [[self.visitObject objectForKey:@"establishments"] setValue:@"" forKey:@"name"];
-    }
     
 }
-
 - (void)requestAlwaysAuthorization
 {
     CLAuthorizationStatus status = [CLLocationManager authorizationStatus];
