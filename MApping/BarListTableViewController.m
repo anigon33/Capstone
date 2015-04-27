@@ -52,7 +52,10 @@
     
 
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [[self navigationController] setNavigationBarHidden:NO animated:NO];
 
+}
 #pragma mark - Table view data source
 
 // all objects ordered by createdAt descending.

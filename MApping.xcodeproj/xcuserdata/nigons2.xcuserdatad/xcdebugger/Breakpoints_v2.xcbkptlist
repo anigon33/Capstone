@@ -10,13 +10,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MApping/CouponRedeemViewController.m"
-            timestampString = "451597934.333403"
+            timestampString = "451856043.11161"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "-textView:shouldChangeTextInRange:replacementText:"
-            landmarkType = "5">
+            startingLineNumber = "169"
+            endingLineNumber = "169"
+            landmarkName = "@implementation CouponRedeemViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -26,13 +26,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MApping/CouponRedeemViewController.m"
-            timestampString = "451597934.333403"
+            timestampString = "451856043.11161"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "-twitterPost:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[CouponRedeemViewController twitterPost:]"
+                  moduleName = "MApping"
+                  urlString = "file:///Users/nigons2/Desktop/MApping/MApping/CouponRedeemViewController.m"
+                  timestampString = "451856043.167893"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "139"
+                  endingLineNumber = "139"
+                  offsetFromSymbolStart = "376">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__42-[CouponRedeemViewController twitterPost:]_block_invoke95"
+                  moduleName = "MApping"
+                  urlString = "file:///Users/nigons2/Desktop/MApping/MApping/CouponRedeemViewController.m"
+                  timestampString = "451856043.168193"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "141"
+                  endingLineNumber = "141"
+                  offsetFromSymbolStart = "20">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -42,11 +72,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MApping/CouponRedeemViewController.m"
-            timestampString = "451597934.333403"
+            timestampString = "451856043.11161"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "-twitterPost:"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,7 +88,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MApping/DetailsViewController.m"
-            timestampString = "451700342.841544"
+            timestampString = "451854328.394388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "76"
@@ -74,7 +104,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MApping/DetailsViewController.m"
-            timestampString = "451700342.841544"
+            timestampString = "451854328.394388"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "83"

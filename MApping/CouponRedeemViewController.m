@@ -58,6 +58,10 @@
     NSLog(@"yo");
 
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [[self navigationController] setNavigationBarHidden:YES animated:NO];
+
+}
 //- (void)handleGesture:(UIGestureRecognizer *)gestureRecognizer{
 //    
 //    

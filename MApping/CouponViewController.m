@@ -79,7 +79,10 @@
     
     [self.view addSubview:self.carousel];
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [[self navigationController] setNavigationBarHidden:YES animated:NO];
 
+}
 - (void)viewDidUnload
 {
     [super viewDidUnload];
