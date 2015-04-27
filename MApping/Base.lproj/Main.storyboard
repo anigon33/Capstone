@@ -194,7 +194,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iii-Vm-mUu" customClass="PFImageView">
-                                <rect key="frame" x="0.0" y="64" width="320" height="252"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="250"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.88095801767676774" green="0.88095801767676774" blue="0.88095801767676774" alpha="1" colorSpace="calibratedRGB"/>
@@ -202,6 +202,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ZIT-S2-XXd"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="BarImageView" destination="Iii-Vm-mUu" id="bvg-Yh-LAg"/>
                         <outlet property="BarLogo" destination="Iii-Vm-mUu" id="aRW-Jd-3Dh"/>
@@ -221,7 +222,7 @@
                         <viewControllerLayoutGuide type="bottom" id="yld-x6-6D2"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="dO1-Ek-ayZ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4C5-j3-uaL" customClass="PFImageView">
@@ -318,7 +319,7 @@
                                     <action selector="twitterPost:" destination="TjL-TS-tSU" eventType="touchUpInside" id="ARE-em-LML"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YZ8-Mv-3DB">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YZ8-Mv-3DB">
                                 <rect key="frame" x="30" y="110" width="260" height="360"/>
                             </imageView>
                         </subviews>
@@ -454,6 +455,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="8xb-H0-F0L"/>
+        <segue reference="mg6-Wm-4uZ"/>
     </inferredMetricsTieBreakers>
 </document>

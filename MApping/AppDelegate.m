@@ -27,11 +27,8 @@
     [Parse setApplicationId:@"sZre86lG4ulrSGqA50KmG9Fef1nv9IUKwmtc8aC6"
                   clientKey:@"EqZMxxzkIszmTyplXiDgRFiJZY5AyQCDXTR8nPlI"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-    [PFUser currentUser];
-    [PFUser logOut];
-    //[MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"BarChat"];
-    // call parse, get latest bars
-    // save all to CoreData
+    
+    
     UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
     tabController.delegate = self;
     [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];

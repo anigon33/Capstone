@@ -78,7 +78,8 @@
 }
 - (IBAction)nextButtonPressed:(UIButton *)sender {
     
-    if ([self.questionsLabel.text isEqualToString:[self.surveyQuestions objectAtIndex:0]]){
+    
+    if ([self.questionsLabel.text isEqualToString:[self.surveyQuestions objectAtIndex:0]]  && ![self.goOutFrequency.text isEqualToString:@""]){
         
 
         self.demographicsSurvey[@"PartyFrequency"] = self.goOutFrequency.text;
@@ -90,7 +91,7 @@
                 [self.goOutPicker reloadAllComponents];
         
     }
-    else if ([self.questionsLabel.text isEqualToString:[self.surveyQuestions objectAtIndex:1]]){
+    else if ([self.questionsLabel.text isEqualToString:[self.surveyQuestions objectAtIndex:1]]  && ![self.goOutFrequency.text isEqualToString:@""]){
         
         self.demographicsSurvey[@"PreferredDrink"] = self.goOutFrequency.text;
         
@@ -101,7 +102,7 @@
                 self.inputArray = self.musicType;
                 [self.goOutPicker reloadAllComponents];
               }
-    else if ([self.questionsLabel.text isEqualToString:[self.surveyQuestions objectAtIndex:2]]){
+    else if ([self.questionsLabel.text isEqualToString:[self.surveyQuestions objectAtIndex:2]]  && ![self.goOutFrequency.text isEqualToString:@""]){
         
         self.demographicsSurvey[@"FavoriteMusic"] = self.goOutFrequency.text;
         

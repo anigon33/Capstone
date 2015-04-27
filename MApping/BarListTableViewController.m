@@ -49,8 +49,9 @@
     self.objectsPerPage = 10;
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
-}
+    
 
+}
 
 #pragma mark - Table view data source
 

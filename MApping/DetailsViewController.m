@@ -31,16 +31,23 @@
     self.BarLogo.file = [self.establishmentObject objectForKey:@"image"];
     [self.BarLogo loadInBackground];
     
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updatedLocation:)
                                                  name:@"newLocationNotif"
                                                object:nil];
-
     
+    
+   [[self navigationController] setNavigationBarHidden:YES animated:NO];
+
     
     self.spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     self.spinner.center = CGPointMake(160, 270);
     [self.view addSubview:self.spinner];
+    
+}
+-(void) viewWillDisappear:(BOOL)animated{
+    [[self navigationController] setNavigationBarHidden:NO animated:NO];
     
 }
 -(void) updatedLocation:(NSNotification*)notif {
@@ -48,7 +55,7 @@
 }
 
 - (IBAction)enterBarButtonPressed:(UIButton *)sender {
-    
+    BOOL barFound = NO;
     //    [self performSegueWithIdentifier:@"toCouponPage" sender:self];
     PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLocation:self.userLocation];
     
@@ -58,50 +65,50 @@
     [query whereKey:@"GeoCoordinates" nearGeoPoint:userLocation withinMiles:.02f];
     NSArray *barsAroundCurrentLocation;
     barsAroundCurrentLocation = [query findObjects];
+    [self.spinner stopAnimating];
     
     if (barsAroundCurrentLocation.count != 0){
         
-    
-    
-        for (PFObject *bar in barsAroundCurrentLocation) {
         
-        if ([self.establishmentObject[@"name"] isEqualToString:bar[@"name"]]) {
-            [self performSegueWithIdentifier:@"toCouponPage" sender:self];
-            NSLog(@"Test");
-            [self.spinner stopAnimating];
+        
+        for (PFObject *bar in barsAroundCurrentLocation) {
+            
+            if ([self.establishmentObject[@"name"] isEqualToString:bar[@"name"]]) {
+                [self performSegueWithIdentifier:@"toCouponPage" sender:self];
+                
+                barFound = YES;
+                NSLog(@"Test");
+            }
         }
-//        if (barsAroundCurrentLocation == nil){
-//            NSString *title = @"Oops!";
-//            NSString *message = @"Coup' users must be inside each bar to see the specials, so get over there already!!";
-//            
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-//                                                                message:message
-//                                                               delegate:self
-//                                                      cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-//            
-//            [self.spinner stopAnimating];
-//            
-//            [alertView show];
-//        }
-        else{
-            NSString *title = @"Oops!";
-            NSString *message = @"Coup' users must be inside each bar to see the specials, so get over there already!!";
-            
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                                message:message
-                                                               delegate:self
-                                                      cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-            
-            [self.spinner stopAnimating];
-            
-            [alertView show];
-
+        if(!barFound){
+        NSString *title = @"Oops!";
+        NSString *message = @"Your Close but no cigar";
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                            message:message
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+        
+        
+        [alertView show];
         }
-//            39.94320113,-104.95623392
-//            
-//            39.943191,  -104.956193
-            
-        }
+    }
+    
+    
+    
+    
+    else{
+        NSString *title = @"Oops!";
+        NSString *message = @"Coup' users must be inside each bar to see the specials, so get over there already!!";
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                            message:message
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+        
+        
+        [alertView show];
+        
     }
     
     // do something with the new geoPoint
@@ -114,13 +121,13 @@
     destination.establishmentObject = self.establishmentObject;
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

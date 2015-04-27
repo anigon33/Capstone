@@ -32,13 +32,13 @@
     
     // ** Don't forget to add NSLocationWhenInUseUsageDescription in MyApp-Info.plist and give it a string
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"login"]];
-  
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updatedLocation:)
                                                  name:@"newLocationNotif"
                                                object:nil];
     
-        self.myMapView.delegate = self;
+    self.myMapView.delegate = self;
     self.myMapView.showsUserLocation = YES;
     [self zoomToLocation];
     
@@ -47,15 +47,13 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             self.locations = [[NSArray alloc]initWithArray:objects];
-            
+            [self.myMapView addAnnotations:[self createAnnotations]];
+
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
-    
-
-    
     
     if (![PFUser currentUser]) { // No user logged in
         // Create the log in view controller
@@ -72,7 +70,7 @@
         
         // Assign our sign up controller to be displayed from the login controller
         [logInViewController setSignUpController:signUpViewController];
-    
+        
         
         // Present the log in view controller
         [self presentViewController:logInViewController animated:YES completion:NULL];
@@ -86,16 +84,28 @@
 }
 
 -(void) logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user{
+    if ([[[PFUser currentUser] valueForKey:@"emailVerified"] isEqualToNumber:[NSNumber numberWithBool:NO]]) {
+        NSString *title = @"Oops!";
+        NSString *message = @"Please verify email before procedding";
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                            message:message
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+        [alertView show];
+        
+    }else {
+    
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-    [self.myMapView addAnnotations:[self createAnnotations]];
-
+    //[self.myMapView addAnnotations:[self createAnnotations]];
+    }
 }
 -(void) signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user{
     
     // pop a pushMODALView in a view controller
-  //  AdditionalSurveyQuestionsViewController *additionalVC = [[AdditionalSurveyQuestionsViewController alloc] init];
+    //  AdditionalSurveyQuestionsViewController *additionalVC = [[AdditionalSurveyQuestionsViewController alloc] init];
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-   
+    
     [self performSegueWithIdentifier:@"surveySegue" sender:self];
     
 }
@@ -114,11 +124,11 @@
         NSString *subtitle = [row objectForKey:@"subtitle"];
         
         
-     
+        
         
         
         NSString *title = [row objectForKey:@"name"];
-       
+        
         PFImageView *imageView = [[PFImageView alloc] init];
         imageView.file = [row objectForKey:@"image"];
         [imageView loadInBackground];
@@ -136,7 +146,7 @@
     zoomLocation.longitude= -104.992028;
     MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 3*METERS_PER_MILE,3*METERS_PER_MILE);
     [self.myMapView regionThatFits:viewRegion];
-
+    
     [self.myMapView setRegion:viewRegion animated:YES];
 }
 
@@ -158,7 +168,7 @@ calloutAccessoryControlTapped:(UIControl *)control{
     if ([[segue identifier] isEqualToString:@"toDetails"]) {
         DetailsViewController *destination = [segue destinationViewController];
         destination.establishmentObject = self.annotationTapped;
-
+        
         
         NSLog(@"Yay!");
         
@@ -178,16 +188,16 @@ calloutAccessoryControlTapped:(UIControl *)control{
         
         av.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         
-//        MapViewAnnotation *customAnnotation = annotation;
-//        
-//
-//        PFImageView *imageView = [[PFImageView alloc] init];
-//        imageView = customAnnotation.image;
-//        [imageView loadInBackground];
-//
-//        av.leftCalloutAccessoryView = imageView;
-
-       
+        //        MapViewAnnotation *customAnnotation = annotation;
+        //
+        //
+        //        PFImageView *imageView = [[PFImageView alloc] init];
+        //        imageView = customAnnotation.image;
+        //        [imageView loadInBackground];
+        //
+        //        av.leftCalloutAccessoryView = imageView;
+        
+        
         
         UILabel *lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 120, 20)];
         lbl.backgroundColor = [UIColor clearColor];
@@ -205,13 +215,13 @@ calloutAccessoryControlTapped:(UIControl *)control{
         av.annotation = annotation;
     }
     UILabel *lbl = (UILabel *)[av viewWithTag:01];
-  // lbl.text = annotation.title;
+    // lbl.text = annotation.title;
     lbl.textAlignment = NSTextAlignmentJustified;
     
     return av;
 }
-                                 
- 
+
+
 - (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
     MKAnnotationView *aV;
     for (aV in views) {
@@ -228,12 +238,12 @@ calloutAccessoryControlTapped:(UIControl *)control{
     }
 }
 
-                                 
-                                 
-                                 
-                                 
-                                 
-                                 
+
+
+
+
+
+
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {

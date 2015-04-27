@@ -28,15 +28,15 @@
     permanentText = @"YEs sir";
 
     
-    self.longPressGesture.minimumPressDuration = .5;
-    self.longPressGesture.numberOfTouchesRequired = 1;
-    self.longPressGesture.allowableMovement = 50;
     
-    self.payWithTweetButton.enabled = YES;
+    self.longPressGesture.allowableMovement = 50;
+    self.longPressGesture.delegate = self;
+
+    
+    self.payWithTweetButton.hidden = [self.establishmentObject[@"payWithTweet"] boolValue];
     self.payWithTweetButton.alpha = 1.0f;
     
     
-    self.longPressGesture.delegate = self;
     
     
     self.promoLabelText.text = [self.establishmentObject valueForKey:@"promoCode"];
@@ -58,27 +58,30 @@
     NSLog(@"yo");
 
 }
-- (void)handleGesture:(UIGestureRecognizer *)gestureRecognizer{
-    if (gestureRecognizer.state == UIGestureRecognizerStateBegan){
-        NSLog(@"UIGestureRecognizerStateBegan.");
-        //Do Whatever You want on Began of Gesture
-        self.promoLabelText.hidden = NO;
-        self.promoLabelText.alpha = 1.0f;
-        // Then fades it away after 2 seconds (the cross-fade animation will take 0.5s)
-        [UIView animateWithDuration:0.5 delay:4.0 options:UIViewAnimationOptionShowHideTransitionViews animations:^{
-            // Animate the alpha value of your imageView from 1.0 to 0.0 here
-            self.promoLabelText.alpha = 0.0f;
-        } completion:^(BOOL finished) {
-            // Once the animation is completed and the alpha has gone to 0.0, hide the view for good
-            self.promoLabelText.hidden = YES;
-            
-        }];
-    }else if (gestureRecognizer.state == UIGestureRecognizerStateEnded){
-        [self performSegueWithIdentifier:@"toCustomerReview" sender:self];
-    }
-
-}
+//- (void)handleGesture:(UIGestureRecognizer *)gestureRecognizer{
+//    
+//    
+//    if (gestureRecognizer.state == UIGestureRecognizerStateBegan){
+//        NSLog(@"UIGestureRecognizerStateBegan.");
+//        //Do Whatever You want on Began of Gesture
+//        self.promoLabelText.hidden = NO;
+//        self.promoLabelText.alpha = 1.0f;
+//        // Then fades it away after 2 seconds (the cross-fade animation will take 0.5s)
+//        [UIView animateWithDuration:0.5 delay:4.0 options:UIViewAnimationOptionShowHideTransitionViews animations:^{
+//            // Animate the alpha value of your imageView from 1.0 to 0.0 here
+//            self.promoLabelText.alpha = 0.0f;
+//        } completion:^(BOOL finished) {
+//            // Once the animation is completed and the alpha has gone to 0.0, hide the view for good
+//            self.promoLabelText.hidden = YES;
+//            
+//        }];
+//    }else if (gestureRecognizer.state == UIGestureRecognizerStateEnded){
+//        [self performSegueWithIdentifier:@"toCustomerReview" sender:self];
+//    }
+//
+//}
 - (IBAction)CouponPressed:(UILongPressGestureRecognizer *)sender {
+    
     if (sender.state == UIGestureRecognizerStateBegan){
         NSLog(@"UIGestureRecognizerStateBegan.");
         //Do Whatever You want on Began of Gesture
