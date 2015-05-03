@@ -38,6 +38,8 @@
                                                  name:@"newLocationNotif"
                                                object:nil];
     
+    
+    
     self.myMapView.delegate = self;
     self.myMapView.showsUserLocation = YES;
     [self zoomToLocation];

@@ -46,17 +46,12 @@
     [self.view addSubview:self.spinner];
     
 }
--(void) viewWillDisappear:(BOOL)animated{
-    [[self navigationController] setNavigationBarHidden:NO animated:NO];
-    
-}
 -(void) updatedLocation:(NSNotification*)notif {
     self.userLocation = (CLLocation*)[[notif userInfo] valueForKey:@"newLocationResult"];
 }
 
 - (IBAction)enterBarButtonPressed:(UIButton *)sender {
     BOOL barFound = NO;
-    //    [self performSegueWithIdentifier:@"toCouponPage" sender:self];
     PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLocation:self.userLocation];
     
     [self.spinner startAnimating];
@@ -80,7 +75,7 @@
                 NSLog(@"Test");
             }
         }
-        if(!barFound){
+        if(barFound == NO){
         NSString *title = @"Oops!";
         NSString *message = @"Your Close but no cigar";
         
@@ -111,7 +106,7 @@
         
     }
     
-    // do something with the new geoPoint
+ 
     
     
 }
@@ -120,14 +115,5 @@
     CouponViewController *destination = segue.destinationViewController;
     destination.establishmentObject = self.establishmentObject;
 }
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

@@ -36,7 +36,6 @@
 		E085304D1AD7638800F12AA1 /* CouponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E085304C1AD7638800F12AA1 /* CouponViewController.m */; };
 		E08530501AD7645200F12AA1 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = E085304F1AD7645200F12AA1 /* iCarousel.m */; };
 		E0C8EA211ABF997100E9456E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0C8EA201ABF997100E9456E /* CoreData.framework */; };
-		E0C8EA241ABF999F00E9456E /* BarChat.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E0C8EA221ABF999F00E9456E /* BarChat.xcdatamodeld */; };
 		E0C8EA651ABF9A6200E9456E /* MagicalImportFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C8EA291ABF9A6200E9456E /* MagicalImportFunctions.m */; };
 		E0C8EA661ABF9A6200E9456E /* NSAttributeDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C8EA2B1ABF9A6200E9456E /* NSAttributeDescription+MagicalDataImport.m */; };
 		E0C8EA671ABF9A6200E9456E /* NSEntityDescription+MagicalDataImport.m in Sources */ = {isa = PBXBuildFile; fileRef = E0C8EA2D1ABF9A6200E9456E /* NSEntityDescription+MagicalDataImport.m */; };
@@ -73,9 +72,7 @@
 		E0DA1B891AB38B0100D23CD7 /* MAppingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E0DA1B881AB38B0100D23CD7 /* MAppingTests.m */; };
 		E0DA1B931AB38B3000D23CD7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0DA1B921AB38B3000D23CD7 /* CoreLocation.framework */; };
 		E0DA1B951AB38B3700D23CD7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0DA1B941AB38B3700D23CD7 /* MapKit.framework */; };
-		E0DA1B9A1AB3A82A00D23CD7 /* locations.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0DA1B991AB3A82A00D23CD7 /* locations.plist */; };
 		E0DA1B9D1AB3AA6F00D23CD7 /* MapViewAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E0DA1B9C1AB3AA6F00D23CD7 /* MapViewAnnotation.m */; };
-		E0ECDA8B1AE3208B00DAE67D /* EstablishmentRegion.m in Sources */ = {isa = PBXBuildFile; fileRef = E0ECDA8A1AE3208A00DAE67D /* EstablishmentRegion.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,7 +124,6 @@
 		E085304E1AD7645200F12AA1 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		E085304F1AD7645200F12AA1 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		E0C8EA201ABF997100E9456E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		E0C8EA231ABF999F00E9456E /* BarChat.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BarChat.xcdatamodel; sourceTree = "<group>"; };
 		E0C8EA281ABF9A6200E9456E /* MagicalImportFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalImportFunctions.h; sourceTree = "<group>"; };
 		E0C8EA291ABF9A6200E9456E /* MagicalImportFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalImportFunctions.m; sourceTree = "<group>"; };
 		E0C8EA2A1ABF9A6200E9456E /* NSAttributeDescription+MagicalDataImport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributeDescription+MagicalDataImport.h"; sourceTree = "<group>"; };
@@ -203,11 +199,8 @@
 		E0DA1B881AB38B0100D23CD7 /* MAppingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MAppingTests.m; sourceTree = "<group>"; };
 		E0DA1B921AB38B3000D23CD7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		E0DA1B941AB38B3700D23CD7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		E0DA1B991AB3A82A00D23CD7 /* locations.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = locations.plist; sourceTree = "<group>"; };
 		E0DA1B9B1AB3AA6F00D23CD7 /* MapViewAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewAnnotation.h; sourceTree = "<group>"; };
 		E0DA1B9C1AB3AA6F00D23CD7 /* MapViewAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewAnnotation.m; sourceTree = "<group>"; };
-		E0ECDA891AE3208A00DAE67D /* EstablishmentRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EstablishmentRegion.h; sourceTree = "<group>"; };
-		E0ECDA8A1AE3208A00DAE67D /* EstablishmentRegion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EstablishmentRegion.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -412,8 +405,6 @@
 				E085304C1AD7638800F12AA1 /* CouponViewController.m */,
 				E07130B11AD857EC00C95E29 /* CouponRedeemViewController.h */,
 				E07130B21AD857EC00C95E29 /* CouponRedeemViewController.m */,
-				E0ECDA891AE3208A00DAE67D /* EstablishmentRegion.h */,
-				E0ECDA8A1AE3208A00DAE67D /* EstablishmentRegion.m */,
 				E0DA1B701AB38B0100D23CD7 /* AppDelegate.h */,
 				E0DA1B711AB38B0100D23CD7 /* AppDelegate.m */,
 				E07E0C611AC49CCD00FD44EA /* AdditionalSurveyQuestionsViewController.h */,
@@ -424,7 +415,6 @@
 				E07E0C591AC2271100FD44EA /* BarChatLogInViewController.m */,
 				E07E0C5B1AC22DDD00FD44EA /* BarChatSignUpViewController.h */,
 				E07E0C5C1AC22DDD00FD44EA /* BarChatSignUpViewController.m */,
-				E0C8EA221ABF999F00E9456E /* BarChat.xcdatamodeld */,
 				E0C8EA811AC0CD9200E9456E /* User.h */,
 				E0C8EA821AC0CD9200E9456E /* User.m */,
 				E0DA1B731AB38B0100D23CD7 /* ViewController.h */,
@@ -447,7 +437,6 @@
 			isa = PBXGroup;
 			children = (
 				E0DA1B6D1AB38B0100D23CD7 /* Info.plist */,
-				E0DA1B991AB3A82A00D23CD7 /* locations.plist */,
 				E0C8EA801ABF9B1500E9456E /* PrefixHeader.pch */,
 				E0DA1B6E1AB38B0100D23CD7 /* main.m */,
 			);
@@ -551,7 +540,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E0DA1B9A1AB3A82A00D23CD7 /* locations.plist in Resources */,
 				E0DA1B7D1AB38B0100D23CD7 /* LaunchScreen.xib in Resources */,
 				E0DA1B7A1AB38B0100D23CD7 /* Images.xcassets in Resources */,
 				E079E01A1ACAD7E100D5A6E2 /* Main.storyboard in Resources */,
@@ -573,7 +561,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E07E0C5A1AC2271100FD44EA /* BarChatLogInViewController.m in Sources */,
-				E0C8EA241ABF999F00E9456E /* BarChat.xcdatamodeld in Sources */,
 				E0C8EA7B1ABF9A6200E9456E /* MagicalRecord+iCloud.m in Sources */,
 				E07130B31AD857EC00C95E29 /* CouponRedeemViewController.m in Sources */,
 				E0DA1B751AB38B0100D23CD7 /* ViewController.m in Sources */,
@@ -609,7 +596,6 @@
 				E07130B61AD8A6F000C95E29 /* CustomerReviewViewController.m in Sources */,
 				E0DA1B6F1AB38B0100D23CD7 /* main.m in Sources */,
 				E0C8EA6A1ABF9A6200E9456E /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
-				E0ECDA8B1AE3208B00DAE67D /* EstablishmentRegion.m in Sources */,
 				E0DA1B9D1AB3AA6F00D23CD7 /* MapViewAnnotation.m in Sources */,
 				E0C8EA681ABF9A6200E9456E /* NSNumber+MagicalDataImport.m in Sources */,
 				E0C8EA6E1ABF9A6200E9456E /* NSManagedObject+MagicalFinders.m in Sources */,
@@ -827,19 +813,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		E0C8EA221ABF999F00E9456E /* BarChat.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				E0C8EA231ABF999F00E9456E /* BarChat.xcdatamodel */,
-			);
-			currentVersion = E0C8EA231ABF999F00E9456E /* BarChat.xcdatamodel */;
-			path = BarChat.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = E0DA1B611AB38B0100D23CD7 /* Project object */;
 }

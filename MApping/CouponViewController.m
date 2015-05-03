@@ -77,7 +77,7 @@
         }
     }];
     
-    [self.view addSubview:self.carousel];
+   // [self.view addSubview:self.carousel];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
