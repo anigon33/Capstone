@@ -17,9 +17,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"login"]];
-    UIImageView *tellEm = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lettersBest"]];
-    self.signUpView.logo = tellEm;
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"detailsView"]];
+    
+   // UIImageView *tellEm = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lettersBest"]];
+    //self.signUpView.logo = tellEm;
     
     self.signUpView.passwordField.textColor = [UIColor blackColor];
 
