@@ -9,6 +9,7 @@
 #import "BarListTableViewController.h"
 #import "DetailsViewController.h"
 #import <Parse/Parse.h>
+#import <UIKit/UIKit.h>
 @interface BarListTableViewController ()
 
 @property (strong, nonatomic) PFObject *bar;
@@ -17,7 +18,6 @@
 
 @end
 @implementation BarListTableViewController
-
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) {
@@ -25,8 +25,11 @@
         
         // The className to query on
            }
+    
+
     return self;
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Uncomment the following line to preserve selection between presentations.
@@ -49,6 +52,14 @@
     self.objectsPerPage = 10;
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    UIImageView *tableViewBackground = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 450)];
+    tableViewBackground.image = [UIImage imageNamed:@"backgroundImage"];
+    [[UITableView appearance] setBackgroundView:tableViewBackground];
+    
+   // UIImageView *barLishHeaderImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 45)];
+    
+   // [[UINavigationBar appearance] setFrame:CGRectMake(0, 0, 320, 45)];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"BarCoupLogo"]forBarMetrics:UIBarMetricsDefault];
     
 
 }
@@ -69,7 +80,7 @@
     self.imageKey = @"image";
     
     // Whether the built-in pull-to-refresh is enabled
-    self.pullToRefreshEnabled = YES;
+    self.pullToRefreshEnabled = NO;
     
     // Whether the built-in pagination is enabled
     self.paginationEnabled = YES;
@@ -113,18 +124,27 @@
      }
      // Configure the cell...
      
-     PFImageView *imageView = [[PFImageView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
+     PFImageView *imageView = [[PFImageView alloc] initWithFrame:CGRectMake(0, 5, 80, 80)];
      imageView.file = [object objectForKey:self.imageKey];
      [imageView loadInBackground];
      
-     UILabel *mainLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, 0, 220, 25)];
+     UILabel *mainLabel = [[UILabel alloc]initWithFrame:CGRectMake(90, 20, 220, 25)];
      mainLabel.text = object[@"name"];
-     mainLabel.font = [UIFont systemFontOfSize:20];
+     mainLabel.textColor = [UIColor whiteColor];
+     mainLabel.font = [UIFont systemFontOfSize:18];
      
-     UILabel *detailsLabel = [[UILabel alloc]initWithFrame:CGRectMake(100, 30, 220, 30)];
+     UILabel *detailsLabel = [[UILabel alloc]initWithFrame:CGRectMake(90, 40, 220, 30)];
      detailsLabel.text = object[@"subtitle"];
-     detailsLabel.font = [UIFont systemFontOfSize:10];
+     detailsLabel.textColor = [UIColor whiteColor];
+     detailsLabel.adjustsFontSizeToFitWidth = YES;
+     detailsLabel.font = [UIFont systemFontOfSize:9];
      
+    
+     UIImageView *cellBackgroundView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 90)];
+     cellBackgroundView.image = [UIImage imageNamed:@"cellImage"];
+     
+     cell.backgroundColor = [UIColor clearColor];
+     [cell addSubview:cellBackgroundView];
      [cell addSubview:imageView];
      [cell addSubview:mainLabel];
      [cell addSubview:detailsLabel];

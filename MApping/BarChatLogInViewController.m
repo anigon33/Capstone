@@ -7,7 +7,7 @@
 //
 
 #import "BarChatLogInViewController.h"
-
+#import <QuartzCore/QuartzCore.h>
 @interface BarChatLogInViewController ()<PFLogInViewControllerDelegate>
 
 @end
@@ -16,12 +16,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"login"]];
-    UIImageView *tellEm = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lettersBest"]];
-    self.logInView.logo = tellEm;
-  
-    // Do any additional setup after loading the view.
-}
+    UIImageView *loginBackground = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"BarCoupLogo"]];
+    self.logInView.logo = loginBackground;
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundImage"]];
+    self.view.contentMode = UIViewContentModeScaleAspectFill;
+ }
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
     
@@ -32,15 +32,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

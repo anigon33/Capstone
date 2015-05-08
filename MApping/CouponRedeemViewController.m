@@ -45,11 +45,10 @@
     [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
         if (!error) {
             self.IndividualCouponImage.image = [UIImage imageWithData:imageData];
-            self.IndividualCouponImage.contentMode = UIViewContentModeScaleAspectFill;
+            
             
             self.promoLabelText.hidden = YES;
 
-            [self.IndividualCouponImage addSubview:self.promoLabelText];
             
             [self.IndividualCouponImage addGestureRecognizer:self.longPressGesture];
         }
@@ -62,28 +61,7 @@
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
 
 }
-//- (void)handleGesture:(UIGestureRecognizer *)gestureRecognizer{
-//    
-//    
-//    if (gestureRecognizer.state == UIGestureRecognizerStateBegan){
-//        NSLog(@"UIGestureRecognizerStateBegan.");
-//        //Do Whatever You want on Began of Gesture
-//        self.promoLabelText.hidden = NO;
-//        self.promoLabelText.alpha = 1.0f;
-//        // Then fades it away after 2 seconds (the cross-fade animation will take 0.5s)
-//        [UIView animateWithDuration:0.5 delay:4.0 options:UIViewAnimationOptionShowHideTransitionViews animations:^{
-//            // Animate the alpha value of your imageView from 1.0 to 0.0 here
-//            self.promoLabelText.alpha = 0.0f;
-//        } completion:^(BOOL finished) {
-//            // Once the animation is completed and the alpha has gone to 0.0, hide the view for good
-//            self.promoLabelText.hidden = YES;
-//            
-//        }];
-//    }else if (gestureRecognizer.state == UIGestureRecognizerStateEnded){
-//        [self performSegueWithIdentifier:@"toCustomerReview" sender:self];
-//    }
-//
-//}
+
 - (IBAction)CouponPressed:(UILongPressGestureRecognizer *)sender {
     
     if (sender.state == UIGestureRecognizerStateBegan){

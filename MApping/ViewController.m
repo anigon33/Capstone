@@ -31,7 +31,7 @@
     [super viewDidLoad];
     
     // ** Don't forget to add NSLocationWhenInUseUsageDescription in MyApp-Info.plist and give it a string
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"backgroundImage"]];
+   
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(updatedLocation:)
@@ -41,21 +41,9 @@
     
     
     self.myMapView.delegate = self;
-    self.myMapView.showsUserLocation = YES;
-    [self zoomToLocation];
     
+    //[self refreshAnnotations];
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Establishment"];
-    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            self.locations = [[NSArray alloc]initWithArray:objects];
-            [self.myMapView addAnnotations:[self createAnnotations]];
-
-        } else {
-            // Log details of the failure
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    }];
     
     if (![PFUser currentUser]) { // No user logged in
         // Create the log in view controller
@@ -76,10 +64,36 @@
         
         // Present the log in view controller
         [self presentViewController:logInViewController animated:YES completion:NULL];
-        logInViewController.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"login"]];
+        
+                
+    
+        
         
     }
     
+}
+-(void)viewDidAppear:(BOOL)animated{
+    self.myMapView.showsUserLocation = YES;
+    [self zoomToLocation];
+
+    [self refreshAnnotations];
+}
+-(void) viewDidDisappear:(BOOL)animated{
+    [self.myMapView removeAnnotations:self.myMapView.annotations];
+
+}
+-(void) refreshAnnotations{
+    PFQuery *query = [PFQuery queryWithClassName:@"Establishment"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            self.locations = [[NSArray alloc]initWithArray:objects];
+            [self.myMapView addAnnotations:[self createAnnotations]];
+            
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
 }
 -(void) updatedLocation:(NSNotification*)notif {
     self.userLocation = (CLLocation*)[[notif userInfo] valueForKey:@"newLocationResult"];
@@ -102,15 +116,26 @@
     //[self.myMapView addAnnotations:[self createAnnotations]];
     }
 }
+
 -(void) signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user{
-    
-    // pop a pushMODALView in a view controller
-    //  AdditionalSurveyQuestionsViewController *additionalVC = [[AdditionalSurveyQuestionsViewController alloc] init];
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-    
-    [self performSegueWithIdentifier:@"surveySegue" sender:self];
-    
+    if ([[[PFUser currentUser] valueForKey:@"emailVerified"] isEqualToNumber:[NSNumber numberWithBool:NO]]) {
+        NSString *title = @"Oops!";
+        NSString *message = @"Please verify email before procedding";
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                            message:message
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+        [alertView show];
+        
+    }else {
+        
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        [self performSegueWithIdentifier:@"surveySegue" sender:self];
+       
+    }
 }
+
 - (NSMutableArray *)createAnnotations
 {
     NSMutableArray *annotations = [[NSMutableArray alloc]init];

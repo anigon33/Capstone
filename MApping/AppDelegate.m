@@ -10,7 +10,6 @@
 #import "CoreData+MagicalRecord.h"
 #import "EstablishmentRegion.h"
 @interface AppDelegate ()
-@property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLCircularRegion *region;
 @property (strong, nonatomic) NSArray *establishmentObjects;
 @property (strong, nonatomic) NSMutableArray *barRegions;
@@ -31,13 +30,14 @@
     
     UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
     tabController.delegate = self;
-    [[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
+    //[[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
     //    [[UITabBar appearance] setBackgroundImage:[UIImage new]];
     
     
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
-    self.locationManager.distanceFilter = kCLLocationAccuracyBest;
+    self.locationManager.distanceFilter = kCLDistanceFilterNone;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
     [self.locationManager startUpdatingLocation];
     
     //  Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
@@ -88,53 +88,52 @@
 {
     CLLocation *newLocation = [locations lastObject];
     CLLocationCoordinate2D currentLocationCoordinate = newLocation.coordinate;
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"newLocationNotif"
-                                                        object:self
-                                                      userInfo:[NSDictionary dictionaryWithObject:newLocation
-                                                                                           forKey:@"newLocationResult"]];
-    NSLog(@"current location = %@", [locations lastObject]);
-    
-    // looping through establishment region to see if user is in one of the bars
-    for (CLCircularRegion *establishmentRegion in self.barRegions){
-        if ([establishmentRegion containsCoordinate:currentLocationCoordinate]){
-            //checking name of visit bar object is equal to the name of the region identifier
-            if ([[[self.visitObject objectForKey:@"establishments"] objectForKey:@"name"] isEqualToString:establishmentRegion.identifier]) {
-                
-                //do nothing because they have already created visit
-                
-            } else {
-                if (self.establishmentObjects != nil) {
+    if (newLocation.horizontalAccuracy <= self.locationManager.desiredAccuracy){
+        self.locationAccurate = YES;
+        self.latestLocation = [[CLLocation alloc]initWithLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
+        self.latestLocation = newLocation;
+        NSLog(@"current location = %@", [locations lastObject]);
+        
+        // looping through establishment region to see if user is in one of the bars
+        for (CLCircularRegion *establishmentRegion in self.barRegions){
+            if ([establishmentRegion containsCoordinate:currentLocationCoordinate]){
+                //checking name of visit bar object is equal to the name of the region identifier
+                if ([[[self.visitObject objectForKey:@"establishments"] objectForKey:@"name"] isEqualToString:establishmentRegion.identifier]) {
                     
-                    self.visitObject = [PFObject objectWithClassName:@"Visit"];
-                    [self.visitObject setObject:[NSDate date] forKey:@"start"];
-                    NSString *barName = establishmentRegion.identifier;
-                    for (PFObject *establishmentObject in self.establishmentObjects){
+                    //do nothing because they have already created visit
+                    
+                } else {
+                    if (self.establishmentObjects != nil) {
                         
-                        if ([barName isEqualToString:[establishmentObject valueForKey:@"name"]]) {
-                            self.visitObject [@"establishments"] = establishmentObject;
+                        self.visitObject = [PFObject objectWithClassName:@"Visit"];
+                        [self.visitObject setObject:[NSDate date] forKey:@"start"];
+                        NSString *barName = establishmentRegion.identifier;
+                        for (PFObject *establishmentObject in self.establishmentObjects){
+                            
+                            if ([barName isEqualToString:[establishmentObject valueForKey:@"name"]]) {
+                                self.visitObject [@"establishments"] = establishmentObject;
+                            }
+                            
+                            
                         }
                         
-                        
+                        [self.visitObject saveInBackground];
                     }
+                }
+            } else {
+                if (self.visitObject != nil && [[[self.visitObject objectForKey:@"establishments"] objectForKey:@"name"] isEqualToString:establishmentRegion.identifier]){
                     
+                    NSLog(@"holla");
+                    [self.visitObject setObject:[NSDate date] forKey:@"end"];
                     [self.visitObject saveInBackground];
+                    
+                    self.visitObject = nil;
+                    
                 }
             }
-        } else {
-            if (self.visitObject != nil && [[[self.visitObject objectForKey:@"establishments"] objectForKey:@"name"] isEqualToString:establishmentRegion.identifier]){
-                
-                NSLog(@"holla");
-                [self.visitObject setObject:[NSDate date] forKey:@"end"];
-                [self.visitObject saveInBackground];
-                
-                self.visitObject = nil;
-                
-            }
+            
         }
-        
     }
-    
 }
 - (void)requestAlwaysAuthorization
 {
@@ -171,6 +170,8 @@
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
+    
+    self.locationAccurate = NO;
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 

@@ -41,7 +41,7 @@
     self.carousel.dataSource = self;
     self.carousel.type = iCarouselTypeCoverFlow2;
     self.carousel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.carousel.backgroundColor = [UIColor whiteColor];
+    self.carousel.backgroundColor = [UIColor clearColor];
     
     self.BarHomePage.file = [self.establishmentObject objectForKey:@"image"];
     [self.BarHomePage loadInBackground];
@@ -106,10 +106,10 @@
     //create new view if no view is available for recycling
     if (view == nil)
     {
-        view = [[PFImageView alloc] initWithFrame:CGRectMake(0, 0, 200.0f, 200.0f)];
+        view = [[PFImageView alloc] initWithFrame:CGRectMake(0, 0, 240.0f, 240.0f)];
         ((PFImageView *)view).file = [self.couponImages objectAtIndex:index][@"Coupon"];
         [((PFImageView *)view) loadInBackground];
-        view.contentMode = UIViewContentModeCenter;
+        view.contentMode = UIViewContentModeScaleAspectFill;
 
 //        label = [[UILabel alloc] initWithFrame:view.bounds];
 //        label.backgroundColor = [UIColor clearColor];

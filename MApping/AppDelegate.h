@@ -10,8 +10,9 @@
 #import <Parse/Parse.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, UITabBarControllerDelegate, CLLocationManagerDelegate>
-
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@property BOOL locationAccurate;
 @property (strong, nonatomic) UIWindow *window;
-
+@property (strong, nonatomic) CLLocation *latestLocation;
 @end
 
