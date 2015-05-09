@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet PFImageView *BarHomePage;
 @property (strong, nonatomic) PFObject *selectedCoupon;
 
+@property(nonatomic, strong) NSArray *usedCoupons;
 
 @property (nonatomic, strong) NSMutableArray *couponImages;
 @end
@@ -66,22 +67,21 @@
     [self.view addSubview:self.BarHomePage];
     PFQuery *couponQuery = [PFQuery queryWithClassName:@"TavernCoupons"];
     [couponQuery whereKey:@"establishmentId" equalTo:self.establishmentObject[@"establishmentId"]];
-    [couponQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            
-            self.couponImages = [NSMutableArray arrayWithArray:objects];
-            
-         
-
-            [self.carousel reloadData];
-        }
-    }];
+    NSMutableArray *availableCoupons = [[NSMutableArray alloc] initWithArray:[couponQuery findObjects]];
     
-   // [self.view addSubview:self.carousel];
+    PFQuery *couponsUsed = [PFQuery queryWithClassName:@"CouponUsed"];
+    [couponsUsed whereKey:@"user" equalTo:[PFUser currentUser]];
+    self.usedCoupons = [[NSArray alloc] initWithArray:[couponsUsed findObjects]];
+    
+    
+    
+    self.couponImages = [[NSMutableArray alloc] initWithArray:availableCoupons];
+    
+    [self.carousel reloadData];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
-
+    
 }
 - (void)viewDidUnload
 {
@@ -110,13 +110,14 @@
         ((PFImageView *)view).file = [self.couponImages objectAtIndex:index][@"Coupon"];
         [((PFImageView *)view) loadInBackground];
         view.contentMode = UIViewContentModeScaleAspectFill;
-
-//        label = [[UILabel alloc] initWithFrame:view.bounds];
-//        label.backgroundColor = [UIColor clearColor];
-//        label.textAlignment = UITextAlignmentCenter;
-//        label.font = [label.font fontWithSize:50];
-//        label.tag = 1;
-//        [view addSubview:label];
+        for (NSDictionary *used in self.usedCoupons) {
+            if ([[[self.couponImages objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]]) {
+                view.alpha = .5;
+                
+                
+            }
+        }
+        
     }
     else
     {
@@ -155,23 +156,30 @@
     return CATransform3DTranslate(transform, 0.0f, 0.0f, offset * carousel.itemWidth);
 }
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index{
+    for (NSDictionary *used in self.usedCoupons) {
+        if ([[[self.couponImages objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]]) {
+            
+            
+        } else {
+            self.selectedCoupon = [self.couponImages objectAtIndex:index];
+            [self performSegueWithIdentifier:@"toFullScreenCoupon" sender:self];
+        }
+    }
     
-    self.selectedCoupon = [self.couponImages objectAtIndex:index];
-    [self performSegueWithIdentifier:@"toFullScreenCoupon" sender:self];
 }
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     CouponRedeemViewController *destination = segue.destinationViewController;
-    destination.establishmentObject = self.selectedCoupon;
+    destination.couponObject = self.selectedCoupon;
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

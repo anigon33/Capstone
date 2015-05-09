@@ -11,7 +11,7 @@
 #import <Social/Social.h>
 
 @interface CouponRedeemViewController : UIViewController
-@property (nonatomic, strong)PFObject *establishmentObject;
+@property (nonatomic, strong)PFObject *couponObject;
 @property (weak, nonatomic) IBOutlet UIButton *payWithTweetButton;
 
 - (IBAction)twitterPost:(id)sender;

@@ -33,15 +33,15 @@
     self.longPressGesture.delegate = self;
 
     
-    self.payWithTweetButton.hidden = [self.establishmentObject[@"payWithTweet"] boolValue];
+    self.payWithTweetButton.hidden = [self.couponObject[@"payWithTweet"] boolValue];
     self.payWithTweetButton.alpha = 1.0f;
     
     
     
     
-    self.promoLabelText.text = [self.establishmentObject valueForKey:@"promoCode"];
+    self.promoLabelText.text = [self.couponObject valueForKey:@"promoCode"];
     
-    PFFile *userImageFile = self.establishmentObject[@"Coupon"];
+    PFFile *userImageFile = self.couponObject[@"Coupon"];
     [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
         if (!error) {
             self.IndividualCouponImage.image = [UIImage imageWithData:imageData];
@@ -80,6 +80,26 @@
         }];
     }else if (sender.state == UIGestureRecognizerStateEnded){
         [self performSegueWithIdentifier:@"toCustomerReview" sender:self];
+        
+        PFObject *couponUsed = [PFObject objectWithClassName:@"CouponUsed"];
+        [couponUsed setObject:[PFUser currentUser] forKey:@"user"];
+        [couponUsed setObject:[NSDate date] forKey:@"dateUsed"];
+        [couponUsed setObject:self.couponObject forKey:@"coupon"];
+        [couponUsed save]; // make synchronous first until system works, then go back and make async
+        
+        // find 12 hours ago from this moment - Use NSDate datewithtimeintervalsincenow (60 * 60 *12 )
+        // query for usedCupons by user (same query as carosel VC) BUT add constraint where 'createdAt' is less than 12 hours ago
+        // this should return the used cuopons form the last 12 hours
+        // if count is equal to 4
+        // set isCutoff on user to YES
+        // set resumeLiquor date to 12 hours in the future
+        
+        
+        // in carosuelVC - if user isCutoff then reduce alpha of any alcholic coupon and make untappable
+        
+        // SOMEWHERE in the code check if resumeLiquor date is in the past, if so, make user isCutoff ==  NO;
+        // maybe do this before download cupouns?
+        
     }
 }
 - (IBAction)backButtonPressed:(UIButton *)sender {
