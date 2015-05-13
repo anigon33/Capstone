@@ -56,11 +56,7 @@
     tableViewBackground.image = [UIImage imageNamed:@"backgroundImage"];
     [[UITableView appearance] setBackgroundView:tableViewBackground];
     
-   // UIImageView *barLishHeaderImage = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 45)];
-    
-   // [[UINavigationBar appearance] setFrame:CGRectMake(0, 0, 320, 45)];
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"BarCoupLogo"]forBarMetrics:UIBarMetricsDefault];
-    
+       
 
 }
 -(void)viewWillAppear:(BOOL)animated{

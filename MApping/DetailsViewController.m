@@ -11,14 +11,11 @@
 #import <ParseUI/ParseUI.h>
 #import "CouponViewController.h"
 #import "AppDelegate.h"
-
 @interface DetailsViewController ()<CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet PFImageView *BarLogo;
-@property (weak, nonatomic) IBOutlet UILabel *BarNameLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *BarImageView;
-@property (weak, nonatomic) IBOutlet UILabel *BarSubtitleDetailsLabel;
 @property (nonatomic, strong) UIActivityIndicatorView *spinner;
+@property (weak, nonatomic) IBOutlet UIButton *enterBarButton;
 @property (nonatomic, strong) CLLocation *userLocation;
 @end
 
@@ -26,8 +23,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.BarSubtitleDetailsLabel.text = [self.establishmentObject objectForKey:@"subtitle"];
-    self.BarNameLabel.text = self.establishmentObject[@"name"];
+    
+
+    
     
     self.BarLogo.file = [self.establishmentObject objectForKey:@"image"];
     [self.BarLogo loadInBackground];
@@ -41,69 +39,91 @@
     [self.view addSubview:self.spinner];
     
 }
-
+-(void) viewDidAppear:(BOOL)animated{
+    
+}
 - (IBAction)enterBarButtonPressed:(UIButton *)sender {
+    
+    [UIView animateWithDuration:0.1 animations:^{
+        self.enterBarButton.transform = CGAffineTransformMakeTranslation(10, 0);
+    } completion:^(BOOL finished) {
+        // Step 2
+        [UIView animateWithDuration:0.1 animations:^{
+            self.enterBarButton.transform = CGAffineTransformMakeTranslation(-10, 0);
+        } completion:^(BOOL finished) {
+            // Step 3
+            [UIView animateWithDuration:0.1 animations:^{
+                
+            }completion:^(BOOL finished){
+                self.enterBarButton.transform = CGAffineTransformMakeTranslation(0, 0);
+                
+                
+                
+            }];
+        }];
+    }];
+    
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-
+    
     if (appDelegate.locationAccurate) {
         
-    
-    BOOL barFound = NO;
-    CLLocation *currentLocation = appDelegate.latestLocation;
-    
-    PFQuery *query = [PFQuery queryWithClassName:@"Establishment"];
-    // Interested in locations near user.
-    PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLocation:currentLocation];
-    [query whereKey:@"GeoCoordinates" nearGeoPoint:userLocation withinMiles:.02f];
-    NSArray *barsAroundCurrentLocation;
-    barsAroundCurrentLocation = [query findObjects];
-    [self.spinner stopAnimating];
-
-    if (barsAroundCurrentLocation.count != 0){
         
+        BOOL barFound = NO;
+        CLLocation *currentLocation = appDelegate.latestLocation;
         
+        PFQuery *query = [PFQuery queryWithClassName:@"Establishment"];
+        // Interested in locations near user.
+        PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLocation:currentLocation];
+        [query whereKey:@"GeoCoordinates" nearGeoPoint:userLocation withinMiles:.02f];
+        NSArray *barsAroundCurrentLocation;
+        barsAroundCurrentLocation = [query findObjects];
+        [self.spinner stopAnimating];
         
-        for (PFObject *bar in barsAroundCurrentLocation) {
+        if (barsAroundCurrentLocation.count != 0){
             
-            if ([self.establishmentObject[@"name"] isEqualToString:bar[@"name"]]) {
-                [self performSegueWithIdentifier:@"toCouponPage" sender:self];
+            
+            
+            for (PFObject *bar in barsAroundCurrentLocation) {
                 
-                barFound = YES;
-                NSLog(@"Test");
+                if ([self.establishmentObject[@"name"] isEqualToString:bar[@"name"]]) {
+                    [self performSegueWithIdentifier:@"toCouponPage" sender:self];
+                    
+                    barFound = YES;
+                    NSLog(@"Test");
+                }
+            }
+            if(barFound == NO){
+                NSString *title = @"Oops!";
+                NSString *message = @"Coup' users must be inside each bar to see the specials, so get over there already!!";
+                
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                                    message:message
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+                
+                
+                [alertView show];
             }
         }
-        if(barFound == NO){
-        NSString *title = @"Oops!";
-        NSString *message = @"Coup' users must be inside each bar to see the specials, so get over there already!!";
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                            message:message
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
         
         
-        [alertView show];
+        
+        
+        else{
+            NSString *title = @"Oops!";
+            NSString *message = @"Coup' users must be inside each bar to see the specials, so get over there already!!";
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                                message:message
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            
+            
+            [alertView show];
+            
         }
-    }
-    
-    
-    
-    
-    else{
-        NSString *title = @"Oops!";
-        NSString *message = @"Coup' users must be inside each bar to see the specials, so get over there already!!";
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                            message:message
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
         
         
-        [alertView show];
-        
-    }
-    
- 
     }else{
         NSString *title = @"Whoa!";
         NSString *message = @"Hold on let us catch up! Try again soon";
@@ -115,9 +135,10 @@
         
         
         [alertView show];
-
+        
     }
-    
+
+  
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

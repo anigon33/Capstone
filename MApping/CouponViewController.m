@@ -112,7 +112,7 @@
         view.contentMode = UIViewContentModeScaleAspectFill;
         for (NSDictionary *used in self.usedCoupons) {
             if ([[[self.couponImages objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]]) {
-                view.alpha = .5;
+                view.alpha = .6 ;
                 
                 
             }
@@ -156,14 +156,24 @@
     return CATransform3DTranslate(transform, 0.0f, 0.0f, offset * carousel.itemWidth);
 }
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index{
+    if (self.usedCoupons.count ==0) {
+        self.selectedCoupon = [self.couponImages objectAtIndex:index];
+        [self performSegueWithIdentifier:@"toFullScreenCoupon" sender:self];
+    }
+    else{
+    
     for (NSDictionary *used in self.usedCoupons) {
         if ([[[self.couponImages objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]]) {
             
-            
-        } else {
+            NSLog(@"Already Used Coupon!");
+        }
+        else {
             self.selectedCoupon = [self.couponImages objectAtIndex:index];
             [self performSegueWithIdentifier:@"toFullScreenCoupon" sender:self];
         }
+        
+        
+    }
     }
     
 }
@@ -172,14 +182,5 @@
     destination.couponObject = self.selectedCoupon;
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end
