@@ -86,14 +86,31 @@
         [couponUsed setObject:[NSDate date] forKey:@"dateUsed"];
         [couponUsed setObject:self.couponObject forKey:@"coupon"];
         [couponUsed save]; // make synchronous first until system works, then go back and make async
-        
+       
         // find 12 hours ago from this moment - Use NSDate datewithtimeintervalsincenow (60 * 60 *12 )
-        // query for usedCupons by user (same query as carosel VC) BUT add constraint where 'createdAt' is less than 12 hours ago
-        // this should return the used cuopons form the last 12 hours
-        // if count is equal to 4
-        // set isCutoff on user to YES
-        // set resumeLiquor date to 12 hours in the future
+        NSDate *timeSinceFirstDrink = [NSDate dateWithTimeIntervalSinceNow:(60 * 60 * 12)];
         
+        // query for usedCupons by user (same query as carosel VC) BUT add constraint where 'createdAt' is less than 12 hours ago
+        PFQuery *couponsUsed = [PFQuery queryWithClassName:@"CouponUsed"];
+        [couponsUsed whereKey:@"user" equalTo:[PFUser currentUser]];
+        [couponsUsed whereKey:@"createdAt" greaterThan:timeSinceFirstDrink];
+        if ([couponsUsed countObjects] == 4) {
+            NSString *title = @"Yikes!";
+            NSString *message = @"4 liqour coupons in one night! Try one of our food coupons to sober up!";
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                                message:message
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            
+            
+            [alertView show];
+            NSDate *timeTillNextDrink = [NSDate dateWithTimeInterval:(60 * 60 * 12) sinceDate:[NSDate date]];
+            [[PFUser currentUser] setObject:[NSNumber numberWithBool:YES] forKey:@"isCutOff"];
+            [[PFUser currentUser] setObject:timeTillNextDrink forKey:@"willResumeLiquor"];
+            [[PFUser currentUser] save];
+        }
+               
         
         // in carosuelVC - if user isCutoff then reduce alpha of any alcholic coupon and make untappable
         

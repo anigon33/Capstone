@@ -69,9 +69,7 @@
     [couponQuery whereKey:@"establishmentId" equalTo:self.establishmentObject[@"establishmentId"]];
     NSMutableArray *availableCoupons = [[NSMutableArray alloc] initWithArray:[couponQuery findObjects]];
     
-    PFQuery *couponsUsed = [PFQuery queryWithClassName:@"CouponUsed"];
-    [couponsUsed whereKey:@"user" equalTo:[PFUser currentUser]];
-    self.usedCoupons = [[NSArray alloc] initWithArray:[couponsUsed findObjects]];
+    
     
     
     
@@ -82,6 +80,17 @@
 -(void)viewWillAppear:(BOOL)animated{
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
     
+    [[PFUser currentUser] fetch];
+    if ([[PFUser currentUser] objectForKey:@"willResumeLiquor"] == nil|| [[[PFUser currentUser] objectForKey:@"willResumeLiquor"] compare:[NSDate date]] == NSOrderedAscending) {
+        [[PFUser currentUser] setObject:[NSNumber numberWithBool:NO] forKey:@"isCutOff"];
+        [[PFUser currentUser] save];
+    }
+    
+    PFQuery *couponsUsed = [PFQuery queryWithClassName:@"CouponUsed"];
+    [couponsUsed whereKey:@"user" equalTo:[PFUser currentUser]];
+    self.usedCoupons = [[NSArray alloc] initWithArray:[couponsUsed findObjects]];
+    
+    [self.carousel reloadData];
 }
 - (void)viewDidUnload
 {
@@ -111,7 +120,8 @@
         [((PFImageView *)view) loadInBackground];
         view.contentMode = UIViewContentModeScaleAspectFill;
         for (NSDictionary *used in self.usedCoupons) {
-            if ([[[self.couponImages objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]]) {
+            if ([[[self.couponImages objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]] ||
+                ([[[PFUser currentUser] valueForKey:@"isCutOff"]integerValue] == 1 && [[[self.couponImages objectAtIndex:index]  valueForKey:@"isLiquorCoupon"] integerValue] == 1)) {
                 view.alpha = .6 ;
                 
                 
@@ -156,27 +166,25 @@
     return CATransform3DTranslate(transform, 0.0f, 0.0f, offset * carousel.itemWidth);
 }
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index{
-    if (self.usedCoupons.count ==0) {
+    BOOL hasUsed = NO;
+    for (NSDictionary *used in self.usedCoupons) {
+        if ([[[self.couponImages objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]]) {
+            hasUsed = YES;
+            NSLog(@"Already Used Coupon!");
+            return;
+        }
+    }
+    if ([[PFUser currentUser] objectForKey:@"isCutOff"] && [[self.couponImages objectAtIndex:index] valueForKey:@"isLiquorCoupon"]){
+        hasUsed = YES;
+    }
+
+    if(!hasUsed){
         self.selectedCoupon = [self.couponImages objectAtIndex:index];
         [self performSegueWithIdentifier:@"toFullScreenCoupon" sender:self];
     }
-    else{
-    
-    for (NSDictionary *used in self.usedCoupons) {
-        if ([[[self.couponImages objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]]) {
-            
-            NSLog(@"Already Used Coupon!");
-        }
-        else {
-            self.selectedCoupon = [self.couponImages objectAtIndex:index];
-            [self performSegueWithIdentifier:@"toFullScreenCoupon" sender:self];
-        }
-        
-        
-    }
-    }
-    
 }
+
+
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     CouponRedeemViewController *destination = segue.destinationViewController;
     destination.couponObject = self.selectedCoupon;
