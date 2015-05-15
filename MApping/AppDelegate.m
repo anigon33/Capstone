@@ -106,6 +106,7 @@
                     if (self.establishmentObjects != nil) {
                         
                         self.visitObject = [PFObject objectWithClassName:@"Visit"];
+                        [self.visitObject setObject:[PFUser currentUser] forKey:@"user"];
                         [self.visitObject setObject:[NSDate date] forKey:@"start"];
                         NSString *barName = establishmentRegion.identifier;
                         for (PFObject *establishmentObject in self.establishmentObjects){
@@ -165,6 +166,8 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
+   
+    
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }

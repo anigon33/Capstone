@@ -115,7 +115,7 @@
     //create new view if no view is available for recycling
     if (view == nil)
     {
-        view = [[PFImageView alloc] initWithFrame:CGRectMake(0, 0, 240.0f, 240.0f)];
+        view = [[PFImageView alloc] initWithFrame:CGRectMake(0, 0, 300.0f, 300.0f)];
         ((PFImageView *)view).file = [self.couponImages objectAtIndex:index][@"Coupon"];
         [((PFImageView *)view) loadInBackground];
         view.contentMode = UIViewContentModeScaleAspectFill;
@@ -167,21 +167,35 @@
 }
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index{
     BOOL hasUsed = NO;
-    for (NSDictionary *used in self.usedCoupons) {
-        if ([[[self.couponImages objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]]) {
-            hasUsed = YES;
-            NSLog(@"Already Used Coupon!");
-            return;
+    if ([[[PFUser currentUser] objectForKey:@"isCutOff"] integerValue] == 1 && [[[self.couponImages objectAtIndex:index] valueForKey:@"isLiquorCoupon"] integerValue] == 1){
+        hasUsed = YES;
+        NSString *title = @"Yikes!";
+        NSString *message = @"4 liqour coupons in one night! Try one of our food coupons to sober up!";
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                            message:message
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+        
+        
+        [alertView show];
+        
+    }else{
+        
+        
+        for (NSDictionary *used in self.usedCoupons) {
+            if ([[[self.couponImages objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]]) {
+                hasUsed = YES;
+                NSLog(@"Already Used Coupon!");
+                return;
+            }
         }
     }
-    if ([[PFUser currentUser] objectForKey:@"isCutOff"] && [[self.couponImages objectAtIndex:index] valueForKey:@"isLiquorCoupon"]){
-        hasUsed = YES;
-    }
-
     if(!hasUsed){
         self.selectedCoupon = [self.couponImages objectAtIndex:index];
         [self performSegueWithIdentifier:@"toFullScreenCoupon" sender:self];
     }
+    
 }
 
 

@@ -79,7 +79,9 @@
         
         }];
     }else if (sender.state == UIGestureRecognizerStateEnded){
-        [self performSegueWithIdentifier:@"toCustomerReview" sender:self];
+        [self dismissViewControllerAnimated:NO completion:^{
+            
+        }];
         
         PFObject *couponUsed = [PFObject objectWithClassName:@"CouponUsed"];
         [couponUsed setObject:[PFUser currentUser] forKey:@"user"];
@@ -93,18 +95,18 @@
         // query for usedCupons by user (same query as carosel VC) BUT add constraint where 'createdAt' is less than 12 hours ago
         PFQuery *couponsUsed = [PFQuery queryWithClassName:@"CouponUsed"];
         [couponsUsed whereKey:@"user" equalTo:[PFUser currentUser]];
-        [couponsUsed whereKey:@"createdAt" greaterThan:timeSinceFirstDrink];
-        if ([couponsUsed countObjects] == 4) {
-            NSString *title = @"Yikes!";
-            NSString *message = @"4 liqour coupons in one night! Try one of our food coupons to sober up!";
-            
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                                message:message
-                                                               delegate:self
-                                                      cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-            
-            
-            [alertView show];
+        [couponsUsed includeKey:@"coupon"];
+     
+       // [couponsUsed whereKey:@"createdAt" greaterThan:timeSinceFirstDrink];
+        NSArray *usedCoupons = [couponsUsed findObjects];
+        int count = 0;
+        for (NSDictionary *coupon in usedCoupons) {
+            if ([[[coupon valueForKey:@"coupon"] valueForKey:@"isLiquorCoupon"] integerValue] ==1 &&
+                [[coupon valueForKey:@"createdAt"] compare:timeSinceFirstDrink] == NSOrderedAscending) {
+                count++;
+            }
+        }
+        if (count == 4){
             NSDate *timeTillNextDrink = [NSDate dateWithTimeInterval:(60 * 60 * 12) sinceDate:[NSDate date]];
             [[PFUser currentUser] setObject:[NSNumber numberWithBool:YES] forKey:@"isCutOff"];
             [[PFUser currentUser] setObject:timeTillNextDrink forKey:@"willResumeLiquor"];

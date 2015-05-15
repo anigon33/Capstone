@@ -56,7 +56,6 @@
     tableViewBackground.image = [UIImage imageNamed:@"backgroundImage"];
     [[UITableView appearance] setBackgroundView:tableViewBackground];
     
-       
 
 }
 -(void)viewWillAppear:(BOOL)animated{

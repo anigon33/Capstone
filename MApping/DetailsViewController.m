@@ -71,6 +71,8 @@
         BOOL barFound = NO;
         CLLocation *currentLocation = appDelegate.latestLocation;
         
+        [self.spinner startAnimating];
+
         PFQuery *query = [PFQuery queryWithClassName:@"Establishment"];
         // Interested in locations near user.
         PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLocation:currentLocation];
