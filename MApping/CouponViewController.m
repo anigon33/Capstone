@@ -148,7 +148,7 @@
 {
     if (option == iCarouselOptionSpacing)
     {
-        return value * 1.5;
+        return value * 2;
     }
     if (option == iCarouselOptionTilt) {
         return value = .65f;
