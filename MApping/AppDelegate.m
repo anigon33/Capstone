@@ -20,7 +20,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+   
     
     //[Parse enableLocalDatastore];
     [Parse setApplicationId:@"sZre86lG4ulrSGqA50KmG9Fef1nv9IUKwmtc8aC6"
@@ -47,7 +47,7 @@
     
     
     self.barRegions = [[NSMutableArray alloc]init];
-    
+
     PFQuery *establishments = [PFQuery queryWithClassName:@"Establishment"];
     PFGeoPoint *currentLocation = [PFGeoPoint geoPointWithLocation:self.locationManager.location];
     
@@ -78,6 +78,7 @@
     
     return YES;
 }
+
 -(void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
     
     NSLog(@"Region not monitored :(");
@@ -93,7 +94,9 @@
         self.latestLocation = [[CLLocation alloc]initWithLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
         self.latestLocation = newLocation;
         NSLog(@"current location = %@", [locations lastObject]);
-        
+        if ([PFUser currentUser] ==nil) {
+            
+        }else{
         // looping through establishment region to see if user is in one of the bars
         for (CLCircularRegion *establishmentRegion in self.barRegions){
             if ([establishmentRegion containsCoordinate:currentLocationCoordinate]){
@@ -134,6 +137,7 @@
             }
             
         }
+    }
     }
 }
 - (void)requestAlwaysAuthorization

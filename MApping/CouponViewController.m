@@ -43,6 +43,7 @@
     self.carousel.type = iCarouselTypeCoverFlow2;
     self.carousel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.carousel.backgroundColor = [UIColor clearColor];
+    self.carousel.scrollSpeed = .75;
     
     self.BarHomePage.file = [self.establishmentObject objectForKey:@"image"];
     [self.BarHomePage loadInBackground];
@@ -111,7 +112,9 @@
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
     UILabel *label = nil;
+    NSLog(@"index: %ld", (long)index);
     
+    NSLog(@"bar name: %@", [self.couponImages objectAtIndex:index][@"promoCode"]);
     //create new view if no view is available for recycling
     if (view == nil)
     {
@@ -166,11 +169,9 @@
     return CATransform3DTranslate(transform, 0.0f, 0.0f, offset * carousel.itemWidth);
 }
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index{
-    BOOL hasUsed = NO;
-    if ([[[PFUser currentUser] objectForKey:@"isCutOff"] integerValue] == 1 && [[[self.couponImages objectAtIndex:index] valueForKey:@"isLiquorCoupon"] integerValue] == 1){
-        hasUsed = YES;
-        NSString *title = @"Yikes!";
-        NSString *message = @"4 liqour coupons in one night! Try one of our food coupons to sober up!";
+    if ([[[PFUser currentUser] valueForKey:@"emailVerified"] integerValue] == 0){
+        NSString *title = @"Whoops";
+        NSString *message = @"Please verify your email before getting great deals!";
         
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                             message:message
@@ -183,19 +184,36 @@
     }else{
         
         
-        for (NSDictionary *used in self.usedCoupons) {
-            if ([[[self.couponImages objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]]) {
-                hasUsed = YES;
-                NSLog(@"Already Used Coupon!");
-                return;
+        BOOL hasUsed = NO;
+        if ([[[PFUser currentUser] objectForKey:@"isCutOff"] integerValue] == 1 && [[[self.couponImages objectAtIndex:index] valueForKey:@"isLiquorCoupon"] integerValue] == 1){
+            hasUsed = YES;
+            NSString *title = @"Yikes!";
+            NSString *message = @"4 liqour coupons in one night! Try one of our food coupons to sober up!";
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                                message:message
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+            
+            
+            [alertView show];
+            
+        }else{
+            
+            
+            for (NSDictionary *used in self.usedCoupons) {
+                if ([[[self.couponImages objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]]) {
+                    hasUsed = YES;
+                    NSLog(@"Already Used Coupon!");
+                    return;
+                }
             }
         }
+        if(!hasUsed){
+            self.selectedCoupon = [self.couponImages objectAtIndex:index];
+            [self performSegueWithIdentifier:@"toFullScreenCoupon" sender:self];    
+        }
     }
-    if(!hasUsed){
-        self.selectedCoupon = [self.couponImages objectAtIndex:index];
-        [self performSegueWithIdentifier:@"toFullScreenCoupon" sender:self];
-    }
-    
 }
 
 
