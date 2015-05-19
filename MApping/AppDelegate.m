@@ -38,6 +38,7 @@
     self.locationManager.delegate = self;
     self.locationManager.distanceFilter = kCLDistanceFilterNone;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+    self.locationManager.pausesLocationUpdatesAutomatically = NO;
     [self.locationManager startUpdatingLocation];
     
     //  Check for iOS 8. Without this guard the code will crash with "unknown selector" on iOS 7.
@@ -171,7 +172,8 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
    
-    
+    [self.locationManager stopUpdatingLocation];
+    [self.locationManager startMonitoringSignificantLocationChanges];
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }

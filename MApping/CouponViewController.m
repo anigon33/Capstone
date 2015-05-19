@@ -12,12 +12,14 @@
 #import "CouponRedeemViewController.h"
 @interface CouponViewController ()
 @property (weak, nonatomic) IBOutlet iCarousel *carousel;
+@property (assign, readonly) BOOL isDataAvailable;
 
 @property (weak, nonatomic) IBOutlet UILabel *singleMenLabel;
 @property (weak, nonatomic) IBOutlet UILabel *singleWomenLabel;
 
 @property (weak, nonatomic) IBOutlet PFImageView *BarHomePage;
 @property (strong, nonatomic) PFObject *selectedCoupon;
+@property (strong, nonatomic) NSMutableArray *allCoupons;
 
 @property(nonatomic, strong) NSArray *usedCoupons;
 
@@ -38,12 +40,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.carousel.delegate = self;
-    self.carousel.dataSource = self;
     self.carousel.type = iCarouselTypeCoverFlow2;
     self.carousel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.carousel.backgroundColor = [UIColor clearColor];
     self.carousel.scrollSpeed = .75;
+    self.carousel.delegate = self;
+    self.carousel.dataSource = self;
     
     self.BarHomePage.file = [self.establishmentObject objectForKey:@"image"];
     [self.BarHomePage loadInBackground];
@@ -67,16 +69,27 @@
     
     [self.view addSubview:self.BarHomePage];
     PFQuery *couponQuery = [PFQuery queryWithClassName:@"TavernCoupons"];
+   // couponQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
     [couponQuery whereKey:@"establishmentId" equalTo:self.establishmentObject[@"establishmentId"]];
-    NSMutableArray *availableCoupons = [[NSMutableArray alloc] initWithArray:[couponQuery findObjects]];
+    [couponQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            self.allCoupons = [[NSMutableArray alloc]initWithArray:objects];
+            
+            
+            
+            [self.carousel reloadData];
+            
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+        
+        
+    }];
     
     
     
     
-    
-    self.couponImages = [[NSMutableArray alloc] initWithArray:availableCoupons];
-    
-    [self.carousel reloadData];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
@@ -106,30 +119,51 @@
 }
 - (NSInteger)numberOfItemsInCarousel:(iCarousel *)carousel
 {
-    return self.couponImages.count;
+    return self.allCoupons.count;
 }
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
+    
     UILabel *label = nil;
     NSLog(@"index: %ld", (long)index);
     
-    NSLog(@"bar name: %@", [self.couponImages objectAtIndex:index][@"promoCode"]);
+    NSLog(@"bar name: %@", [self.allCoupons objectAtIndex:index][@"promoCode"]);
     //create new view if no view is available for recycling
     if (view == nil)
     {
-        view = [[PFImageView alloc] initWithFrame:CGRectMake(0, 0, 300.0f, 300.0f)];
-        ((PFImageView *)view).file = [self.couponImages objectAtIndex:index][@"Coupon"];
-        [((PFImageView *)view) loadInBackground];
-        view.contentMode = UIViewContentModeScaleAspectFill;
-        for (NSDictionary *used in self.usedCoupons) {
-            if ([[[self.couponImages objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]] ||
-                ([[[PFUser currentUser] valueForKey:@"isCutOff"]integerValue] == 1 && [[[self.couponImages objectAtIndex:index]  valueForKey:@"isLiquorCoupon"] integerValue] == 1)) {
-                view.alpha = .6 ;
-                
-                
-            }
-        }
+        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300.0f, 300.0f)];
+
+        PFFile *couponImage = [self.allCoupons objectAtIndex:index][@"Coupon"];
+
+            [couponImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+             {
+                 if (!error)
+                 {
+                     
+                     view.contentMode = UIViewContentModeScaleAspectFill;
+                     for (NSDictionary *used in self.usedCoupons) {
+                         if ([[[self.allCoupons objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]] ||
+                             ([[[PFUser currentUser] valueForKey:@"isCutOff"]integerValue] == 1 && [[[self.allCoupons objectAtIndex:index]  valueForKey:@"isLiquorCoupon"] integerValue] == 1)) {
+                             view.alpha = .6 ;
+                             
+                             
+                         }
+                     }
+                     
+                     UIImage *coupon = [UIImage imageWithData:data];
+                     UIImageView *couponView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 300.0f, 300.0f)];
+                     couponView.image = coupon;
+                     
+                     
+                     [view addSubview:couponView];
+                     
+                     // use the newly retrieved data
+                 }
+             }];
+        //}
+        
+        
         
     }
     else
@@ -159,6 +193,9 @@
     if (option == iCarouselOptionWrap){
         return YES;
     }
+    else if(option == iCarouselOptionVisibleItems) {
+        return self.allCoupons.count;
+    }
     return value;
 }
 
@@ -185,7 +222,7 @@
         
         
         BOOL hasUsed = NO;
-        if ([[[PFUser currentUser] objectForKey:@"isCutOff"] integerValue] == 1 && [[[self.couponImages objectAtIndex:index] valueForKey:@"isLiquorCoupon"] integerValue] == 1){
+        if ([[[PFUser currentUser] objectForKey:@"isCutOff"] integerValue] == 1 && [[[self.allCoupons objectAtIndex:index] valueForKey:@"isLiquorCoupon"] integerValue] == 1){
             hasUsed = YES;
             NSString *title = @"Yikes!";
             NSString *message = @"4 liqour coupons in one night! Try one of our food coupons to sober up!";
@@ -202,7 +239,7 @@
             
             
             for (NSDictionary *used in self.usedCoupons) {
-                if ([[[self.couponImages objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]]) {
+                if ([[[self.allCoupons objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]]) {
                     hasUsed = YES;
                     NSLog(@"Already Used Coupon!");
                     return;
@@ -210,8 +247,8 @@
             }
         }
         if(!hasUsed){
-            self.selectedCoupon = [self.couponImages objectAtIndex:index];
-            [self performSegueWithIdentifier:@"toFullScreenCoupon" sender:self];    
+            self.selectedCoupon = [self.allCoupons objectAtIndex:index];
+            [self performSegueWithIdentifier:@"toFullScreenCoupon" sender:self];
         }
     }
 }
