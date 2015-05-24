@@ -11,6 +11,7 @@
 #import <ParseUI/ParseUI.h>
 #import "CouponViewController.h"
 #import "AppDelegate.h"
+
 @interface DetailsViewController ()<CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet PFImageView *BarLogo;
@@ -24,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    self.BarLogo.layer.cornerRadius = .9;
     
     
     self.BarLogo.file = [self.establishmentObject objectForKey:@"image"];
@@ -73,64 +74,46 @@
                     barFound = YES;
                     NSLog(@"Test");
                     
-//                    [UIView animateWithDuration:0.2 animations:^{
-//                        self.BarLogo.transform = CGAffineTransformMakeTranslation(65, -120);
-//                        self.BarLogo.transform = CGAffineTransformMakeScale(.5, .5);
-//                        self.enterBarButton.alpha = 0;
-//
-
-               
-                
-                    [UIView animateWithDuration:.1 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut
-                                     animations:^{
-                                         
-                                         self.BarLogo.transform = CGAffineTransformMakeTranslation(15, -140);
-                                         self.BarLogo.transform = CGAffineTransformScale(self.BarLogo.transform,.5, .5);
-                                         self.enterBarButton.alpha = 0;
-                                         
-                                     } completion:^(BOOL finished) {
-                                         // Step 2
-                                         [self performSegueWithIdentifier:@"toCouponPage" sender:self];
-
-                                     }];
-                
+                    [self performSegueWithIdentifier:@"toCouponPage" sender:self];
                     
-            }
-            if(barFound == NO){
-                [UIView animateWithDuration:0.1 animations:^{
-                    self.enterBarButton.transform = CGAffineTransformMakeTranslation(10, 0);
-                } completion:^(BOOL finished) {
-                    // Step 2
+                    
+                    
+                }
+                if(barFound == NO){
                     [UIView animateWithDuration:0.1 animations:^{
-                        self.enterBarButton.transform = CGAffineTransformMakeTranslation(-10, 0);
+                        self.enterBarButton.transform = CGAffineTransformMakeTranslation(10, 0);
                     } completion:^(BOOL finished) {
-                        // Step 3
+                        // Step 2
                         [UIView animateWithDuration:0.1 animations:^{
-                            
-                        }completion:^(BOOL finished){
-                            self.enterBarButton.transform = CGAffineTransformMakeTranslation(0, 0);
-                            NSString *title = @"Oops!";
-                            NSString *message = @"Coup' users must be inside each bar to see the specials, so get over there already!!";
-                            
-                            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                                                message:message
-                                                                               delegate:self
-                                                                      cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-                            
-                            
-                            [alertView show];
-
-                            
-                            
-                            
+                            self.enterBarButton.transform = CGAffineTransformMakeTranslation(-10, 0);
+                        } completion:^(BOOL finished) {
+                            // Step 3
+                            [UIView animateWithDuration:0.1 animations:^{
+                                
+                            }completion:^(BOOL finished){
+                                self.enterBarButton.transform = CGAffineTransformMakeTranslation(0, 0);
+                                NSString *title = @"Oops!";
+                                NSString *message = @"Coup' users must be inside each bar to see the specials, so get over there already!!";
+                                
+                                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                                                    message:message
+                                                                                   delegate:self
+                                                                          cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+                                
+                                
+                                [alertView show];
+                                
+                                
+                                
+                                
+                            }];
                         }];
                     }];
-                }];
-
-                
-                            }
-        }
-        
+                    
+                    
+                }
+            }
+            
         }
         
         

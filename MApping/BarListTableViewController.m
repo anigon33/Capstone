@@ -51,9 +51,11 @@
     // The number of objects to show per page
     self.objectsPerPage = 10;
     
+
+    
     self.edgesForExtendedLayout = UIRectEdgeNone;
     UIImageView *tableViewBackground = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 450)];
-    tableViewBackground.image = [UIImage imageNamed:@"backgroundImage"];
+    tableViewBackground.image = [UIImage imageNamed:@"blackBackground"];
     [[UITableView appearance] setBackgroundView:tableViewBackground];
     
 

@@ -115,6 +115,7 @@
 		E0C39BB31AFE941600F1D8E8 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = MApping.xcodeproj/Bolts.framework; sourceTree = "<group>"; };
 		E0C39BB51AFE94A300F1D8E8 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		E0C39BB71AFE94D300F1D8E8 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		E0C68B1D1B11353C0047699C /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		E0C8EA201ABF997100E9456E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E0C8EA281ABF9A6200E9456E /* MagicalImportFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MagicalImportFunctions.h; sourceTree = "<group>"; };
 		E0C8EA291ABF9A6200E9456E /* MagicalImportFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MagicalImportFunctions.m; sourceTree = "<group>"; };
@@ -377,6 +378,7 @@
 			children = (
 				E085304E1AD7645200F12AA1 /* iCarousel.h */,
 				E085304F1AD7645200F12AA1 /* iCarousel.m */,
+				E0C68B1D1B11353C0047699C /* Constants.h */,
 				E085304B1AD7638800F12AA1 /* CouponViewController.h */,
 				E085304C1AD7638800F12AA1 /* CouponViewController.m */,
 				E07130B11AD857EC00C95E29 /* CouponRedeemViewController.h */,

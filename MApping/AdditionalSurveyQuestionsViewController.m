@@ -12,9 +12,10 @@
 @interface AdditionalSurveyQuestionsViewController ()<UIPickerViewDataSource, UIPickerViewDelegate>
 @property (nonatomic,strong) NSArray *frequency;
 @property (nonatomic, strong) NSArray *drinks;
-@property (nonatomic, strong) NSArray *musicType;
+@property (nonatomic, strong) NSArray *maritalStatus;
 @property (nonatomic, strong) NSArray *maleFemale;
 @property (nonatomic, strong) UIPickerView *goOutPicker;
+@property (nonatomic, strong)UIDatePicker *datePicker;
 
 
 @property (nonatomic, strong) PFObject *surveyAnswers;
@@ -35,23 +36,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.demographicsSurvey = [PFObject objectWithClassName:@"DemographicSurvey"];
+    
     
     //create survey answers arrays for picker view 
     self.frequency = [NSArray arrayWithObjects:@"1 time a week or less", @"2-3 times a week", @"4-5 times a week", @"Party Animal", nil];
     self.drinks = [NSArray arrayWithObjects:@"Beer", @"Wine", @"Spirits", nil];
-    self.musicType =[NSArray arrayWithObjects:@"Hip Hop", @"RnB", @"Country",@"Electronic", @"Rock", @"Classical", nil];
+    self.maritalStatus =[NSArray arrayWithObjects:@"Single", @"Married", @"Not Interested", nil];
     self.maleFemale = [NSArray arrayWithObjects:@"Male", @"Female", nil];
     
     
     //create survey question array
-    self.surveyQuestions = [NSArray arrayWithObjects:@"How many times a week do you go out?", @"What is your favorite type of drink?", @"What is your favorite type of music", @"Are you male or female?", nil];
+    self.surveyQuestions = [NSArray arrayWithObjects:@"How many times a week do you go out?", @"What is your favorite type of drink?", @"Marital Status?", @"Are you male or female?", @"Whats your date of birth", nil];
     
     //initializing picker view
     self.goOutPicker = [[UIPickerView alloc]init];
     self.goOutPicker.dataSource = self;
     self.goOutPicker.delegate = self;
     [self.goOutFrequency setInputView:self.goOutPicker];
+    self.goOutPicker.backgroundColor = [UIColor clearColor];
+    
+    self.datePicker = [[UIDatePicker alloc]init];
+    self.datePicker.datePickerMode = UIDatePickerModeDate;
+    
     
     //initialize question 1
     self.inputArray = [[NSArray alloc]init];
@@ -84,7 +90,7 @@
     if ([self.questionsLabel.text isEqualToString:[self.surveyQuestions objectAtIndex:0]]  && ![self.goOutFrequency.text isEqualToString:@""]){
         
         
-        self.demographicsSurvey[@"PartyFrequency"] = self.goOutFrequency.text;
+        [PFUser currentUser][@"partyFrequency"] = self.goOutFrequency.text;
         
         
         self.questionsLabel.text = [self.surveyQuestions objectAtIndex:1];
@@ -95,35 +101,58 @@
     }
     else if ([self.questionsLabel.text isEqualToString:[self.surveyQuestions objectAtIndex:1]]  && ![self.goOutFrequency.text isEqualToString:@""]){
         
-        self.demographicsSurvey[@"PreferredDrink"] = self.goOutFrequency.text;
+        [PFUser currentUser][@"perferredDrink"] = self.goOutFrequency.text;
         
         
         
         self.questionsLabel.text = [self.surveyQuestions objectAtIndex:2];
         self.goOutFrequency.text = @"";
-        self.inputArray = self.musicType;
+        self.inputArray = self.maritalStatus;
         [self.goOutPicker reloadAllComponents];
     }
     else if ([self.questionsLabel.text isEqualToString:[self.surveyQuestions objectAtIndex:2]]  && ![self.goOutFrequency.text isEqualToString:@""]){
         
-        self.demographicsSurvey[@"FavoriteMusic"] = self.goOutFrequency.text;
+        [PFUser currentUser][@"maritalStatus"] = self.goOutFrequency.text;
         
         
         self.questionsLabel.text = [self.surveyQuestions objectAtIndex:3];
         self.goOutFrequency.text = @"";
         self.inputArray = self.maleFemale;
-        self.nextButton.hidden = YES;
-        self.submitButton.hidden = NO;
+        self.nextButton.hidden = NO;
         [self.goOutPicker reloadAllComponents];
         
         
     }
+    else if ([self.questionsLabel.text isEqualToString:[self.surveyQuestions objectAtIndex:3]]  && ![self.goOutFrequency.text isEqualToString:@""]){
+        
+        [PFUser currentUser][@"gender"] = self.goOutFrequency.text;
+        self.questionsLabel.text = [self.surveyQuestions objectAtIndex:4];
+        self.goOutFrequency.text = @"";
+        self.nextButton.hidden = YES;
+        self.submitButton.hidden = NO;
+        self.goOutFrequency.inputView = self.datePicker;
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+        NSString *stringDate = [dateFormatter stringFromDate:self.datePicker.date];
+        self.goOutFrequency.text = stringDate;
+        [self.goOutFrequency resignFirstResponder];
+        
+
+
+    }
 }
 
 - (IBAction)submitButtonClicked:(id)sender {
-    self.demographicsSurvey[@"Gender"] = self.goOutFrequency.text;
-    [self.demographicsSurvey saveEventually];
+    if ([self.questionsLabel.text isEqualToString:[self.surveyQuestions objectAtIndex:4]]  && ![self.goOutFrequency.text isEqualToString:@""]){
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+        NSString *stringDate = [dateFormatter stringFromDate:self.datePicker.date];
+        self.goOutFrequency.text = stringDate;
+    
+    [PFUser currentUser][@"birthday"] = self.datePicker.date;
+    [[PFUser currentUser] saveEventually];
     [self dismissViewControllerAnimated:YES completion:nil];
+    }
     
 }
 

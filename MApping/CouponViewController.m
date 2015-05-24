@@ -10,14 +10,15 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import "CouponRedeemViewController.h"
+#import "Constants.h"
 @interface CouponViewController ()
 @property (weak, nonatomic) IBOutlet iCarousel *carousel;
 @property (assign, readonly) BOOL isDataAvailable;
 
 @property (weak, nonatomic) IBOutlet UILabel *singleMenLabel;
 @property (weak, nonatomic) IBOutlet UILabel *singleWomenLabel;
+@property (weak, nonatomic) IBOutlet UILabel *barName;
 
-@property (weak, nonatomic) IBOutlet PFImageView *BarHomePage;
 @property (strong, nonatomic) PFObject *selectedCoupon;
 @property (strong, nonatomic) NSMutableArray *allCoupons;
 
@@ -47,29 +48,43 @@
     self.carousel.delegate = self;
     self.carousel.dataSource = self;
     
-    self.BarHomePage.file = [self.establishmentObject objectForKey:@"image"];
-    [self.BarHomePage loadInBackground];
-    
-    PFQuery *maleStatus = [PFQuery queryWithClassName:@"DemographicSurvey"];
-    [maleStatus whereKey:@"Gender" equalTo:@"Male"];
-    [maleStatus findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    self.barName.text = [self.establishmentObject objectForKey:@"name"];
+    PFQuery *gender = [PFQuery queryWithClassName:@"Visit"];
+    [gender whereKey:@"establishments" equalTo:self.establishmentObject];
+    [gender whereKeyDoesNotExist:@"end"];
+    [gender includeKey:@"user"];
+    [gender findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            self.singleMenLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)objects.count];
+            NSMutableDictionary *males = [[NSMutableDictionary alloc]init];
+            NSMutableDictionary *females = [[NSMutableDictionary alloc]init];
+            for (PFObject *visit in objects) {
+                [[visit objectForKey:@"user"] objectForKey:@"gender"];
+                [[visit objectForKey:@"user"] objectForKey:@"maritalStatus"];
+                if ([[[visit objectForKey:@"user"] objectForKey:@"gender"] isEqualToString:@"Male"] && [[visit objectForKey:@"user"] objectForKey:@"maritalStatus"]) {
+                    if (![males objectForKey:[[visit objectForKey:@"user"]valueForKey:@"objectId"]]) {
+                        
+                        [males setObject:[visit objectForKey:@"user"] forKey:[[visit objectForKey:@"user"]valueForKey:@"objectId"]];
+
+                    }
+                }
+                if ([[[visit objectForKey:@"user"] objectForKey:@"gender"] isEqualToString:@"Female"] && [[visit objectForKey:@"user"] objectForKey:@"maritalStatus"]) {
+                    if (![females objectForKey:[[visit objectForKey:@"user"]valueForKey:@"objectId"]]) {
+                        
+                        [females setObject:[visit objectForKey:@"user"] forKey:[[visit objectForKey:@"user"]valueForKey:@"objectId"]];
+                        
+                    }
+
+                }
+            }
+            
+            self.singleMenLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)males.count];
+            self.singleWomenLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)females.count];
         }
     }];
     
-    PFQuery *femaleStatus = [PFQuery queryWithClassName:@"DemographicSurvey"];
-    [femaleStatus whereKey:@"Gender" equalTo:@"Female"];
-    [femaleStatus findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        if (!error) {
-            self.singleWomenLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)objects.count];
-        }
-    }];
     
     
-    [self.view addSubview:self.BarHomePage];
     PFQuery *couponQuery = [PFQuery queryWithClassName:@"TavernCoupons"];
-   // couponQuery.cachePolicy = kPFCachePolicyCacheElseNetwork;
     [couponQuery whereKey:@"establishmentId" equalTo:self.establishmentObject[@"establishmentId"]];
     [couponQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
@@ -101,6 +116,7 @@
     }
     
     PFQuery *couponsUsed = [PFQuery queryWithClassName:@"CouponUsed"];
+    [couponsUsed whereKey:@"createdAt" greaterThan:[NSDate dateWithTimeIntervalSinceNow:60 * 60 * kHoursForCouponReset]];
     [couponsUsed whereKey:@"user" equalTo:[PFUser currentUser]];
     self.usedCoupons = [[NSArray alloc] initWithArray:[couponsUsed findObjects]];
     
@@ -132,7 +148,7 @@
     //create new view if no view is available for recycling
     if (view == nil)
     {
-        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300.0f, 300.0f)];
+        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 380)];
 
         PFFile *couponImage = [self.allCoupons objectAtIndex:index][@"Coupon"];
 
@@ -152,7 +168,7 @@
                      }
                      
                      UIImage *coupon = [UIImage imageWithData:data];
-                     UIImageView *couponView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 300.0f, 300.0f)];
+                     UIImageView *couponView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 280, 380)];
                      couponView.image = coupon;
                      
                      
@@ -185,10 +201,10 @@
 {
     if (option == iCarouselOptionSpacing)
     {
-        return value * 2;
+        return value * 1.5;
     }
     if (option == iCarouselOptionTilt) {
-        return value = .65f;
+        return value = .8;
     }
     if (option == iCarouselOptionWrap){
         return YES;

@@ -17,60 +17,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"detailsView"]];
+    UIImageView *imgView = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    imgView.image = [UIImage imageNamed:@"blackBackground"];
+   
+    self.signUpView.backgroundColor =[UIColor clearColor];
     
-   // UIImageView *tellEm = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"lettersBest"]];
-    //self.signUpView.logo = tellEm;
+    [self.signUpView setLogo:[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"logo"]]];
+    [self.signUpView.signUpButton setBackgroundImage:[UIImage imageNamed:@"SignUpandLogIn"] forState:UIControlStateNormal];
     
-    self.signUpView.passwordField.textColor = [UIColor blackColor];
+    [self.signUpView addSubview:imgView];
+    [self.signUpView sendSubviewToBack:imgView];
 
-    // Do any additional setup after loading the view.
-}
+   }
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    [self.signUpView.logo setFrame:CGRectMake(30, 20, 260, 160)];
+    [self.signUpView.dismissButton setFrame:CGRectMake(5, 5, 50, 50)];
+
+    [self.signUpView.logo setFrame:CGRectMake(60, 20, 240, 150)];
+    [self.signUpView.emailField setFrame:CGRectMake(20, 175, 280, 40)];
+    [self.signUpView.usernameField setFrame:CGRectMake(20, 220, 280, 40)];
+    [self.signUpView.passwordField setFrame:CGRectMake(20, 265, 280, 40)];
+    [self.signUpView.signUpButton setFrame:CGRectMake(20, 345, 280, 40)];
     
 }
-//- (void) myMethod {
-//    PFUser *user = [PFUser user];
-//    user.username = @"my name";
-//    user.password = @"my pass";
-//    user.email = @"email@example.com";
-//    
-//    // other fields can be set just like with PFObject
-//
-//    
-//    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-//        if (!error) {
-//            // Hooray! Let them use the app now.
-//            
-//            AdditionalSurveyQuestionsViewController *additionalVC = [[AdditionalSurveyQuestionsViewController alloc] init];
-//            [self presentViewController:additionalVC animated:YES completion:nil];
-//            
-//            
-//        } else {
-//            NSString *errorString = [error userInfo][@"error"];
-//            // Show the errorString somewhere and let the user try again.
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"error"
-//                                                                message:errorString
-//                                                               delegate:self
-//                                                      cancelButtonTitle:@"Cancel"
-//                                                      otherButtonTitles:@"Settings", nil];
-//            
-//            [alertView show];
-//        }
-//    }];
-//}
-
-    
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
