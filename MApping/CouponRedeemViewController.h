@@ -14,6 +14,5 @@
 @property (nonatomic, strong)PFObject *couponObject;
 @property (weak, nonatomic) IBOutlet UIButton *payWithTweetButton;
 
-- (IBAction)twitterPost:(id)sender;
-
+@property (nonatomic, strong) NSString *establishmentId;
 @end

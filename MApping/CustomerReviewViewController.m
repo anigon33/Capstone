@@ -24,9 +24,10 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (IBAction)backPressed:(UIButton *)sender {
+    [self dismissViewControllerAnimated:NO completion:nil];
+    
 }
 
 /*

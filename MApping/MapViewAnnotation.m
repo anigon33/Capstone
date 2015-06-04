@@ -17,6 +17,7 @@
 -(id) initWithTitle:(NSString *) title AndCoordinate:(CLLocationCoordinate2D)coordinate andImage:(PFImageView *)image andSubtitle:(NSString *)subtitle andEstablishmentIndex:(int)establishmentIndex;
 {
     self = [super init];
+    
     _title = title;
     _coordinate = coordinate;
     _image = image;

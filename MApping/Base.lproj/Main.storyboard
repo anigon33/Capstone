@@ -72,6 +72,9 @@
                                     <action selector="submitButtonClicked:" destination="qWE-sg-M94" eventType="touchUpInside" id="mJY-4E-mrv"/>
                                 </connections>
                             </button>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="jiz-Di-pvP">
+                                <rect key="frame" x="98" y="20" width="124" height="100"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -147,8 +150,8 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bUQ-CE-7NT">
                                 <rect key="frame" x="10" y="140" width="300" height="340"/>
                             </mapView>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="FD1-US-ogh">
-                                <rect key="frame" x="98" y="20" width="125" height="100"/>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="FD1-US-ogh">
+                                <rect key="frame" x="98" y="28" width="125" height="75"/>
                             </imageView>
                         </subviews>
                     </view>
@@ -192,11 +195,11 @@
                                     <action selector="enterBarButtonPressed:" destination="do9-uA-d6h" eventType="touchUpInside" id="MkA-ky-ehG"/>
                                 </connections>
                             </button>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Q4z-hu-Mxm">
-                                <rect key="frame" x="98" y="20" width="125" height="100"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iii-Vm-mUu" customClass="PFImageView">
-                                <rect key="frame" x="30" y="130" width="260" height="240"/>
+                                <rect key="frame" x="30" y="128" width="260" height="240"/>
+                            </imageView>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Q4z-hu-Mxm">
+                                <rect key="frame" x="98" y="20" width="125" height="75"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.88095801767676774" green="0.88095801767676774" blue="0.88095801767676774" alpha="1" colorSpace="calibratedRGB"/>
@@ -279,12 +282,52 @@
                         <outlet property="carousel" destination="md8-JA-h9f" id="vWv-aF-n0w"/>
                         <outlet property="singleMenLabel" destination="zMe-6D-tuW" id="3h5-tc-Gr7"/>
                         <outlet property="singleWomenLabel" destination="QQH-6z-26T" id="sWr-x9-oJe"/>
-                        <segue destination="TjL-TS-tSU" kind="modal" identifier="toFullScreenCoupon" modalTransitionStyle="crossDissolve" id="qZt-9D-tyQ"/>
+                        <segue destination="TjL-TS-tSU" kind="push" identifier="toFullScreenCoupon" id="qZt-9D-tyQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iHG-jB-wYb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="749" y="912"/>
+        </scene>
+        <!--Pay With Tweet View Controller-->
+        <scene sceneID="Byn-So-MxB">
+            <objects>
+                <viewController id="eZx-nR-M7d" customClass="PayWithTweetViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tFV-iN-BOh"/>
+                        <viewControllerLayoutGuide type="bottom" id="lNP-lF-IA5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Uxx-1x-S0e">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLh-SQ-r1A">
+                                <rect key="frame" x="16" y="28" width="60" height="25"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backButtonPressed:" destination="eZx-nR-M7d" eventType="touchUpInside" id="ThJ-K3-Tl3"/>
+                                </connections>
+                            </button>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" paginationMode="topToBottom" translatesAutoresizingMaskIntoConstraints="NO" id="Elm-qF-Ri7">
+                                <rect key="frame" x="0.0" y="53" width="320" height="515"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9a4-Xq-YAs"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="webView" destination="Elm-qF-Ri7" id="Zec-8o-0jU"/>
+                        <segue destination="VG1-Pd-NL2" kind="unwind" identifier="unwindToCouponRedeem" unwindAction="unwindToFromPayWithTweetViewController:" id="E48-Xw-ykC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xBC-1H-hMp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="VG1-Pd-NL2" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1223" y="209"/>
         </scene>
         <!--Coupon Redeem View Controller-->
         <scene sceneID="yrd-lC-kuG">
@@ -320,19 +363,20 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="twitterPost:" destination="TjL-TS-tSU" eventType="touchUpInside" id="ARE-em-LML"/>
+                                    <action selector="payWithTweetPressed:" destination="TjL-TS-tSU" eventType="touchUpInside" id="UDb-Eu-L5p"/>
+                                    <segue destination="eZx-nR-M7d" kind="push" identifier="toPayWithTweet" id="92h-LH-0cG"/>
                                 </connections>
                             </button>
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YZ8-Mv-3DB">
+                                <rect key="frame" x="10" y="64" width="300" height="440"/>
+                            </imageView>
                             <label opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aem-fQ-euV">
-                                <rect key="frame" x="40" y="229" width="240" height="110"/>
+                                <rect key="frame" x="39" y="229" width="240" height="110"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YZ8-Mv-3DB">
-                                <rect key="frame" x="10" y="64" width="300" height="440"/>
-                            </imageView>
                         </subviews>
                         <gestureRecognizers/>
                     </view>
@@ -344,6 +388,7 @@
                         <outlet property="payWithTweetButton" destination="g23-EN-zOC" id="rBK-T5-ca6"/>
                         <outlet property="promoLabelText" destination="Aem-fQ-euV" id="T84-LN-qeX"/>
                         <segue destination="StN-Nb-pfw" kind="modal" identifier="toCustomerReview" modalTransitionStyle="flipHorizontal" id="5Lf-Yw-Are"/>
+                        <segue destination="3Bp-ud-Vzu" kind="push" identifier="toAvPlayer" id="FCa-Qp-LMA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dhp-qE-7D3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -355,6 +400,16 @@
                 </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1223" y="912"/>
+        </scene>
+        <!--AV Player View Controller-->
+        <scene sceneID="abR-UY-79d">
+            <objects>
+                <avPlayerViewController videoGravity="AVLayerVideoGravityResizeAspect" id="3Bp-ud-Vzu" customClass="AvViewController" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="mPL-k4-awu"/>
+                </avPlayerViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qVo-vp-ZQl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1223" y="1603"/>
         </scene>
         <!--Customer Review View Controller-->
         <scene sceneID="HZP-hr-Hkd">
@@ -402,8 +457,17 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Or2-bn-lk5">
-                                <rect key="frame" x="98" y="20" width="125" height="100"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2y2-YB-mPI">
+                                <rect key="frame" x="16" y="28" width="46" height="30"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="backPressed:" destination="StN-Nb-pfw" eventType="touchUpInside" id="DyM-1J-ozG"/>
+                                </connections>
+                            </button>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Or2-bn-lk5">
+                                <rect key="frame" x="98" y="20" width="125" height="75"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -446,7 +510,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Bar List" id="GRD-sn-LZq"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" translucent="NO" prompted="NO"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="pullToRefreshEnabled" value="NO"/>
                     </userDefinedRuntimeAttributes>
@@ -476,6 +539,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="mg6-Wm-4uZ"/>
+        <segue reference="8xb-H0-F0L"/>
     </inferredMetricsTieBreakers>
 </document>

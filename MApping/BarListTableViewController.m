@@ -10,6 +10,7 @@
 #import "DetailsViewController.h"
 #import <Parse/Parse.h>
 #import <UIKit/UIKit.h>
+#import "UINavigationBar+UINavigationBar_CustomImage.h"
 @interface BarListTableViewController ()
 
 @property (strong, nonatomic) PFObject *bar;
@@ -25,7 +26,6 @@
         
         // The className to query on
            }
-    
 
     return self;
 }
@@ -50,8 +50,14 @@
     
     // The number of objects to show per page
     self.objectsPerPage = 10;
-    
 
+    
+    UIImageView *logoTitle = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 70, 40)];
+    logoTitle.image = [UIImage imageNamed:@"logoBarList"];
+    logoTitle.contentMode = UIViewContentModeScaleToFill;
+    self.navigationItem.titleView.contentMode = UIViewContentModeScaleToFill;
+    
+    [self.navigationItem setTitleView:logoTitle];
     
     self.edgesForExtendedLayout = UIRectEdgeNone;
     UIImageView *tableViewBackground = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 450)];

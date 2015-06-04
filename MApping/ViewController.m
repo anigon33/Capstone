@@ -113,7 +113,6 @@
     }else {
     
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-    //[self.myMapView addAnnotations:[self createAnnotations]];
     }
 }
 
@@ -171,7 +170,7 @@
     CLLocationCoordinate2D zoomLocation;
     zoomLocation.latitude = 39.750661;
     zoomLocation.longitude= -104.992028;
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 3*METERS_PER_MILE,3*METERS_PER_MILE);
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 25*METERS_PER_MILE,25*METERS_PER_MILE);
     [self.myMapView regionThatFits:viewRegion];
     
     [self.myMapView setRegion:viewRegion animated:YES];
@@ -233,7 +232,6 @@ calloutAccessoryControlTapped:(UIControl *)control{
         lbl.font = [UIFont fontWithName:@"TrebuchetMS-bold" size:10];
         [av addSubview:lbl];
         av.canShowCallout = YES;
-        
         av.image = [UIImage imageNamed:@"beermug"];
         
     }
@@ -257,7 +255,7 @@ calloutAccessoryControlTapped:(UIControl *)control{
         aV.frame = CGRectMake(aV.frame.origin.x, aV.frame.origin.y - 230.0, aV.frame.size.width, aV.frame.size.height);
         
         [UIView beginAnimations:nil context:NULL];
-        [UIView setAnimationDuration:0.8];
+        [UIView setAnimationDuration:0.5];
         [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
         [aV setFrame:endFrame];
         [UIView commitAnimations];

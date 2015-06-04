@@ -57,7 +57,8 @@
     
     self.datePicker = [[UIDatePicker alloc]init];
     self.datePicker.datePickerMode = UIDatePickerModeDate;
-    
+    [self.datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
+
     
     //initialize question 1
     self.inputArray = [[NSArray alloc]init];
@@ -131,24 +132,25 @@
         self.nextButton.hidden = YES;
         self.submitButton.hidden = NO;
         self.goOutFrequency.inputView = self.datePicker;
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"MM-dd-yyyy"];
-        NSString *stringDate = [dateFormatter stringFromDate:self.datePicker.date];
-        self.goOutFrequency.text = stringDate;
+    
         [self.goOutFrequency resignFirstResponder];
         
 
 
     }
 }
+-(void)updateTextField:(id)sender
+{
+    self.goOutFrequency.inputView = self.datePicker;
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+    NSString *stringDate = [dateFormatter stringFromDate:self.datePicker.date];
+    self.goOutFrequency.text = stringDate;
+}
 
 - (IBAction)submitButtonClicked:(id)sender {
     if ([self.questionsLabel.text isEqualToString:[self.surveyQuestions objectAtIndex:4]]  && ![self.goOutFrequency.text isEqualToString:@""]){
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"MM-dd-yyyy"];
-        NSString *stringDate = [dateFormatter stringFromDate:self.datePicker.date];
-        self.goOutFrequency.text = stringDate;
-    
+        
     [PFUser currentUser][@"birthday"] = self.datePicker.date;
     [[PFUser currentUser] saveEventually];
     [self dismissViewControllerAnimated:YES completion:nil];
