@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2365004C82D0EC619C5A620A /* libPods-MApping.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F6CF4FB3499A421B9C3630FF /* libPods-MApping.a */; };
 		E00DF9401B138FC8006BD131 /* spacetestSMALL_512kb.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E00DF93F1B138FC8006BD131 /* spacetestSMALL_512kb.mp4 */; };
-		E00DF9431B13A289006BD131 /* UINavigationBar+UINavigationBar_CustomImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E00DF9421B13A289006BD131 /* UINavigationBar+UINavigationBar_CustomImage.m */; };
 		E03D6BE21AB751F800E3EFB6 /* BarListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E03D6BE11AB751F800E3EFB6 /* BarListTableViewController.m */; };
 		E05C73D71ABA64C400FE8309 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05C73D61ABA64C400FE8309 /* DetailsViewController.m */; };
 		E06FD8081B1B871F00551BF5 /* PayWithTweetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E06FD8071B1B871F00551BF5 /* PayWithTweetViewController.m */; };
@@ -88,9 +88,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F174810FC7FCD4F0FECF8F7 /* Pods-MApping.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MApping.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MApping/Pods-MApping.debug.xcconfig"; sourceTree = "<group>"; };
+		99CA64CA5029BE698D578250 /* Pods-MApping.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MApping.release.xcconfig"; path = "Pods/Target Support Files/Pods-MApping/Pods-MApping.release.xcconfig"; sourceTree = "<group>"; };
 		E00DF93F1B138FC8006BD131 /* spacetestSMALL_512kb.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = spacetestSMALL_512kb.mp4; sourceTree = "<group>"; };
-		E00DF9411B13A289006BD131 /* UINavigationBar+UINavigationBar_CustomImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+UINavigationBar_CustomImage.h"; sourceTree = "<group>"; };
-		E00DF9421B13A289006BD131 /* UINavigationBar+UINavigationBar_CustomImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+UINavigationBar_CustomImage.m"; sourceTree = "<group>"; };
 		E03D6BE01AB751F800E3EFB6 /* BarListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarListTableViewController.h; sourceTree = "<group>"; };
 		E03D6BE11AB751F800E3EFB6 /* BarListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarListTableViewController.m; sourceTree = "<group>"; };
 		E05C73D51ABA64C400FE8309 /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
@@ -209,6 +209,7 @@
 		E0DA1B941AB38B3700D23CD7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E0DA1B9B1AB3AA6F00D23CD7 /* MapViewAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewAnnotation.h; sourceTree = "<group>"; };
 		E0DA1B9C1AB3AA6F00D23CD7 /* MapViewAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewAnnotation.m; sourceTree = "<group>"; };
+		F6CF4FB3499A421B9C3630FF /* libPods-MApping.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MApping.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +236,7 @@
 				E0DA1B951AB38B3700D23CD7 /* MapKit.framework in Frameworks */,
 				E0DA1B931AB38B3000D23CD7 /* CoreLocation.framework in Frameworks */,
 				E0C39BB41AFE941600F1D8E8 /* Bolts.framework in Frameworks */,
+				2365004C82D0EC619C5A620A /* libPods-MApping.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +250,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		98A2381CCD34EB9CB8E0C026 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6F174810FC7FCD4F0FECF8F7 /* Pods-MApping.debug.xcconfig */,
+				99CA64CA5029BE698D578250 /* Pods-MApping.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E0C8EA251ABF9A6200E9456E /* MagicalRecord */ = {
 			isa = PBXGroup;
 			children = (
@@ -380,6 +391,8 @@
 				E0C8EA251ABF9A6200E9456E /* MagicalRecord */,
 				E0DA1B851AB38B0100D23CD7 /* MAppingTests */,
 				E0DA1B6A1AB38B0100D23CD7 /* Products */,
+				98A2381CCD34EB9CB8E0C026 /* Pods */,
+				E913D08C45E3043018C3932E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -401,8 +414,6 @@
 				E0C68B1D1B11353C0047699C /* Constants.h */,
 				E06FD8061B1B871F00551BF5 /* PayWithTweetViewController.h */,
 				E06FD8071B1B871F00551BF5 /* PayWithTweetViewController.m */,
-				E00DF9411B13A289006BD131 /* UINavigationBar+UINavigationBar_CustomImage.h */,
-				E00DF9421B13A289006BD131 /* UINavigationBar+UINavigationBar_CustomImage.m */,
 				E0C68B221B138DA80047699C /* AvViewController.h */,
 				E0C68B231B138DA80047699C /* AvViewController.m */,
 				E085304B1AD7638800F12AA1 /* CouponViewController.h */,
@@ -464,6 +475,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E913D08C45E3043018C3932E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F6CF4FB3499A421B9C3630FF /* libPods-MApping.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -471,9 +490,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E0DA1B8C1AB38B0100D23CD7 /* Build configuration list for PBXNativeTarget "MApping" */;
 			buildPhases = (
+				6974ECC5821987E63490B046 /* Check Pods Manifest.lock */,
 				E0DA1B651AB38B0100D23CD7 /* Sources */,
 				E0DA1B661AB38B0100D23CD7 /* Frameworks */,
 				E0DA1B671AB38B0100D23CD7 /* Resources */,
+				C03BB09429231BF3FD996584 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -569,6 +590,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6974ECC5821987E63490B046 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C03BB09429231BF3FD996584 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MApping/Pods-MApping-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E0DA1B651AB38B0100D23CD7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -602,7 +656,6 @@
 				E0C8EA6F1ABF9A6200E9456E /* NSManagedObject+MagicalRecord.m in Sources */,
 				E0C8EA6D1ABF9A6200E9456E /* NSManagedObject+MagicalDataImport.m in Sources */,
 				E0C8EA761ABF9A6200E9456E /* NSManagedObjectModel+MagicalRecord.m in Sources */,
-				E00DF9431B13A289006BD131 /* UINavigationBar+UINavigationBar_CustomImage.m in Sources */,
 				E0C68B241B138DA80047699C /* AvViewController.m in Sources */,
 				E0C8EA6C1ABF9A6200E9456E /* NSManagedObject+MagicalAggregation.m in Sources */,
 				E0C8EA701ABF9A6200E9456E /* NSManagedObject+MagicalRequests.m in Sources */,
@@ -737,6 +790,7 @@
 		};
 		E0DA1B8D1AB38B0100D23CD7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F174810FC7FCD4F0FECF8F7 /* Pods-MApping.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -755,6 +809,7 @@
 		};
 		E0DA1B8E1AB38B0100D23CD7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99CA64CA5029BE698D578250 /* Pods-MApping.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

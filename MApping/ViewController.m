@@ -38,6 +38,8 @@
                                                  name:@"newLocationNotif"
                                                object:nil];
     
+    self.myMapView.clipsToBounds = YES;
+    self.myMapView.layer.cornerRadius = 5;
     
     
     self.myMapView.delegate = self;

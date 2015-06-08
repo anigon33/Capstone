@@ -10,7 +10,6 @@
 #import "DetailsViewController.h"
 #import <Parse/Parse.h>
 #import <UIKit/UIKit.h>
-#import "UINavigationBar+UINavigationBar_CustomImage.h"
 @interface BarListTableViewController ()
 
 @property (strong, nonatomic) PFObject *bar;

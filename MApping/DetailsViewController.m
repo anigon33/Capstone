@@ -11,6 +11,7 @@
 #import <ParseUI/ParseUI.h>
 #import "CouponViewController.h"
 #import "AppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface DetailsViewController ()<CLLocationManagerDelegate>
 
@@ -25,7 +26,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.BarLogo.layer.cornerRadius = .9;
+    
+    self.enterBarButton.clipsToBounds = YES;
+    self.enterBarButton.layer.cornerRadius = 1;
+    
+    self.BarLogo.clipsToBounds = YES;
+    self.BarLogo.layer.cornerRadius  = 2;
     
     
     self.BarLogo.file = [self.establishmentObject objectForKey:@"image"];

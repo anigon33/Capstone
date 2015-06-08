@@ -33,6 +33,9 @@
     
     self.payWithTweetButton.hidden = YES;
     
+    self.IndividualCouponImage.clipsToBounds = YES;
+    self.IndividualCouponImage.layer.cornerRadius = 5;
+    
     
     if ([[self.couponObject valueForKey:@"payWithTweet"] integerValue] ==1) {
         self.payWithTweetButton.hidden = NO;

@@ -120,7 +120,7 @@
             [self.allCoupons insertObject:messageCoupon atIndex:0];
 
             PFQuery *couponsUsed = [PFQuery queryWithClassName:@"CouponUsed"];
-            [couponsUsed whereKey:@"createdAt" greaterThan:[NSDate dateWithTimeIntervalSinceNow:60 * 60 * kHoursForCouponReset]];
+            [couponsUsed whereKey:@"createdAt" lessThan:[NSDate dateWithTimeIntervalSinceNow:60 * 60 * kHoursForCouponReset]];
             [couponsUsed whereKey:@"user" equalTo:[PFUser currentUser]];
             self.usedCoupons = [[NSArray alloc] initWithArray:[couponsUsed findObjects]];
             
@@ -168,8 +168,10 @@
     {
         
         view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 380)];
-        
+        view.clipsToBounds = YES;
+        view.layer.cornerRadius = 5;
         PFFile *couponImage = [self.allCoupons objectAtIndex:index][@"Coupon"];
+        
         
         [couponImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
          {
