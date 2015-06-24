@@ -13,7 +13,6 @@
 @property (strong, nonatomic) CLCircularRegion *region;
 @property (strong, nonatomic) NSArray *establishmentObjects;
 @property (strong, nonatomic) NSMutableArray *barRegions;
-@property (strong, nonatomic) PFObject *visitObject;
 @end
 
 @implementation AppDelegate
@@ -46,7 +45,7 @@
         [self.locationManager requestAlwaysAuthorization];
     }
     
-    
+        
     self.barRegions = [[NSMutableArray alloc]init];
 
     PFQuery *establishments = [PFQuery queryWithClassName:@"Establishment"];
@@ -64,7 +63,7 @@
             CLLocationCoordinate2D center = CLLocationCoordinate2DMake(geopoint.latitude, geopoint.longitude);
             
             CLRegion *region = [[CLCircularRegion alloc] initWithCenter:center
-                                                                 radius:25.00
+                                                                 radius:30.00
                                                              identifier:[object objectForKey:@"name"]];
             self.region.notifyOnEntry = YES;
             self.region.notifyOnExit = YES;
@@ -112,6 +111,10 @@
                         self.visitObject = [PFObject objectWithClassName:@"Visit"];
                         [self.visitObject setObject:[PFUser currentUser] forKey:@"user"];
                         [self.visitObject setObject:[NSDate date] forKey:@"start"];
+                        
+                        PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLocation:self.latestLocation];
+                        [self.visitObject setObject:userLocation forKey:@"startGeoPoint"];
+                        
                         NSString *barName = establishmentRegion.identifier;
                         for (PFObject *establishmentObject in self.establishmentObjects){
                             
@@ -130,6 +133,8 @@
                     
                     NSLog(@"holla");
                     [self.visitObject setObject:[NSDate date] forKey:@"end"];
+                    PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLocation:self.latestLocation];
+                    [self.visitObject setObject:userLocation forKey:@"endGeoPoint"];
                     [self.visitObject saveInBackground];
                     
                     self.visitObject = nil;
@@ -190,6 +195,12 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+    
+    if (![self.visitObject objectForKey:@"end"]) {
+        [self.visitObject setObject:[NSDate date] forKey:@"end"];
+        [self.visitObject save];
+
+    }
     
 }
 -(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{

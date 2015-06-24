@@ -50,82 +50,117 @@
     
 }
 - (IBAction)enterBarButtonPressed:(UIButton *)sender {
-    
-    
-    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    
-    if (appDelegate.locationAccurate) {
+    [[PFUser currentUser] fetch];
+    if ([[[PFUser currentUser] valueForKey:@"emailVerified"] integerValue] == 0){
+        NSString *title = @"Whoops";
+        NSString *message = @"Please verify your email before getting great deals!";
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                            message:message
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
         
         
-        BOOL barFound = NO;
-        CLLocation *currentLocation = appDelegate.latestLocation;
+        [alertView show];
         
-        [self.spinner startAnimating];
+    }else{
+        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         
-        PFQuery *query = [PFQuery queryWithClassName:@"Establishment"];
-        // Interested in locations near user.
-        PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLocation:currentLocation];
-        [query whereKey:@"GeoCoordinates" nearGeoPoint:userLocation withinMiles:.02f];
-        NSArray *barsAroundCurrentLocation;
-        barsAroundCurrentLocation = [query findObjects];
-        [self.spinner stopAnimating];
-        
-        if (barsAroundCurrentLocation.count != 0){
+        if (appDelegate.locationAccurate) {
             
             
+            BOOL barFound = NO;
+            CLLocation *currentLocation = appDelegate.latestLocation;
             
-            for (PFObject *bar in barsAroundCurrentLocation) {
+            [self.spinner startAnimating];
+            
+            PFQuery *query = [PFQuery queryWithClassName:@"Establishment"];
+            // Interested in locations near user.
+            PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLocation:currentLocation];
+            [query whereKey:@"GeoCoordinates" nearGeoPoint:userLocation withinMiles:1.00f];
+            NSArray *barsAroundCurrentLocation;
+            barsAroundCurrentLocation = [query findObjects];
+            [self.spinner stopAnimating];
+            
+            if (barsAroundCurrentLocation.count != 0){
                 
-                if ([self.establishmentObject[@"name"] isEqualToString:bar[@"name"]]) {
-                    barFound = YES;
-                    NSLog(@"Test");
+                
+                
+                for (PFObject *bar in barsAroundCurrentLocation) {
                     
-                    [self performSegueWithIdentifier:@"toCouponPage" sender:self];
-                    
-                    
-                    
-                }
-                if(barFound == NO){
-                    [UIView animateWithDuration:0.1 animations:^{
-                        self.enterBarButton.transform = CGAffineTransformMakeTranslation(10, 0);
-                    } completion:^(BOOL finished) {
-                        // Step 2
+                    if ([self.establishmentObject[@"name"] isEqualToString:bar[@"name"]]) {
+                        barFound = YES;
+                        NSLog(@"Test");
+                        if (appDelegate.visitObject == nil) {
+                            appDelegate.visitObject = [PFObject objectWithClassName:@"Visit"];
+                            [appDelegate.visitObject setObject:[NSDate date] forKey:@"start"];
+                            [appDelegate.visitObject setObject:userLocation forKey:@"startGeoPoint"];
+                            [appDelegate.visitObject setObject:[PFUser currentUser] forKey:@"user"];
+                            [appDelegate.visitObject setObject:self.establishmentObject forKey:@"establishments"];
+                            [appDelegate.visitObject saveInBackground];
+                        }
+                        
+                        [self performSegueWithIdentifier:@"toCouponPage" sender:self];
+                        
+                        
+                        
+                    }
+                    if(barFound == NO){
                         [UIView animateWithDuration:0.1 animations:^{
-                            self.enterBarButton.transform = CGAffineTransformMakeTranslation(-10, 0);
+                            self.enterBarButton.transform = CGAffineTransformMakeTranslation(10, 0);
                         } completion:^(BOOL finished) {
-                            // Step 3
+                            // Step 2
                             [UIView animateWithDuration:0.1 animations:^{
-                                
-                            }completion:^(BOOL finished){
-                                self.enterBarButton.transform = CGAffineTransformMakeTranslation(0, 0);
-                                NSString *title = @"Oops!";
-                                NSString *message = @"Coup' users must be inside each bar to see the specials, so get over there already!!";
-                                
-                                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                                                    message:message
-                                                                                   delegate:self
-                                                                          cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-                                
-                                
-                                [alertView show];
-                                
-                                
-                                
-                                
+                                self.enterBarButton.transform = CGAffineTransformMakeTranslation(-10, 0);
+                            } completion:^(BOOL finished) {
+                                // Step 3
+                                [UIView animateWithDuration:0.1 animations:^{
+                                    
+                                }completion:^(BOOL finished){
+                                    self.enterBarButton.transform = CGAffineTransformMakeTranslation(0, 0);
+                                    NSString *title = @"Oops!";
+                                    NSString *message = @"Coup' users must be inside each bar to see the specials, so get over there already!!";
+                                    
+                                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                                                        message:message
+                                                                                       delegate:self
+                                                                              cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+                                    
+                                    
+                                    [alertView show];
+                                    
+                                    
+                                    
+                                    
+                                }];
                             }];
                         }];
-                    }];
-                    
-                    
+                        
+                        
+                    }
                 }
+                
             }
             
-        }
-        
-        
-        else{
-            NSString *title = @"Oops!";
-            NSString *message = @"Coup' users must be inside each bar to see the specials, so get over there already!!";
+            
+            else{
+                NSString *title = @"Oops!";
+                NSString *message = @"Coup' users must be inside each bar to see the specials, so get over there already!!";
+                
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                                    message:message
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+                
+                
+                [alertView show];
+                
+            }
+            
+            
+        }else{
+            NSString *title = @"Whoa!";
+            NSString *message = @"Hold on let us catch up! Try again soon";
             
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                                 message:message
@@ -138,21 +173,7 @@
         }
         
         
-    }else{
-        NSString *title = @"Whoa!";
-        NSString *message = @"Hold on let us catch up! Try again soon";
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                            message:message
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-        
-        
-        [alertView show];
-        
     }
-    
-    
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

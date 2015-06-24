@@ -7,8 +7,8 @@
 //
 
 #import "PayWithTweetViewController.h"
-#define kSuccessURL @"https://www.google.com/movement"
-#define kErrorURL @"https://www.google.com/error"
+#define kSuccessURL @"http://www.barcoup.com/EndTweet"
+#define kErrorURL @"https://api.twitter.com/login/error?username_or_email=taxmagicman&redirect_after_login=https%3A%2F%2Fapi.twitter.com%2Foauth%2Fauthenticate%3Foauth_token%3Dnpq44wAAAAAAf8YVAAABTiFQUj0"
 
 @interface PayWithTweetViewController () <UIWebViewDelegate>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -21,31 +21,44 @@
     [super viewDidLoad];
     [self.webView reload];
     self.webView.delegate = self;
-    
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://107.170.232.77:8860/starttweeting.html?establishmentid=%@", self.establishmentId]];
-   // NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.google.com"]];
+
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.barcoup.com/starttweeting.html?establishmentid=%@", self.establishmentId]];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
     
     [self.webView loadRequest:urlRequest];
 }
--(void)webViewDidStartLoad:(UIWebView *)webView {
+
+-(void)webViewDidFinishLoad:(UIWebView *)webView    {
     
-}
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request
- navigationType:(UIWebViewNavigationType)navigationType{
-    if ([webView.request.URL.absoluteURL isEqual:kSuccessURL]) {
+    if ([webView.request.URL.absoluteString isEqual:kSuccessURL]) {
         self.success = YES;
         
         [self performSegueWithIdentifier:@"unwindToCouponRedeem" sender:self];
         
-        return NO;
-        
     }else if([webView.request.URL.absoluteString isEqualToString:kErrorURL]){
         self.success = NO;
         [self performSegueWithIdentifier:@"unwindToCouponRedeem" sender:self];
-        
     }
-   return YES;
+    else if([webView.request.URL.absoluteString isEqualToString:kErrorURL]){
+        NSString *title = @"Oops!";
+        NSString *message = @"Please try again";
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                            message:message
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        
+        
+        [alertView show];
+
+        [self.navigationController popViewControllerAnimated:NO];
+
+    }
+    
+    // This is the url that cause page to have "sorry that page doesnt exist"
+    // https://api.twitter.com/login/error?username_or_email=taxmagicman&redirect_after_login=https%3A%2F%2Fapi.twitter.com%2Foauth%2Fauthenticate%3Foauth_token%3Dnpq44wAAAAAAf8YVAAABTiFQUj0
+    
+    
 }
 - (IBAction)backButtonPressed:(UIButton *)sender {
     [self.navigationController popViewControllerAnimated:NO];

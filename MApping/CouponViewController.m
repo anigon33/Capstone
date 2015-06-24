@@ -94,7 +94,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
     [self.tabBarController.tabBar setHidden:NO];
-
+    
     [[PFUser currentUser] fetch];
     if ([[PFUser currentUser] objectForKey:@"willResumeLiquor"] == nil|| [[[PFUser currentUser] objectForKey:@"willResumeLiquor"] compare:[NSDate date]] == NSOrderedAscending) {
         [[PFUser currentUser] setObject:[NSNumber numberWithBool:NO] forKey:@"isCutOff"];
@@ -118,9 +118,9 @@
             [self.allCoupons removeObjectAtIndex:index];
             
             [self.allCoupons insertObject:messageCoupon atIndex:0];
-
+            
             PFQuery *couponsUsed = [PFQuery queryWithClassName:@"CouponUsed"];
-            [couponsUsed whereKey:@"createdAt" lessThan:[NSDate dateWithTimeIntervalSinceNow:60 * 60 * kHoursForCouponReset]];
+            [couponsUsed whereKey:@"dateUsed" greaterThan:[NSDate dateWithTimeIntervalSinceNow:-60 * 60 * kHoursForCouponReset]];
             [couponsUsed whereKey:@"user" equalTo:[PFUser currentUser]];
             self.usedCoupons = [[NSArray alloc] initWithArray:[couponsUsed findObjects]];
             
@@ -241,9 +241,14 @@
     return CATransform3DTranslate(transform, 0.0f, 0.0f, offset * carousel.itemWidth);
 }
 - (void)carousel:(iCarousel *)carousel didSelectItemAtIndex:(NSInteger)index{
-    if ([[[PFUser currentUser] valueForKey:@"emailVerified"] integerValue] == 0){
-        NSString *title = @"Whoops";
-        NSString *message = @"Please verify your email before getting great deals!";
+    
+    
+    
+    BOOL hasUsed = NO;
+    if ([[[PFUser currentUser] objectForKey:@"isCutOff"] integerValue] == 1 && [[[self.allCoupons objectAtIndex:index] valueForKey:@"isLiquorCoupon"] integerValue] == 1){
+        hasUsed = YES;
+        NSString *title = @"Yikes!";
+        NSString *message = @"4 liqour coupons in one night! Try one of our food coupons to sober up!";
         
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                             message:message
@@ -256,37 +261,20 @@
     }else{
         
         
-        BOOL hasUsed = NO;
-        if ([[[PFUser currentUser] objectForKey:@"isCutOff"] integerValue] == 1 && [[[self.allCoupons objectAtIndex:index] valueForKey:@"isLiquorCoupon"] integerValue] == 1){
-            hasUsed = YES;
-            NSString *title = @"Yikes!";
-            NSString *message = @"4 liqour coupons in one night! Try one of our food coupons to sober up!";
-            
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                                message:message
-                                                               delegate:self
-                                                      cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-            
-            
-            [alertView show];
-            
-        }else{
-            
-            
-            for (NSDictionary *used in self.usedCoupons) {
-                if ([[[self.allCoupons objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]]) {
-                    hasUsed = YES;
-                    NSLog(@"Already Used Coupon!");
-                    return;
-                }
+        for (NSDictionary *used in self.usedCoupons) {
+            if ([[[self.allCoupons objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]]) {
+                hasUsed = YES;
+                NSLog(@"Already Used Coupon!");
+                return;
             }
         }
-        if(!hasUsed && [[[self.allCoupons objectAtIndex:index] valueForKey:@"isWelcomeMessage"] isEqualToNumber:[NSNumber numberWithBool:NO]]){
-            self.selectedCoupon = [self.allCoupons objectAtIndex:index];
-            [self performSegueWithIdentifier:@"toFullScreenCoupon" sender:self];
-        }
+    }
+    if(!hasUsed && [[[self.allCoupons objectAtIndex:index] valueForKey:@"isWelcomeMessage"] isEqualToNumber:[NSNumber numberWithBool:NO]]){
+        self.selectedCoupon = [self.allCoupons objectAtIndex:index];
+        [self performSegueWithIdentifier:@"toFullScreenCoupon" sender:self];
     }
 }
+
 
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

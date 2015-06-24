@@ -14,6 +14,7 @@
 @property BOOL locked;
 
 @property (strong, nonatomic) IBOutlet UILongPressGestureRecognizer *longPressGesture;
+@property (weak, nonatomic) IBOutlet UIImageView *lockedCoupon;
 
 @property (weak, nonatomic) IBOutlet UILabel *promoLabelText;
 
@@ -39,6 +40,7 @@
     
     if ([[self.couponObject valueForKey:@"payWithTweet"] integerValue] ==1) {
         self.payWithTweetButton.hidden = NO;
+        self.lockedCoupon.hidden = NO;
         
     }
     
@@ -60,7 +62,6 @@
         }
     }];
     
-    NSLog(@"yo");
     
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -97,7 +98,7 @@
             [couponsUsed whereKey:@"user" equalTo:[PFUser currentUser]];
             [couponsUsed includeKey:@"coupon"];
             
-            // [couponsUsed whereKey:@"createdAt" greaterThan:timeSinceFirstDrink];
+             [couponsUsed whereKey:@"createdAt" greaterThan:timeSinceFirstDrink];
             NSArray *usedCoupons = [couponsUsed findObjects];
             int count = 0;
             for (NSDictionary *coupon in usedCoupons) {
@@ -153,6 +154,8 @@
     PayWithTweetViewController *source = unwindSegue.sourceViewController;
     if (source.success) {
         // set locked to NO
+        self.lockedCoupon.hidden = YES;
+        self.payWithTweetButton.hidden = YES;
         self.locked = NO;
     }
     

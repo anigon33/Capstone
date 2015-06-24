@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1BA7B5AC-4E67-472D-9A6C-A4594DC8720A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>MApping</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F43FB7AAA279DFB8CFDECAEDD801DFB8293C5016</key>
+		<string>https://github.com/anigon33/Capstone.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>MApping.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F43FB7AAA279DFB8CFDECAEDD801DFB8293C5016</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/anigon33/Capstone.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F43FB7AAA279DFB8CFDECAEDD801DFB8293C5016</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F43FB7AAA279DFB8CFDECAEDD801DFB8293C5016</string>
+			<key>IDESourceControlWCCName</key>
+			<string>MApping</string>
+		</dict>
+	</array>
+</dict>
+</plist>

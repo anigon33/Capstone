@@ -88,8 +88,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		6F174810FC7FCD4F0FECF8F7 /* Pods-MApping.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MApping.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MApping/Pods-MApping.debug.xcconfig"; sourceTree = "<group>"; };
-		99CA64CA5029BE698D578250 /* Pods-MApping.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MApping.release.xcconfig"; path = "Pods/Target Support Files/Pods-MApping/Pods-MApping.release.xcconfig"; sourceTree = "<group>"; };
+		6D3A28884974298AA01788F8 /* Pods-MApping.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MApping.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MApping/Pods-MApping.debug.xcconfig"; sourceTree = "<group>"; };
+		D2239C718E787711AA65BF9D /* Pods-MApping.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MApping.release.xcconfig"; path = "Pods/Target Support Files/Pods-MApping/Pods-MApping.release.xcconfig"; sourceTree = "<group>"; };
 		E00DF93F1B138FC8006BD131 /* spacetestSMALL_512kb.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = spacetestSMALL_512kb.mp4; sourceTree = "<group>"; };
 		E03D6BE01AB751F800E3EFB6 /* BarListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarListTableViewController.h; sourceTree = "<group>"; };
 		E03D6BE11AB751F800E3EFB6 /* BarListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarListTableViewController.m; sourceTree = "<group>"; };
@@ -250,11 +250,11 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		98A2381CCD34EB9CB8E0C026 /* Pods */ = {
+		C46057C96AC6CA47D83853AC /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6F174810FC7FCD4F0FECF8F7 /* Pods-MApping.debug.xcconfig */,
-				99CA64CA5029BE698D578250 /* Pods-MApping.release.xcconfig */,
+				6D3A28884974298AA01788F8 /* Pods-MApping.debug.xcconfig */,
+				D2239C718E787711AA65BF9D /* Pods-MApping.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -391,8 +391,8 @@
 				E0C8EA251ABF9A6200E9456E /* MagicalRecord */,
 				E0DA1B851AB38B0100D23CD7 /* MAppingTests */,
 				E0DA1B6A1AB38B0100D23CD7 /* Products */,
-				98A2381CCD34EB9CB8E0C026 /* Pods */,
 				E913D08C45E3043018C3932E /* Frameworks */,
+				C46057C96AC6CA47D83853AC /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -790,7 +790,7 @@
 		};
 		E0DA1B8D1AB38B0100D23CD7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F174810FC7FCD4F0FECF8F7 /* Pods-MApping.debug.xcconfig */;
+			baseConfigurationReference = 6D3A28884974298AA01788F8 /* Pods-MApping.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -809,7 +809,7 @@
 		};
 		E0DA1B8E1AB38B0100D23CD7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99CA64CA5029BE698D578250 /* Pods-MApping.release.xcconfig */;
+			baseConfigurationReference = D2239C718E787711AA65BF9D /* Pods-MApping.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

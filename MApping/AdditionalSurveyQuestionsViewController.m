@@ -53,16 +53,18 @@
     self.goOutPicker.dataSource = self;
     self.goOutPicker.delegate = self;
     [self.goOutFrequency setInputView:self.goOutPicker];
+
     self.goOutPicker.backgroundColor = [UIColor clearColor];
     
     self.datePicker = [[UIDatePicker alloc]init];
     self.datePicker.datePickerMode = UIDatePickerModeDate;
     [self.datePicker addTarget:self action:@selector(updateTextField:) forControlEvents:UIControlEventValueChanged];
 
-    
+    self.goOutFrequency.text = [self.frequency objectAtIndex:0];
     //initialize question 1
     self.inputArray = [[NSArray alloc]init];
     self.inputArray = self.frequency;
+
     self.questionsLabel.text = [self.surveyQuestions objectAtIndex:0];
     self.submitButton.hidden = YES;
     
@@ -87,15 +89,13 @@
 }
 - (IBAction)nextButtonPressed:(UIButton *)sender {
     
-    
     if ([self.questionsLabel.text isEqualToString:[self.surveyQuestions objectAtIndex:0]]  && ![self.goOutFrequency.text isEqualToString:@""]){
-        
         
         [PFUser currentUser][@"partyFrequency"] = self.goOutFrequency.text;
         
         
         self.questionsLabel.text = [self.surveyQuestions objectAtIndex:1];
-        self.goOutFrequency.text = @"";
+        self.goOutFrequency.text = [self.drinks objectAtIndex:0];
         self.inputArray = self.drinks;
         [self.goOutPicker reloadAllComponents];
         
@@ -107,7 +107,7 @@
         
         
         self.questionsLabel.text = [self.surveyQuestions objectAtIndex:2];
-        self.goOutFrequency.text = @"";
+        self.goOutFrequency.text = [self.maritalStatus objectAtIndex:0];
         self.inputArray = self.maritalStatus;
         [self.goOutPicker reloadAllComponents];
     }
@@ -117,7 +117,7 @@
         
         
         self.questionsLabel.text = [self.surveyQuestions objectAtIndex:3];
-        self.goOutFrequency.text = @"";
+        self.goOutFrequency.text = [self.maleFemale objectAtIndex:0];
         self.inputArray = self.maleFemale;
         self.nextButton.hidden = NO;
         [self.goOutPicker reloadAllComponents];
@@ -143,7 +143,8 @@
 {
     self.goOutFrequency.inputView = self.datePicker;
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"MM-dd-yyyy"];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
     NSString *stringDate = [dateFormatter stringFromDate:self.datePicker.date];
     self.goOutFrequency.text = stringDate;
 }
