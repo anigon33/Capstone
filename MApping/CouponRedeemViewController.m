@@ -19,8 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *promoLabelText;
 
 @property (weak, nonatomic) IBOutlet UIImageView *IndividualCouponImage;
-
-
+@property BOOL returnedFromTweetBool;
 @end
 
 @implementation CouponRedeemViewController
@@ -68,6 +67,10 @@
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
     if ([[self.couponObject valueForKey:@"payWithTweet"] integerValue] == 1) {
         self.locked = YES;
+        if (self.returnedFromTweetBool == YES) {
+            self.locked = NO;
+            self.returnedFromTweetBool = NO;
+        }
     }
 }
 
@@ -157,6 +160,7 @@
         self.lockedCoupon.hidden = YES;
         self.payWithTweetButton.hidden = YES;
         self.locked = NO;
+        self.returnedFromTweetBool = YES;
     }
     
 }

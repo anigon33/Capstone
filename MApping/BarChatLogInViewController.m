@@ -29,6 +29,10 @@
  }
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    
+    if (screenWidth == 320) {
     [self.logInView.logo setFrame:CGRectMake(55, 30, 240, 150)];
     [self.logInView.usernameField setFrame:CGRectMake(20, 210, 280, 40)];
     [self.logInView.passwordField setFrame:CGRectMake(20, 255, 280, 40)];
@@ -36,7 +40,25 @@
     [self.logInView.passwordForgottenButton setFrame:CGRectMake(60, 370, 200, 15)];
     [self.logInView.signUpButton setFrame:CGRectMake(20, 425, 280, 40)];
     
+    }
+    if (screenWidth == 375){
+        [self.logInView.logo setFrame:CGRectMake(70, 30, 240, 150)];
+        [self.logInView.usernameField setFrame:CGRectMake(45, 210, 280, 40)];
+        [self.logInView.passwordField setFrame:CGRectMake(45, 255, 280, 40)];
+        [self.logInView.logInButton setFrame:CGRectMake(45, 305, 280, 50)];
+        [self.logInView.passwordForgottenButton setFrame:CGRectMake(85, 370, 200, 15)];
+        [self.logInView.signUpButton setFrame:CGRectMake(45, 425, 280, 40)];
 
+    }
+    if (screenWidth == 414){
+        [self.logInView.logo setFrame:CGRectMake(95, 40, 240, 150)];
+        [self.logInView.usernameField setFrame:CGRectMake(65, 210, 280, 40)];
+        [self.logInView.passwordField setFrame:CGRectMake(65, 255, 280, 40)];
+        [self.logInView.logInButton setFrame:CGRectMake(65, 305, 280, 50)];
+        [self.logInView.passwordForgottenButton setFrame:CGRectMake(105, 370, 200, 15)];
+        [self.logInView.signUpButton setFrame:CGRectMake(65, 425, 280, 40)];
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning {

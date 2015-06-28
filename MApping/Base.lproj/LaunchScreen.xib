@@ -10,34 +10,110 @@
             <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" image="blackBackground" translatesAutoresizingMaskIntoConstraints="NO" id="zjI-f7-fnp">
+                    <rect key="frame" x="0.0" y="-284" width="160" height="284"/>
+                </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 Adam Nigon. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
                     <rect key="frame" x="20" y="439" width="441" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
+                    <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                        <rect key="frame" x="29" y="526" width="263" height="21"/>
+                    </variation>
                 </label>
-                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="YoA-sZ-Uwa">
-                    <rect key="frame" x="178" y="190" width="125" height="100"/>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="YoA-sZ-Uwa">
+                    <rect key="frame" x="155" y="141" width="170" height="170"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="100" id="MDZ-JS-Edr"/>
-                        <constraint firstAttribute="width" constant="125" id="b30-da-Jqf"/>
+                        <constraint firstAttribute="height" constant="170" id="QNH-W3-Jpc"/>
+                        <constraint firstAttribute="width" constant="170" id="w1y-5e-cyy"/>
+                        <constraint firstAttribute="height" constant="170" id="zRI-Vx-mM4"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="QNH-W3-Jpc"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact" ambiguous="YES" misplaced="YES">
+                        <rect key="frame" x="75" y="150" width="170" height="170"/>
+                        <mask key="constraints">
+                            <exclude reference="w1y-5e-cyy"/>
+                            <exclude reference="zRI-Vx-mM4"/>
+                        </mask>
+                    </variation>
+                    <variation key="heightClass=regular-widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="QNH-W3-Jpc"/>
+                        </mask>
+                    </variation>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
-                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
-                <constraint firstAttribute="centerY" secondItem="YoA-sZ-Uwa" secondAttribute="centerY" id="V5p-kF-oNi"/>
-                <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
-                <constraint firstAttribute="centerX" secondItem="YoA-sZ-Uwa" secondAttribute="centerX" id="fsN-wG-pT1"/>
+                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="7QP-JJ-Js1"/>
+                <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="21" id="DBP-jZ-5Mg"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="centerX" secondItem="YoA-sZ-Uwa" secondAttribute="centerX" id="Ecc-Au-USx"/>
+                <constraint firstAttribute="trailing" secondItem="zjI-f7-fnp" secondAttribute="trailing" id="N1d-It-Mys"/>
+                <constraint firstItem="zjI-f7-fnp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Pnx-nk-Ko0"/>
+                <constraint firstItem="YoA-sZ-Uwa" firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="QVx-cx-NDK"/>
+                <constraint firstItem="YoA-sZ-Uwa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="75" id="YTp-2R-qDL"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="bX7-aw-YWq"/>
+                <constraint firstItem="YoA-sZ-Uwa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="141" id="bjn-El-Yf5"/>
+                <constraint firstAttribute="bottom" secondItem="zjI-f7-fnp" secondAttribute="bottom" id="hTR-dl-PXz"/>
+                <constraint firstItem="zjI-f7-fnp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="iIJ-xz-y9O"/>
+                <constraint firstItem="YoA-sZ-Uwa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="171" id="soc-fV-ZEA"/>
+                <constraint firstItem="zjI-f7-fnp" firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="xmJ-Or-RHr"/>
+                <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="29" id="yYd-GT-GRJ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="548" y="455"/>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="zjI-f7-fnp"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="N1d-It-Mys"/>
+                    <exclude reference="Pnx-nk-Ko0"/>
+                    <exclude reference="hTR-dl-PXz"/>
+                    <exclude reference="iIJ-xz-y9O"/>
+                    <exclude reference="xmJ-Or-RHr"/>
+                    <exclude reference="QVx-cx-NDK"/>
+                    <exclude reference="YTp-2R-qDL"/>
+                    <exclude reference="soc-fV-ZEA"/>
+                    <exclude reference="DBP-jZ-5Mg"/>
+                    <exclude reference="yYd-GT-GRJ"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="constraints">
+                    <exclude reference="bjn-El-Yf5"/>
+                    <exclude reference="7QP-JJ-Js1"/>
+                    <exclude reference="Ecc-Au-USx"/>
+                    <exclude reference="bX7-aw-YWq"/>
+                </mask>
+            </variation>
+            <variation key="heightClass=regular-widthClass=compact">
+                <mask key="subviews">
+                    <include reference="zjI-f7-fnp"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="N1d-It-Mys"/>
+                    <include reference="Pnx-nk-Ko0"/>
+                    <include reference="hTR-dl-PXz"/>
+                    <include reference="iIJ-xz-y9O"/>
+                    <include reference="xmJ-Or-RHr"/>
+                    <include reference="QVx-cx-NDK"/>
+                    <include reference="YTp-2R-qDL"/>
+                    <include reference="soc-fV-ZEA"/>
+                    <include reference="DBP-jZ-5Mg"/>
+                    <include reference="yYd-GT-GRJ"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="470" y="474"/>
         </view>
     </objects>
     <resources>
+        <image name="blackBackground" width="160" height="284"/>
         <image name="logo" width="125" height="100"/>
     </resources>
 </document>

@@ -63,7 +63,9 @@
     tableViewBackground.image = [UIImage imageNamed:@"blackBackground"];
     [[UITableView appearance] setBackgroundView:tableViewBackground];
     
-
+    
+    [self.navigationController.navigationBar setBarTintColor:[UIColor grayColor]];
+    [self.navigationController.navigationBar setTranslucent:NO];
 }
 -(void)viewWillAppear:(BOOL)animated{
     [[self navigationController] setNavigationBarHidden:NO animated:NO];
@@ -142,7 +144,7 @@
      detailsLabel.font = [UIFont systemFontOfSize:9];
      
     
-     UIImageView *cellBackgroundView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 320, 90)];
+     UIImageView *cellBackgroundView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 90)];
      cellBackgroundView.image = [UIImage imageNamed:@"cellImage"];
      
      cell.backgroundColor = [UIColor clearColor];

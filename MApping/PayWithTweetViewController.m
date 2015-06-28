@@ -7,7 +7,8 @@
 //
 
 #import "PayWithTweetViewController.h"
-#define kSuccessURL @"http://www.barcoup.com/EndTweet"
+#define kSuccessURL @"http://www.barcoup.com/EndTweet.html"
+
 #define kErrorURL @"https://api.twitter.com/login/error?username_or_email=taxmagicman&redirect_after_login=https%3A%2F%2Fapi.twitter.com%2Foauth%2Fauthenticate%3Foauth_token%3Dnpq44wAAAAAAf8YVAAABTiFQUj0"
 
 @interface PayWithTweetViewController () <UIWebViewDelegate>

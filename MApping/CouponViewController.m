@@ -158,6 +158,9 @@
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSInteger)index reusingView:(UIView *)view
 {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+   // CGFloat screenHeight = screenRect.size.height;
     
     UILabel *label = nil;
     NSLog(@"index: %ld", (long)index);
@@ -166,41 +169,124 @@
     //create new view if no view is available for recycling
     if (view == nil)
     {
-        
-        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 380)];
-        view.clipsToBounds = YES;
-        view.layer.cornerRadius = 5;
-        PFFile *couponImage = [self.allCoupons objectAtIndex:index][@"Coupon"];
-        
-        
-        [couponImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
-         {
-             if (!error)
+        if (screenWidth == 320.00f){
+            
+            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 280, 380)];
+        }else if (screenWidth == 375.00f){
+            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 310, 460)];
+
+        }else if (screenWidth == 414.00f){
+            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 350, 550)];
+
+        }
+            view.clipsToBounds = YES;
+            view.layer.cornerRadius = 5;
+            PFFile *couponImage = [self.allCoupons objectAtIndex:index][@"Coupon"];
+            
+            
+            [couponImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
              {
-                 
-                 view.contentMode = UIViewContentModeScaleAspectFill;
-                 for (NSDictionary *used in self.usedCoupons) {
-                     if ([[[self.allCoupons objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]] ||
-                         ([[[PFUser currentUser] valueForKey:@"isCutOff"]integerValue] == 1 && [[[self.allCoupons objectAtIndex:index]  valueForKey:@"isLiquorCoupon"] integerValue] == 1)) {
-                         view.alpha = .6 ;
-                         
-                         
+                 if (!error)
+                 {
+                     
+                     view.contentMode = UIViewContentModeScaleAspectFill;
+                     for (NSDictionary *used in self.usedCoupons) {
+                         if ([[[self.allCoupons objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]] ||
+                             ([[[PFUser currentUser] valueForKey:@"isCutOff"]integerValue] == 1 && [[[self.allCoupons objectAtIndex:index]  valueForKey:@"isLiquorCoupon"] integerValue] == 1)) {
+                             view.alpha = .6 ;
+                             
+                             
+                         }
                      }
+                     
+                     UIImage *coupon = [UIImage imageWithData:data];
+                     UIImageView *couponView = [[UIImageView alloc]init];
+                     if (screenWidth == 320.00f){
+                         couponView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 280, 380)];
+                     } else if (screenWidth == 375.00f){
+                         couponView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 310, 460)];
+
+                     }else if (screenWidth == 414.00f){
+                         couponView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 350, 550)];
+
+                     }
+                     couponView.image = coupon;
+                     [view addSubview:couponView];
+                     
+                     // use the newly retrieved data
                  }
-                 
-                 UIImage *coupon = [UIImage imageWithData:data];
-                 UIImageView *couponView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 280, 380)];
-                 couponView.image = coupon;
-                 [view addSubview:couponView];
-                 
-                 // use the newly retrieved data
-             }
-         }];
-        //}
-        
-        
-        
+             }];
+
     }
+    
+//        }else if (screenWidth == 375.00f){
+//            
+//            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 310, 450)];
+//            view.clipsToBounds = YES;
+//            view.layer.cornerRadius = 5;
+//            PFFile *couponImage = [self.allCoupons objectAtIndex:index][@"Coupon"];
+//            
+//            
+//            [couponImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+//             {
+//                 if (!error)
+//                 {
+//                     
+//                     view.contentMode = UIViewContentModeScaleAspectFill;
+//                     for (NSDictionary *used in self.usedCoupons) {
+//                         if ([[[self.allCoupons objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]] ||
+//                             ([[[PFUser currentUser] valueForKey:@"isCutOff"]integerValue] == 1 && [[[self.allCoupons objectAtIndex:index]  valueForKey:@"isLiquorCoupon"] integerValue] == 1)) {
+//                             view.alpha = .6 ;
+//                             
+//                             
+//                         }
+//                     }
+//                     
+//                     UIImage *coupon = [UIImage imageWithData:data];
+//                     UIImageView *couponView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 310, 450)];
+//                     couponView.image = coupon;
+//                     [view addSubview:couponView];
+//                     
+//                     // use the newly retrieved data
+//                 }
+//             }];
+//
+//            
+//        } else if (screenWidth == 414){
+//        view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 330, 485)];
+//        view.clipsToBounds = YES;
+//        view.layer.cornerRadius = 5;
+//        PFFile *couponImage = [self.allCoupons objectAtIndex:index][@"Coupon"];
+//        
+//        
+//        [couponImage getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+//         {
+//             if (!error)
+//             {
+//                 
+//                 view.contentMode = UIViewContentModeScaleAspectFill;
+//                 for (NSDictionary *used in self.usedCoupons) {
+//                     if ([[[self.allCoupons objectAtIndex:index] valueForKey:@"objectId"] isEqualToString:[[used valueForKey:@"coupon"] valueForKey:@"objectId"]] ||
+//                         ([[[PFUser currentUser] valueForKey:@"isCutOff"]integerValue] == 1 && [[[self.allCoupons objectAtIndex:index]  valueForKey:@"isLiquorCoupon"] integerValue] == 1)) {
+//                         view.alpha = .6 ;
+//                         
+//                         
+//                     }
+//                 }
+//                 
+//                 UIImage *coupon = [UIImage imageWithData:data];
+//                 UIImageView *couponView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 330, 485)];
+//                 couponView.image = coupon;
+//                 [view addSubview:couponView];
+//                 
+//                 // use the newly retrieved data
+//             }
+//         }];
+//        //}
+//        
+//        }
+    
+  //  }
     else
     {
         //get a reference to the label in the recycled view

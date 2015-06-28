@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MApping/PayWithTweetViewController.m"
-            timestampString = "456770740.479023"
+            filePath = "MApping/CouponRedeemViewController.m"
+            timestampString = "457201507.663443"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "-webViewDidFinishLoad:"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
+            landmarkName = "-unwindToFromPayWithTweetViewController:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MApping/CouponRedeemViewController.m"
-            timestampString = "456802380.706963"
+            timestampString = "457201176.204175"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "-unwindToFromPayWithTweetViewController:"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
