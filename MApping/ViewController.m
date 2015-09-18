@@ -59,13 +59,15 @@
         // Create the sign up view controller
         BarChatSignUpViewController *signUpViewController = [[BarChatSignUpViewController alloc] init];
         [signUpViewController setDelegate:self]; // Set ourselves as the delegate
+        signUpViewController.fields = (PFSignUpFieldsUsernameAndPassword
+                                      | PFSignUpFieldsSignUpButton);
         
         // Assign our sign up controller to be displayed from the login controller
         [logInViewController setSignUpController:signUpViewController];
         
         
         // Present the log in view controller
-        [self presentViewController:logInViewController animated:YES completion:NULL];
+        [self presentViewController:signUpViewController animated:YES completion:NULL];
         
                 
     

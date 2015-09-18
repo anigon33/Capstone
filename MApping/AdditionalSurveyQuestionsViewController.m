@@ -39,7 +39,7 @@
     
     
     //create survey answers arrays for picker view 
-    self.frequency = [NSArray arrayWithObjects:@"1 time a week or less", @"2-3 times a week", @"4-5 times a week", @"Party Animal", nil];
+    self.frequency = [NSArray arrayWithObjects:@"1 time a week or less", @"2-3 times a week", @"Party Animal", nil];
     self.drinks = [NSArray arrayWithObjects:@"Beer", @"Wine", @"Spirits", nil];
     self.maritalStatus =[NSArray arrayWithObjects:@"Single", @"Married", @"Not Interested", nil];
     self.maleFemale = [NSArray arrayWithObjects:@"Male", @"Female", nil];
@@ -66,6 +66,8 @@
     self.inputArray = self.frequency;
 
     self.questionsLabel.text = [self.surveyQuestions objectAtIndex:0];
+    [self.goOutPicker selectRow:0 inComponent:0  animated:NO];
+
     self.submitButton.hidden = YES;
     
 }
@@ -98,6 +100,8 @@
         self.goOutFrequency.text = [self.drinks objectAtIndex:0];
         self.inputArray = self.drinks;
         [self.goOutPicker reloadAllComponents];
+        [self.goOutPicker selectRow:0 inComponent:0  animated:NO];
+
         
     }
     else if ([self.questionsLabel.text isEqualToString:[self.surveyQuestions objectAtIndex:1]]  && ![self.goOutFrequency.text isEqualToString:@""]){
@@ -110,6 +114,8 @@
         self.goOutFrequency.text = [self.maritalStatus objectAtIndex:0];
         self.inputArray = self.maritalStatus;
         [self.goOutPicker reloadAllComponents];
+        [self.goOutPicker selectRow:0 inComponent:0  animated:NO];
+
     }
     else if ([self.questionsLabel.text isEqualToString:[self.surveyQuestions objectAtIndex:2]]  && ![self.goOutFrequency.text isEqualToString:@""]){
         
@@ -121,6 +127,7 @@
         self.inputArray = self.maleFemale;
         self.nextButton.hidden = NO;
         [self.goOutPicker reloadAllComponents];
+        [self.goOutPicker selectRow:0 inComponent:0  animated:NO];
         
         
     }
@@ -158,7 +165,14 @@
     }
     
 }
-
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+    self.goOutPicker = nil;
+    self.goOutFrequency = nil;
+}
 
 
 @end

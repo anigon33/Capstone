@@ -14,7 +14,9 @@
 @property BOOL locked;
 
 @property (strong, nonatomic) IBOutlet UILongPressGestureRecognizer *longPressGesture;
+@property (weak, nonatomic) IBOutlet UIView *payWithTweetView;
 @property (weak, nonatomic) IBOutlet UIImageView *lockedCoupon;
+@property (weak, nonatomic) IBOutlet UIView *promoCodeView;
 
 @property (weak, nonatomic) IBOutlet UILabel *promoLabelText;
 
@@ -31,14 +33,19 @@
     self.longPressGesture.allowableMovement = 50;
     self.longPressGesture.delegate = self;
     
-    self.payWithTweetButton.hidden = YES;
+    //self.payWithTweetButton.hidden = YES;
+    self.promoCodeView.hidden = YES;
+    
+    self.payWithTweetView.hidden = YES;
+    
+
     
     self.IndividualCouponImage.clipsToBounds = YES;
     self.IndividualCouponImage.layer.cornerRadius = 5;
     
     
     if ([[self.couponObject valueForKey:@"payWithTweet"] integerValue] ==1) {
-        self.payWithTweetButton.hidden = NO;
+        self.payWithTweetView.hidden = NO;
         self.lockedCoupon.hidden = NO;
         
     }
@@ -81,7 +88,8 @@
         if (sender.state == UIGestureRecognizerStateBegan){
             NSLog(@"UIGestureRecognizerStateBegan.");
             self.promoLabelText.hidden = NO;
-            
+            self.promoCodeView.hidden = NO;
+
             
         }else if (sender.state == UIGestureRecognizerStateEnded){
             
@@ -147,6 +155,7 @@
     }else if ([segue.identifier isEqualToString:@"toPayWithTweet"]){
         PayWithTweetViewController *destination = segue.destinationViewController;
         destination.establishmentId = self.establishmentId;
+        destination.couponObject = self.couponObject;
     }else if ([segue.identifier isEqualToString:@"toAvPlayer"]){
         AvViewController *av = segue.destinationViewController;
         av.couponObject = self.couponObject;

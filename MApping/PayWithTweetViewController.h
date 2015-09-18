@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 @interface PayWithTweetViewController : UIViewController
 @property (nonatomic, strong) NSString *establishmentId;
+@property (nonatomic, strong)PFObject *couponObject;
+
 @property BOOL success;
 @end

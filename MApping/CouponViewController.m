@@ -44,7 +44,7 @@
     self.carousel.type = iCarouselTypeCoverFlow2;
     self.carousel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.carousel.backgroundColor = [UIColor clearColor];
-    self.carousel.scrollSpeed = .75;
+    self.carousel.scrollSpeed = .5;
     self.carousel.delegate = self;
     self.carousel.dataSource = self;
     
