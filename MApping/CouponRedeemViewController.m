@@ -10,16 +10,18 @@
 #import <ParseUI/ParseUI.h>
 #import "PayWithTweetViewController.h"
 #import "AvViewController.h"
+#import "CustomerReviewViewController.h"
 @interface CouponRedeemViewController ()<UIGestureRecognizerDelegate>
 @property BOOL locked;
 
+@property (weak, nonatomic) IBOutlet UIView *lockedView;
 @property (strong, nonatomic) IBOutlet UILongPressGestureRecognizer *longPressGesture;
-@property (weak, nonatomic) IBOutlet UIView *payWithTweetView;
 @property (weak, nonatomic) IBOutlet UIImageView *lockedCoupon;
+
 @property (weak, nonatomic) IBOutlet UIView *promoCodeView;
 
-@property (weak, nonatomic) IBOutlet UILabel *promoLabelText;
 
+@property (weak, nonatomic) IBOutlet UILabel *promoLabelText;
 @property (weak, nonatomic) IBOutlet UIImageView *IndividualCouponImage;
 @property BOOL returnedFromTweetBool;
 @end
@@ -33,20 +35,18 @@
     self.longPressGesture.allowableMovement = 50;
     self.longPressGesture.delegate = self;
     
-    //self.payWithTweetButton.hidden = YES;
-    self.promoCodeView.hidden = YES;
-    
-    self.payWithTweetView.hidden = YES;
-    
 
+    
+    self.lockedView.hidden = YES;
+    
+    self.promoCodeView.hidden = YES;
     
     self.IndividualCouponImage.clipsToBounds = YES;
     self.IndividualCouponImage.layer.cornerRadius = 5;
     
     
     if ([[self.couponObject valueForKey:@"payWithTweet"] integerValue] ==1) {
-        self.payWithTweetView.hidden = NO;
-        self.lockedCoupon.hidden = NO;
+        self.lockedView.hidden = NO;
         
     }
     
@@ -61,7 +61,7 @@
             self.IndividualCouponImage.image = [UIImage imageWithData:imageData];
             
             
-            self.promoLabelText.hidden = YES;
+            self.promoCodeView.hidden = YES;
             
             
             [self.IndividualCouponImage addGestureRecognizer:self.longPressGesture];
@@ -72,28 +72,50 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
+    
+
     if ([[self.couponObject valueForKey:@"payWithTweet"] integerValue] == 1) {
         self.locked = YES;
+        
         if (self.returnedFromTweetBool == YES) {
             self.locked = NO;
             self.returnedFromTweetBool = NO;
         }
     }
 }
+-(void)viewDidAppear:(BOOL)animated{
+    
+    PFQuery *couponsUsed = [PFQuery queryWithClassName:@"CouponUsed" predicate:[NSPredicate predicateWithFormat:@"user == %@", [PFUser currentUser]]];
+    
+    NSArray *coupons = [couponsUsed findObjects];
+    
+    if (coupons.count == 0) {
+        UIAlertController *message = [UIAlertController alertControllerWithTitle:@"Conratulations" message:@"You have unlocked a Bar Coup Coupon. Please make sure to hold down finger until promo code is revealed. The bartender or waitress MUST see this code!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                              handler:^(UIAlertAction * action) {}];
+        
+        [message addAction:defaultAction];
+        
+        [self presentViewController:message animated:NO completion:nil];
+        
+        
+    }
 
+    
+}
 - (IBAction)CouponPressed:(UILongPressGestureRecognizer *)sender {
     // check if locked if (!locked){
     if (!self.locked) {
         
         if (sender.state == UIGestureRecognizerStateBegan){
             NSLog(@"UIGestureRecognizerStateBegan.");
-            self.promoLabelText.hidden = NO;
             self.promoCodeView.hidden = NO;
-
+            
+            
             
         }else if (sender.state == UIGestureRecognizerStateEnded){
             
-            self.promoLabelText.hidden = YES;
+            self.promoCodeView.hidden = YES;
             
             PFObject *couponUsed = [PFObject objectWithClassName:@"CouponUsed"];
             [couponUsed setObject:[PFUser currentUser] forKey:@"user"];
@@ -151,7 +173,9 @@
 }
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"toCustomerReview"]) {
-        NSLog(@"go to Customer Review Screen");
+        CustomerReviewViewController *destination = segue.destinationViewController;
+        destination.establishmentId = self.establishmentId;
+        
     }else if ([segue.identifier isEqualToString:@"toPayWithTweet"]){
         PayWithTweetViewController *destination = segue.destinationViewController;
         destination.establishmentId = self.establishmentId;
@@ -166,8 +190,7 @@
     PayWithTweetViewController *source = unwindSegue.sourceViewController;
     if (source.success) {
         // set locked to NO
-        self.lockedCoupon.hidden = YES;
-        self.payWithTweetButton.hidden = YES;
+        self.lockedView.hidden = YES;
         self.locked = NO;
         self.returnedFromTweetBool = YES;
     }

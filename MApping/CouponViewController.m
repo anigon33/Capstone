@@ -370,5 +370,6 @@
     destination.establishmentId = [self.establishmentObject valueForKey:@"objectId"];
 }
 
-
+- (IBAction)unwindToCouponView:(UIStoryboardSegue *)unwindSegue{
+}
 @end

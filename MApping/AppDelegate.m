@@ -9,10 +9,12 @@
 #import "AppDelegate.h"
 #import "CoreData+MagicalRecord.h"
 #import "EstablishmentRegion.h"
+#import "AdditionalSurveyQuestionsViewController.h"
 @interface AppDelegate ()
 @property (strong, nonatomic) CLCircularRegion *region;
 @property (strong, nonatomic) NSArray *establishmentObjects;
 @property (strong, nonatomic) NSMutableArray *barRegions;
+
 @end
 
 @implementation AppDelegate
@@ -76,7 +78,33 @@
         }
     }];
     
-    return YES;
+    // read unifinishedSurvey bool
+    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"P"
+                                                         ofType:@"plist"];
+    NSDictionary* plist = [NSDictionary dictionaryWithContentsOfFile:filePath];
+    
+    NSDictionary *surveyOne = [[NSDictionary dictionaryWithDictionary:plist] objectForKey:@"survey"] ;
+    NSMutableDictionary *survey = [surveyOne mutableCopy];
+    [survey setObject:@1 forKey:@"unfinishedSurvey"];
+    [survey writeToFile:filePath atomically:YES];
+
+    
+    NSLog(@"%@",plist);
+    NSNumber *hasUnfinishedSurvey = [plist objectForKey:@"unfinishedSurvey"];
+    if ([hasUnfinishedSurvey intValue] == 1) {
+        AdditionalSurveyQuestionsViewController* room = [[AdditionalSurveyQuestionsViewController  alloc] init];
+        [self.window.rootViewController presentViewController:room
+                                                     animated:NO
+                                                   completion:nil];
+        
+        return YES;
+        
+    }else{
+    
+        return YES;
+
+    }
+    
 }
 
 -(void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{

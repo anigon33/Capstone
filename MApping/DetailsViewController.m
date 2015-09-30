@@ -51,6 +51,7 @@
 }
 - (IBAction)enterBarButtonPressed:(UIButton *)sender {
     [[PFUser currentUser] fetch];
+    
     if ([[[PFUser currentUser] valueForKey:@"emailVerified"] integerValue] == 0){
         NSString *title = @"Whoops";
         NSString *message = @"Please verify your email before getting great deals!";

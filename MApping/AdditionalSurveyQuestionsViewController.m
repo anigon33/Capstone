@@ -70,6 +70,15 @@
 
     self.submitButton.hidden = YES;
     
+    // set unifinishedSurvey bool to YES
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"Property List.plist"];
+    
+      NSMutableDictionary *myDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+     [myDict setObject:[NSNumber numberWithBool:YES] forKey:@"unfiinishedSurvey"];
+    [myDict writeToFile:filePath atomically:YES];
+    
 }
 
 
@@ -160,18 +169,21 @@
     if ([self.questionsLabel.text isEqualToString:[self.surveyQuestions objectAtIndex:4]]  && ![self.goOutFrequency.text isEqualToString:@""]){
         
     [PFUser currentUser][@"birthday"] = self.datePicker.date;
-    [[PFUser currentUser] saveEventually];
+    [[PFUser currentUser] saveEventually];                                      
+        
+        // set unifinishedSurvey bool to NO
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"Property List.plist"];
+        
+        NSMutableDictionary *myDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
+        [myDict setObject:[NSNumber numberWithBool:NO] forKey:@"unfiinishedSurvey"];
+        [myDict writeToFile:filePath atomically:YES];
+    
+        
     [self dismissViewControllerAnimated:YES completion:nil];
     }
     
-}
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-    self.goOutPicker = nil;
-    self.goOutFrequency = nil;
 }
 
 

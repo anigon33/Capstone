@@ -13,7 +13,6 @@
 		E05C73D71ABA64C400FE8309 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05C73D61ABA64C400FE8309 /* DetailsViewController.m */; };
 		E06FD8081B1B871F00551BF5 /* PayWithTweetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E06FD8071B1B871F00551BF5 /* PayWithTweetViewController.m */; };
 		E07130B31AD857EC00C95E29 /* CouponRedeemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E07130B21AD857EC00C95E29 /* CouponRedeemViewController.m */; };
-		E07130B61AD8A6F000C95E29 /* CustomerReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E07130B51AD8A6F000C95E29 /* CustomerReviewViewController.m */; };
 		E079E01A1ACAD7E100D5A6E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E079E0181ACAD7E100D5A6E2 /* Main.storyboard */; };
 		E07E0C3F1AC21F4100FD44EA /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E07E0C3E1AC21F4100FD44EA /* Accounts.framework */; };
 		E07E0C411AC21F4900FD44EA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E07E0C401AC21F4900FD44EA /* AudioToolbox.framework */; };
@@ -31,6 +30,7 @@
 		E07E0C631AC49CCD00FD44EA /* AdditionalSurveyQuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E07E0C621AC49CCD00FD44EA /* AdditionalSurveyQuestionsViewController.m */; };
 		E085304D1AD7638800F12AA1 /* CouponViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E085304C1AD7638800F12AA1 /* CouponViewController.m */; };
 		E08530501AD7645200F12AA1 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = E085304F1AD7645200F12AA1 /* iCarousel.m */; };
+		E09E6DDA1BB8AB3E00CF1E00 /* P.plist in Resources */ = {isa = PBXBuildFile; fileRef = E09E6DD91BB8AB3E00CF1E00 /* P.plist */; };
 		E0C39BB41AFE941600F1D8E8 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0C39BB31AFE941600F1D8E8 /* Bolts.framework */; };
 		E0C39BB61AFE94A300F1D8E8 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0C39BB51AFE94A300F1D8E8 /* Parse.framework */; };
 		E0C39BB81AFE94D300F1D8E8 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0C39BB71AFE94D300F1D8E8 /* ParseUI.framework */; };
@@ -75,6 +75,7 @@
 		E0DA1B931AB38B3000D23CD7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0DA1B921AB38B3000D23CD7 /* CoreLocation.framework */; };
 		E0DA1B951AB38B3700D23CD7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0DA1B941AB38B3700D23CD7 /* MapKit.framework */; };
 		E0DA1B9D1AB3AA6F00D23CD7 /* MapViewAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = E0DA1B9C1AB3AA6F00D23CD7 /* MapViewAnnotation.m */; };
+		E0ED0E8F1BABCCE6005AECEF /* CustomerReviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0ED0E8E1BABCCE6005AECEF /* CustomerReviewViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,8 +100,6 @@
 		E06FD8071B1B871F00551BF5 /* PayWithTweetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayWithTweetViewController.m; sourceTree = "<group>"; };
 		E07130B11AD857EC00C95E29 /* CouponRedeemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponRedeemViewController.h; sourceTree = "<group>"; };
 		E07130B21AD857EC00C95E29 /* CouponRedeemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponRedeemViewController.m; sourceTree = "<group>"; };
-		E07130B41AD8A6F000C95E29 /* CustomerReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerReviewViewController.h; sourceTree = "<group>"; };
-		E07130B51AD8A6F000C95E29 /* CustomerReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerReviewViewController.m; sourceTree = "<group>"; };
 		E079E0191ACAD7E100D5A6E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E07E0C3E1AC21F4100FD44EA /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		E07E0C401AC21F4900FD44EA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -123,6 +122,7 @@
 		E085304C1AD7638800F12AA1 /* CouponViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponViewController.m; sourceTree = "<group>"; };
 		E085304E1AD7645200F12AA1 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		E085304F1AD7645200F12AA1 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
+		E09E6DD91BB8AB3E00CF1E00 /* P.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = P.plist; sourceTree = "<group>"; };
 		E0C39BB31AFE941600F1D8E8 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = MApping.xcodeproj/Bolts.framework; sourceTree = "<group>"; };
 		E0C39BB51AFE94A300F1D8E8 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		E0C39BB71AFE94D300F1D8E8 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
@@ -209,6 +209,8 @@
 		E0DA1B941AB38B3700D23CD7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E0DA1B9B1AB3AA6F00D23CD7 /* MapViewAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewAnnotation.h; sourceTree = "<group>"; };
 		E0DA1B9C1AB3AA6F00D23CD7 /* MapViewAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewAnnotation.m; sourceTree = "<group>"; };
+		E0ED0E8D1BABCCE6005AECEF /* CustomerReviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerReviewViewController.h; sourceTree = "<group>"; };
+		E0ED0E8E1BABCCE6005AECEF /* CustomerReviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerReviewViewController.m; sourceTree = "<group>"; };
 		F6CF4FB3499A421B9C3630FF /* libPods-MApping.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MApping.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -418,14 +420,15 @@
 				E0C68B231B138DA80047699C /* AvViewController.m */,
 				E085304B1AD7638800F12AA1 /* CouponViewController.h */,
 				E085304C1AD7638800F12AA1 /* CouponViewController.m */,
+				E09E6DD91BB8AB3E00CF1E00 /* P.plist */,
+				E0ED0E8D1BABCCE6005AECEF /* CustomerReviewViewController.h */,
+				E0ED0E8E1BABCCE6005AECEF /* CustomerReviewViewController.m */,
 				E07130B11AD857EC00C95E29 /* CouponRedeemViewController.h */,
 				E07130B21AD857EC00C95E29 /* CouponRedeemViewController.m */,
 				E0DA1B701AB38B0100D23CD7 /* AppDelegate.h */,
 				E0DA1B711AB38B0100D23CD7 /* AppDelegate.m */,
 				E07E0C611AC49CCD00FD44EA /* AdditionalSurveyQuestionsViewController.h */,
 				E07E0C621AC49CCD00FD44EA /* AdditionalSurveyQuestionsViewController.m */,
-				E07130B41AD8A6F000C95E29 /* CustomerReviewViewController.h */,
-				E07130B51AD8A6F000C95E29 /* CustomerReviewViewController.m */,
 				E07E0C581AC2271100FD44EA /* BarChatLogInViewController.h */,
 				E07E0C591AC2271100FD44EA /* BarChatLogInViewController.m */,
 				E07E0C5B1AC22DDD00FD44EA /* BarChatSignUpViewController.h */,
@@ -577,6 +580,7 @@
 				E00DF9401B138FC8006BD131 /* spacetestSMALL_512kb.mp4 in Resources */,
 				E0DA1B7D1AB38B0100D23CD7 /* LaunchScreen.xib in Resources */,
 				E0DA1B7A1AB38B0100D23CD7 /* Images.xcassets in Resources */,
+				E09E6DDA1BB8AB3E00CF1E00 /* P.plist in Resources */,
 				E079E01A1ACAD7E100D5A6E2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -659,11 +663,11 @@
 				E0C68B241B138DA80047699C /* AvViewController.m in Sources */,
 				E0C8EA6C1ABF9A6200E9456E /* NSManagedObject+MagicalAggregation.m in Sources */,
 				E0C8EA701ABF9A6200E9456E /* NSManagedObject+MagicalRequests.m in Sources */,
+				E0ED0E8F1BABCCE6005AECEF /* CustomerReviewViewController.m in Sources */,
 				E0C8EA731ABF9A6200E9456E /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				E0C8EA661ABF9A6200E9456E /* NSAttributeDescription+MagicalDataImport.m in Sources */,
 				E07E0C5D1AC22DDD00FD44EA /* BarChatSignUpViewController.m in Sources */,
 				E0C8EA7D1ABF9A6200E9456E /* MagicalRecord+Setup.m in Sources */,
-				E07130B61AD8A6F000C95E29 /* CustomerReviewViewController.m in Sources */,
 				E0DA1B6F1AB38B0100D23CD7 /* main.m in Sources */,
 				E0C8EA6A1ABF9A6200E9456E /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
 				E0DA1B9D1AB3AA6F00D23CD7 /* MapViewAnnotation.m in Sources */,
