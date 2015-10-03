@@ -90,7 +90,7 @@
     NSArray *coupons = [couponsUsed findObjects];
     
     if (coupons.count == 0) {
-        UIAlertController *message = [UIAlertController alertControllerWithTitle:@"Conratulations" message:@"You have unlocked a Bar Coup Coupon. Please make sure to hold down finger until promo code is revealed. The bartender or waitress MUST see this code!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *message = [UIAlertController alertControllerWithTitle:@"Congratulations!!!" message:@"You have unlocked a Bar Coup Coupon. Please make sure to CONTINUOUSLY HOLD DOWN finger to reveal promo code. The bartender or waitress MUST see this code!" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
                                                               handler:^(UIAlertAction * action) {}];
         

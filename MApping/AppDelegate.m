@@ -9,8 +9,10 @@
 #import "AppDelegate.h"
 #import "CoreData+MagicalRecord.h"
 #import "EstablishmentRegion.h"
-#import "AdditionalSurveyQuestionsViewController.h"
-@interface AppDelegate ()
+#import "CustomerReviewViewController.h"
+#import "ViewController.h"
+
+@interface AppDelegate ();
 @property (strong, nonatomic) CLCircularRegion *region;
 @property (strong, nonatomic) NSArray *establishmentObjects;
 @property (strong, nonatomic) NSMutableArray *barRegions;
@@ -33,6 +35,8 @@
     tabController.delegate = self;
     //[[UITabBar appearance] setBarTintColor:[UIColor whiteColor]];
     //    [[UITabBar appearance] setBackgroundImage:[UIImage new]];
+    
+    
     
     
     self.locationManager = [[CLLocationManager alloc] init];
@@ -73,38 +77,26 @@
             
             [self.barRegions addObject:region];
             
-            
-            
         }
     }];
     
     // read unifinishedSurvey bool
-    NSString* filePath = [[NSBundle mainBundle] pathForResource:@"P"
-                                                         ofType:@"plist"];
-    NSDictionary* plist = [NSDictionary dictionaryWithContentsOfFile:filePath];
     
-    NSDictionary *surveyOne = [[NSDictionary dictionaryWithDictionary:plist] objectForKey:@"survey"] ;
-    NSMutableDictionary *survey = [surveyOne mutableCopy];
-    [survey setObject:@1 forKey:@"unfinishedSurvey"];
-    [survey writeToFile:filePath atomically:YES];
-
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(surveyCompletionStatusUpdated:) name:@"com.barcoup.surveydatachanged" object:nil];
     
-    NSLog(@"%@",plist);
-    NSNumber *hasUnfinishedSurvey = [plist objectForKey:@"unfinishedSurvey"];
-    if ([hasUnfinishedSurvey intValue] == 1) {
-        AdditionalSurveyQuestionsViewController* room = [[AdditionalSurveyQuestionsViewController  alloc] init];
-        [self.window.rootViewController presentViewController:room
-                                                     animated:NO
-                                                   completion:nil];
+    NSString *filePath = [self dataFilePath];
+    NSArray *pListDataArray;
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
+        pListDataArray = [[NSArray alloc] initWithContentsOfFile:filePath];
         
-        return YES;
-        
-    }else{
-    
-        return YES;
-
+        if([[pListDataArray firstObject]boolValue] == NO){
+            // Load survey View Controller
+            
+            self.incompleteSurvey = YES;
+            
+        }
     }
-    
+    return YES;
 }
 
 -(void) locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
@@ -121,6 +113,8 @@
         self.locationAccurate = YES;
         self.latestLocation = [[CLLocation alloc]initWithLatitude:newLocation.coordinate.latitude longitude:newLocation.coordinate.longitude];
         self.latestLocation = newLocation;
+        
+        
         NSLog(@"current location = %@", [locations lastObject]);
         if ([PFUser currentUser] ==nil) {
             
@@ -237,4 +231,21 @@
         [(UINavigationController *)viewController popToRootViewControllerAnimated:YES];
     }
 }
+
+-(NSString *)dataFilePath{
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    return [documentsDirectory stringByAppendingPathComponent:@"data.plist"];
+}
+
+-(void)surveyCompletionStatusUpdated:(NSNotification *)notification{
+    
+    NSString *filePath = [self dataFilePath];
+    NSNumber *completed = [notification.userInfo objectForKey:@"isCompleted"];
+    NSArray *pListDataArray = @[completed];
+    [pListDataArray writeToFile:filePath atomically:YES];
+    
+}
+
 @end

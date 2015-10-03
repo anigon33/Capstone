@@ -14,6 +14,7 @@
 @property (strong, nonatomic) PFObject *surveyAnswer;
 @property (strong, nonatomic) NSDictionary *dataSourceDict;
 @property int dataSourceIndex;
+@property (weak, nonatomic) IBOutlet UILabel *counterLabel;
 
 @end
 
@@ -62,7 +63,14 @@
     
     self.tableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.tableView.bounds.size.width, 0.01f)];
 
+    
+    
 
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"com.barcoup.surveydatachanged" object:nil userInfo:@{@"isCompleted":@NO}];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -95,11 +103,19 @@
     
     // change out the question and possible answers
     self.dataSourceIndex++;
+    if (self.dataSourceIndex < self.dataSourceArray.count) {
+        self.counterLabel.text = [NSString stringWithFormat:@"%d/%lu", self.dataSourceIndex + 1, (unsigned long)self.dataSourceArray.count];
+    }
     
     
     if (self.dataSourceArray.count == self.dataSourceIndex) {
         [self.surveyAnswer saveInBackground];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"com.barcoup.surveydatachanged" object:nil userInfo:@{@"isCompleted":@YES}];
 
+        if (self.presentedModally) {
+            self.presentedModally = NO;
+            [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+        }
         [self performSegueWithIdentifier:@"backToCoupons" sender:self];
        
         

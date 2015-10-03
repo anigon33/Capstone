@@ -11,5 +11,6 @@
 @interface CustomerReviewViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong)NSString *establishmentId;
 
+@property BOOL presentedModally;
 
 @end

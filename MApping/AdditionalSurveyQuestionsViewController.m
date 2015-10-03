@@ -70,17 +70,9 @@
 
     self.submitButton.hidden = YES;
     
-    // set unifinishedSurvey bool to YES
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"Property List.plist"];
     
-      NSMutableDictionary *myDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
-     [myDict setObject:[NSNumber numberWithBool:YES] forKey:@"unfiinishedSurvey"];
-    [myDict writeToFile:filePath atomically:YES];
-    
+        
 }
-
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
     return [self.inputArray count];
@@ -171,14 +163,6 @@
     [PFUser currentUser][@"birthday"] = self.datePicker.date;
     [[PFUser currentUser] saveEventually];                                      
         
-        // set unifinishedSurvey bool to NO
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"Property List.plist"];
-        
-        NSMutableDictionary *myDict = [[NSMutableDictionary alloc] initWithContentsOfFile:filePath];
-        [myDict setObject:[NSNumber numberWithBool:NO] forKey:@"unfiinishedSurvey"];
-        [myDict writeToFile:filePath atomically:YES];
     
         
     [self dismissViewControllerAnimated:YES completion:nil];

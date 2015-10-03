@@ -78,7 +78,7 @@
             PFQuery *query = [PFQuery queryWithClassName:@"Establishment"];
             // Interested in locations near user.
             PFGeoPoint *userLocation = [PFGeoPoint geoPointWithLocation:currentLocation];
-            [query whereKey:@"GeoCoordinates" nearGeoPoint:userLocation withinMiles:50];
+            [query whereKey:@"GeoCoordinates" nearGeoPoint:userLocation withinMiles:.2];
             NSArray *barsAroundCurrentLocation;
             barsAroundCurrentLocation = [query findObjects];
             [self.spinner stopAnimating];

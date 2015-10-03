@@ -16,11 +16,14 @@
 #import "AdditionalSurveyQuestionsViewController.h"
 #import <ParseUI/ParseUI.h>
 #import "DetailsViewController.h"
-
+#import "AppDelegate.h"
+#import "CustomerReviewViewController.h"
 @interface ViewController () <CLLocationManagerDelegate, MKMapViewDelegate,UINavigationControllerDelegate, PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate>
 @property (nonatomic, strong) NSArray *locations;
 @property (nonatomic, strong) PFObject *annotationTapped;
 @property (nonatomic, strong) CLLocation *userLocation;
+@property (nonatomic, strong) AppDelegate *appDelegate;
+@property int zoomCounter;
 @end
 
 @implementation ViewController
@@ -43,6 +46,14 @@
     
     
     self.myMapView.delegate = self;
+    
+    self.appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
+
+    
+//    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(self.myMapView.userLocation.coordinate, 25*METERS_PER_MILE,25*METERS_PER_MILE);
+//    [self.myMapView regionThatFits:viewRegion];
+//    
+//    [self.myMapView setRegion:viewRegion animated:YES];
     
     //[self refreshAnnotations];
     
@@ -71,16 +82,30 @@
         
                 
     
-        
+
         
     }
     
 }
 -(void)viewDidAppear:(BOOL)animated{
     self.myMapView.showsUserLocation = YES;
-    [self zoomToLocation];
 
     [self refreshAnnotations];
+    
+    if (self.appDelegate.incompleteSurvey) {
+        UIStoryboard *st = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        CustomerReviewViewController *customerReviewController = [st instantiateViewControllerWithIdentifier:@"CustomerReviewViewController"];
+        [customerReviewController view];
+        customerReviewController.presentedModally = YES;
+        [customerReviewController setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        [self presentViewController:customerReviewController animated:YES completion:nil];
+    }
+
+}
+-(void)viewWillAppear:(BOOL)animated{
+    self.zoomCounter = 0;
+
 }
 -(void) viewDidDisappear:(BOOL)animated{
     [self.myMapView removeAnnotations:self.myMapView.annotations];
@@ -171,10 +196,8 @@
 }
 - (void)zoomToLocation
 {
-    CLLocationCoordinate2D zoomLocation;
-    zoomLocation.latitude = 39.750661;
-    zoomLocation.longitude= -104.992028;
-    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(zoomLocation, 25*METERS_PER_MILE,25*METERS_PER_MILE);
+
+    MKCoordinateRegion viewRegion = MKCoordinateRegionMakeWithDistance(self.myMapView.userLocation.coordinate, 25*METERS_PER_MILE,25*METERS_PER_MILE);
     [self.myMapView regionThatFits:viewRegion];
     
     [self.myMapView setRegion:viewRegion animated:YES];
@@ -268,7 +291,19 @@ calloutAccessoryControlTapped:(UIControl *)control{
 }
 
 
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation   {
+   
+    
+    if (self.appDelegate.locationAccurate && self.zoomCounter == 0) {
+        [self zoomToLocation];
+        self.zoomCounter++;
+    }
 
+    
+    
+
+    
+}
 
 
 
