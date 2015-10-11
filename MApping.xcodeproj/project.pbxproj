@@ -14,6 +14,8 @@
 		E06FD8081B1B871F00551BF5 /* PayWithTweetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E06FD8071B1B871F00551BF5 /* PayWithTweetViewController.m */; };
 		E07130B31AD857EC00C95E29 /* CouponRedeemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E07130B21AD857EC00C95E29 /* CouponRedeemViewController.m */; };
 		E079E01A1ACAD7E100D5A6E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E079E0181ACAD7E100D5A6E2 /* Main.storyboard */; };
+		E07C93441BC9AA570089A30D /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E07C93431BC9AA570089A30D /* CustomTableViewCell.m */; };
+		E07C93461BC9B08E0089A30D /* CustomCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E07C93451BC9B08E0089A30D /* CustomCellView.xib */; };
 		E07E0C3F1AC21F4100FD44EA /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E07E0C3E1AC21F4100FD44EA /* Accounts.framework */; };
 		E07E0C411AC21F4900FD44EA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E07E0C401AC21F4900FD44EA /* AudioToolbox.framework */; };
 		E07E0C431AC21F5300FD44EA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E07E0C421AC21F5300FD44EA /* CFNetwork.framework */; };
@@ -100,6 +102,9 @@
 		E07130B11AD857EC00C95E29 /* CouponRedeemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponRedeemViewController.h; sourceTree = "<group>"; };
 		E07130B21AD857EC00C95E29 /* CouponRedeemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouponRedeemViewController.m; sourceTree = "<group>"; };
 		E079E0191ACAD7E100D5A6E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E07C93421BC9AA570089A30D /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
+		E07C93431BC9AA570089A30D /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
+		E07C93451BC9B08E0089A30D /* CustomCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellView.xib; sourceTree = "<group>"; };
 		E07E0C3E1AC21F4100FD44EA /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		E07E0C401AC21F4900FD44EA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		E07E0C421AC21F5300FD44EA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -423,7 +428,10 @@
 				E07130B11AD857EC00C95E29 /* CouponRedeemViewController.h */,
 				E07130B21AD857EC00C95E29 /* CouponRedeemViewController.m */,
 				E0DA1B701AB38B0100D23CD7 /* AppDelegate.h */,
+				E07C93451BC9B08E0089A30D /* CustomCellView.xib */,
 				E0DA1B711AB38B0100D23CD7 /* AppDelegate.m */,
+				E07C93421BC9AA570089A30D /* CustomTableViewCell.h */,
+				E07C93431BC9AA570089A30D /* CustomTableViewCell.m */,
 				E07E0C611AC49CCD00FD44EA /* AdditionalSurveyQuestionsViewController.h */,
 				E07E0C621AC49CCD00FD44EA /* AdditionalSurveyQuestionsViewController.m */,
 				E07E0C581AC2271100FD44EA /* BarChatLogInViewController.h */,
@@ -576,6 +584,7 @@
 			files = (
 				E00DF9401B138FC8006BD131 /* spacetestSMALL_512kb.mp4 in Resources */,
 				E0DA1B7D1AB38B0100D23CD7 /* LaunchScreen.xib in Resources */,
+				E07C93461BC9B08E0089A30D /* CustomCellView.xib in Resources */,
 				E0DA1B7A1AB38B0100D23CD7 /* Images.xcassets in Resources */,
 				E079E01A1ACAD7E100D5A6E2 /* Main.storyboard in Resources */,
 			);
@@ -666,6 +675,7 @@
 				E0C8EA7D1ABF9A6200E9456E /* MagicalRecord+Setup.m in Sources */,
 				E0DA1B6F1AB38B0100D23CD7 /* main.m in Sources */,
 				E0C8EA6A1ABF9A6200E9456E /* NSRelationshipDescription+MagicalDataImport.m in Sources */,
+				E07C93441BC9AA570089A30D /* CustomTableViewCell.m in Sources */,
 				E0DA1B9D1AB3AA6F00D23CD7 /* MapViewAnnotation.m in Sources */,
 				E0C8EA681ABF9A6200E9456E /* NSNumber+MagicalDataImport.m in Sources */,
 				E0C8EA6E1ABF9A6200E9456E /* NSManagedObject+MagicalFinders.m in Sources */,

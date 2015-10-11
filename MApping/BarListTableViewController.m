@@ -10,6 +10,8 @@
 #import "DetailsViewController.h"
 #import <Parse/Parse.h>
 #import <UIKit/UIKit.h>
+#import "CustomTableViewCell.h"
+
 @interface BarListTableViewController ()
 
 @property (strong, nonatomic) PFObject *bar;
@@ -18,38 +20,49 @@
 
 @end
 @implementation BarListTableViewController
+- (void)customInit {
+    self.parseClassName = @"Establishment";
+    self.pullToRefreshEnabled = YES;
+    self.paginationEnabled = YES;
+    self.objectsPerPage = 25;
+}
+
 - (id)initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom the table
-        
-        // The className to query on
-           }
-
+        [self customInit];
+    }
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self customInit];
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Uncomment the following line to preserve selection between presentations.
-    self.clearsSelectionOnViewWillAppear = NO;
-    self.parseClassName = @"Establishment";
     
     // The key of the PFObject to display in the label of the default cell style
-    self.textKey = @"title";
+   // self.textKey = @"title";
     
     // Uncomment the following line to specify the key of a PFFile on the PFObject to display in the imageView of the default cell style
-    self.imageKey = @"image";
+  //  self.imageKey = @"image";
     
     // Whether the built-in pull-to-refresh is enabled
     self.pullToRefreshEnabled = YES;
     
     // Whether the built-in pagination is enabled
     self.paginationEnabled = YES;
-    
+ 
     // The number of objects to show per page
-    self.objectsPerPage = 10;
+  //  self.objectsPerPage = 10;
 
+    [self.tableView registerNib:[UINib nibWithNibName:@"CustomCellView" bundle:nil] forCellReuseIdentifier:@"customCellReuse"];
+    
     
     UIImageView *logoTitle = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, 70, 40)];
     logoTitle.image = [UIImage imageNamed:@"logoBarList"];
@@ -71,26 +84,29 @@
     [[self navigationController] setNavigationBarHidden:NO animated:NO];
 
 }
+-(void)viewWillDisappear:(BOOL)animated{
+    
+}
 #pragma mark - Table view data source
 
 // all objects ordered by createdAt descending.
 - (PFQuery *)queryForTable {
-    self.parseClassName = @"Establishment";
-    
-    // The key of the PFObject to display in the label of the default cell style
-    self.textKey = @"title";
-    
-    // Uncomment the following line to specify the key of a PFFile on the PFObject to display in the imageView of the default cell style
-    self.imageKey = @"image";
-    
-    // Whether the built-in pull-to-refresh is enabled
-    self.pullToRefreshEnabled = NO;
-    
-    // Whether the built-in pagination is enabled
-    self.paginationEnabled = YES;
-    
-    // The number of objects to show per page
-    self.objectsPerPage = 10;
+//    self.parseClassName = @"Establishment";
+//    
+//    // The key of the PFObject to display in the label of the default cell style
+//    self.textKey = @"title";
+//    
+//    // Uncomment the following line to specify the key of a PFFile on the PFObject to display in the imageView of the default cell style
+//    self.imageKey = @"image";
+//    
+//    // Whether the built-in pull-to-refresh is enabled
+    self.pullToRefreshEnabled = YES;
+//    
+//    // Whether the built-in pagination is enabled
+    self.paginationEnabled = NO;
+//    
+//    // The number of objects to show per page
+//    self.objectsPerPage = 10;
 
     
     
@@ -104,7 +120,7 @@
     // If no objects are loaded in memory, we look to the cache first to fill the table
     // and then subsequently do a query against the network.
     if (self.objects.count == 0) {
-        query.cachePolicy = kPFCachePolicyCacheThenNetwork;
+        query.cachePolicy = kPFCachePolicyNetworkOnly;
     }
     
     [query orderByDescending:@"createdAt"];
@@ -119,48 +135,24 @@
  // and the imageView being the imageKey in the object.
  - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath object:(PFObject *)object {
      
-     static NSString *CellIdentifier = @"reuse";
+     static NSString *CellIdentifier = @"customCellReuse";
  
  
-     PFTableViewCell *cell = (PFTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+     CustomTableViewCell *cell = (CustomTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
      if (cell == nil) {
-         cell = [[PFTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+         cell = [[CustomTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
      }
-     // Configure the cell...
      
-     PFImageView *imageView = [[PFImageView alloc] initWithFrame:CGRectMake(0, 5, 80, 80)];
-     imageView.file = [object objectForKey:self.imageKey];
-     [imageView loadInBackground];
-     
-     UILabel *mainLabel = [[UILabel alloc]initWithFrame:CGRectMake(90, 20, 220, 25)];
-     mainLabel.text = object[@"name"];
-     mainLabel.textColor = [UIColor whiteColor];
-     mainLabel.font = [UIFont systemFontOfSize:18];
-     
-     UILabel *detailsLabel = [[UILabel alloc]initWithFrame:CGRectMake(90, 40, 220, 30)];
-     detailsLabel.text = object[@"subtitle"];
-     detailsLabel.textColor = [UIColor whiteColor];
-     detailsLabel.adjustsFontSizeToFitWidth = YES;
-     detailsLabel.font = [UIFont systemFontOfSize:9];
-     
-    
-     UIImageView *cellBackgroundView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 90)];
-     cellBackgroundView.image = [UIImage imageNamed:@"cellImage"];
-     
-     cell.backgroundColor = [UIColor clearColor];
-     [cell addSubview:cellBackgroundView];
-     [cell addSubview:imageView];
-     [cell addSubview:mainLabel];
-     [cell addSubview:detailsLabel];
+     [cell setUpCellWithObject:object];
+          
+
  return cell;
  }
 
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//   
-//    [self performSegueWithIdentifier:@"DetailsSegue" sender:self];
-//}
-
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self performSegueWithIdentifier:@"DetailsSegue" sender:nil];
+    
+}
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([[segue identifier] isEqualToString:@"DetailsSegue"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
@@ -169,6 +161,8 @@
         DetailsViewController *detailsViewController = [segue destinationViewController];
         detailsViewController.establishmentObject = object;
         
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+
         
         }
 }
