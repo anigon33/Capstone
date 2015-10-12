@@ -12,6 +12,7 @@
 #import "CouponViewController.h"
 #import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
+#import "BarAdminLoginViewController.h"
 
 @interface DetailsViewController ()<CLLocationManagerDelegate>
 
@@ -47,6 +48,10 @@
     
 }
 -(void) viewDidAppear:(BOOL)animated{
+    
+}
+- (IBAction)barLoginClicked:(id)sender {
+    [self performSegueWithIdentifier:@"toBarAdminLogin" sender:nil];
     
 }
 - (IBAction)enterBarButtonPressed:(UIButton *)sender {
@@ -178,8 +183,17 @@
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"toCouponPage"]) {
+        
     CouponViewController *destination = segue.destinationViewController;
     destination.establishmentObject = self.establishmentObject;
+        
+    }
+    if ([segue.identifier isEqualToString:@"toBarAdminLogin"]) {
+        BarAdminLoginViewController *destination = segue.destinationViewController;
+        destination.establishmentObject = self.establishmentObject;
+    }
+    
 }
 
 @end

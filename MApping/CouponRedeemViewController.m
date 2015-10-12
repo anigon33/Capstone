@@ -121,6 +121,7 @@
             [couponUsed setObject:[PFUser currentUser] forKey:@"user"];
             [couponUsed setObject:[NSDate date] forKey:@"dateUsed"];
             [couponUsed setObject:self.couponObject forKey:@"coupon"];
+            [couponUsed setObject:self.couponObject[@"establishmentId"] forKey:@"establishmentId"];
             [couponUsed save]; // make synchronous first until system works, then go back and make async
             
             // find 12 hours ago from this moment - Use NSDate datewithtimeintervalsincenow (60 * 60 *12 )

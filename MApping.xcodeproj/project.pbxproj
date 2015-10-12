@@ -16,6 +16,8 @@
 		E079E01A1ACAD7E100D5A6E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E079E0181ACAD7E100D5A6E2 /* Main.storyboard */; };
 		E07C93441BC9AA570089A30D /* CustomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E07C93431BC9AA570089A30D /* CustomTableViewCell.m */; };
 		E07C93461BC9B08E0089A30D /* CustomCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E07C93451BC9B08E0089A30D /* CustomCellView.xib */; };
+		E07C93491BCAEDD30089A30D /* BarAdminLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E07C93481BCAEDD30089A30D /* BarAdminLoginViewController.m */; };
+		E07C934C1BCAF5E80089A30D /* BarHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E07C934B1BCAF5E80089A30D /* BarHomePageViewController.m */; };
 		E07E0C3F1AC21F4100FD44EA /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E07E0C3E1AC21F4100FD44EA /* Accounts.framework */; };
 		E07E0C411AC21F4900FD44EA /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E07E0C401AC21F4900FD44EA /* AudioToolbox.framework */; };
 		E07E0C431AC21F5300FD44EA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E07E0C421AC21F5300FD44EA /* CFNetwork.framework */; };
@@ -105,6 +107,10 @@
 		E07C93421BC9AA570089A30D /* CustomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTableViewCell.h; sourceTree = "<group>"; };
 		E07C93431BC9AA570089A30D /* CustomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTableViewCell.m; sourceTree = "<group>"; };
 		E07C93451BC9B08E0089A30D /* CustomCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCellView.xib; sourceTree = "<group>"; };
+		E07C93471BCAEDD30089A30D /* BarAdminLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarAdminLoginViewController.h; sourceTree = "<group>"; };
+		E07C93481BCAEDD30089A30D /* BarAdminLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarAdminLoginViewController.m; sourceTree = "<group>"; };
+		E07C934A1BCAF5E80089A30D /* BarHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BarHomePageViewController.h; sourceTree = "<group>"; };
+		E07C934B1BCAF5E80089A30D /* BarHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarHomePageViewController.m; sourceTree = "<group>"; };
 		E07E0C3E1AC21F4100FD44EA /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		E07E0C401AC21F4900FD44EA /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		E07E0C421AC21F5300FD44EA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -440,6 +446,10 @@
 				E07E0C5C1AC22DDD00FD44EA /* BarChatSignUpViewController.m */,
 				E0C8EA811AC0CD9200E9456E /* User.h */,
 				E0C8EA821AC0CD9200E9456E /* User.m */,
+				E07C934A1BCAF5E80089A30D /* BarHomePageViewController.h */,
+				E07C934B1BCAF5E80089A30D /* BarHomePageViewController.m */,
+				E07C93471BCAEDD30089A30D /* BarAdminLoginViewController.h */,
+				E07C93481BCAEDD30089A30D /* BarAdminLoginViewController.m */,
 				E0DA1B731AB38B0100D23CD7 /* ViewController.h */,
 				E0DA1B741AB38B0100D23CD7 /* ViewController.m */,
 				E05C73D51ABA64C400FE8309 /* DetailsViewController.h */,
@@ -643,6 +653,7 @@
 				E0DA1B751AB38B0100D23CD7 /* ViewController.m in Sources */,
 				E0C8EA671ABF9A6200E9456E /* NSEntityDescription+MagicalDataImport.m in Sources */,
 				E06FD8081B1B871F00551BF5 /* PayWithTweetViewController.m in Sources */,
+				E07C93491BCAEDD30089A30D /* BarAdminLoginViewController.m in Sources */,
 				E0C8EA791ABF9A6200E9456E /* MagicalRecord+Actions.m in Sources */,
 				E0C8EA741ABF9A6200E9456E /* NSManagedObjectContext+MagicalSaves.m in Sources */,
 				E0C8EA781ABF9A6200E9456E /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
@@ -670,6 +681,7 @@
 				E0C8EA701ABF9A6200E9456E /* NSManagedObject+MagicalRequests.m in Sources */,
 				E0ED0E8F1BABCCE6005AECEF /* CustomerReviewViewController.m in Sources */,
 				E0C8EA731ABF9A6200E9456E /* NSManagedObjectContext+MagicalRecord.m in Sources */,
+				E07C934C1BCAF5E80089A30D /* BarHomePageViewController.m in Sources */,
 				E0C8EA661ABF9A6200E9456E /* NSAttributeDescription+MagicalDataImport.m in Sources */,
 				E07E0C5D1AC22DDD00FD44EA /* BarChatSignUpViewController.m in Sources */,
 				E0C8EA7D1ABF9A6200E9456E /* MagicalRecord+Setup.m in Sources */,
