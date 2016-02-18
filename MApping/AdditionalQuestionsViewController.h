@@ -2,12 +2,12 @@
 //  AdditionalQuestionsViewController.h
 //  MApping
 //
-//  Created by Nigon's on 3/26/15.
+//  Created by Nigon's on 10/21/15.
 //  Copyright (c) 2015 Adam Nigon. All rights reserved.
 //
 
-#import "ViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface AdditionalQuestionsViewController : ViewController
-
+@interface AdditionalQuestionsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@property BOOL presentedModally;
 @end

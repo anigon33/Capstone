@@ -19,11 +19,11 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.3</string>
+	<string>1.7</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>NEED LOCATION</string>
+	<string>Bar Coup requires users to be inside each bar to recieve great deals!</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

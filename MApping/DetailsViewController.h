@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
-
-@interface DetailsViewController : UIViewController 
+#import <ParseUI/ParseUI.h>
+@interface DetailsViewController : UIViewController <UIGestureRecognizerDelegate, PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
 @property PFObject *establishmentObject;
 

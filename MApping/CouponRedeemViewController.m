@@ -116,6 +116,10 @@
         }else if (sender.state == UIGestureRecognizerStateEnded){
             
             self.promoCodeView.hidden = YES;
+            PFQuery *query = [PFQuery queryWithClassName:@"CouponUsed"];
+            [query whereKey:@"user" equalTo:[PFUser currentUser]];
+            [query includeKey:@"coupon"];
+            NSUInteger couponCount = [query countObjects];
             
             PFObject *couponUsed = [PFObject objectWithClassName:@"CouponUsed"];
             [couponUsed setObject:[PFUser currentUser] forKey:@"user"];
@@ -124,6 +128,11 @@
             [couponUsed setObject:self.couponObject[@"establishmentId"] forKey:@"establishmentId"];
             [couponUsed save]; // make synchronous first until system works, then go back and make async
             
+            
+            
+            if (couponCount == 0) {
+                [self performSegueWithIdentifier:@"toPersonalSurvey" sender:nil];
+            }else{
             // find 12 hours ago from this moment - Use NSDate datewithtimeintervalsincenow (60 * 60 *12 )
             NSDate *timeSinceFirstDrink = [NSDate dateWithTimeIntervalSinceNow:(60 * 60 * 12)];
             
@@ -148,6 +157,9 @@
                 [[PFUser currentUser] save];
             }
             
+           
+            
+            
             if ([[self.couponObject objectForKey:@"afterRedeemScreen"] isEqualToNumber: [NSNumber numberWithInt:1]]){
                 
                 [self performSegueWithIdentifier:@"toCustomerReview" sender:self];
@@ -160,8 +172,9 @@
                 
                 [self performSegueWithIdentifier:@"toAvPlayer" sender:self];
             }
-            
+            }
         }
+        
     }
 }
 - (IBAction)backButtonPressed:(UIButton *)sender {

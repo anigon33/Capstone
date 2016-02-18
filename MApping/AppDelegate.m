@@ -84,6 +84,9 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(surveyCompletionStatusUpdated:) name:@"com.barcoup.surveydatachanged" object:nil];
     
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(initalSurveyCompletionStatusUpdated:) name:@"com.barcoup.introSurvey" object:nil];
+    
+    
     NSString *filePath = [self dataFilePath];
     NSArray *pListDataArray;
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
@@ -92,8 +95,10 @@
         if([[pListDataArray firstObject]boolValue] == NO){
             // Load survey View Controller
             
-            self.incompleteSurvey = YES;
+            self.personalSurveyIsInComplete = YES;
             
+        }else if ([pListDataArray objectAtIndex:1] == NO){
+            self.establishmentSurveyIsInComplete = YES;
         }
     }
     return YES;
@@ -176,7 +181,7 @@
     if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusDenied) {
         NSString *title;
         title = (status == kCLAuthorizationStatusDenied) ? @"Location services are off" : @"Background location is not enabled";
-        NSString *message = @"To use background location you must turn on 'Always' in the Location Services Settings";
+        NSString *message = @"To use background location you must turn on 'Always' in the Location Services Settings.";
         
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                             message:message
@@ -190,7 +195,34 @@
         [self.locationManager requestAlwaysAuthorization];
     }
 }
+-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
+    if (status == kCLAuthorizationStatusAuthorizedWhenInUse || status == kCLAuthorizationStatusDenied) {
+        NSString *title;
+        title = (status == kCLAuthorizationStatusDenied) ? @"Location services are off" : @"Background location is not enabled";
+        NSString *message = @"To use background location you must turn on 'Always' in the Location Services Settings.";
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                            message:message
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                                  otherButtonTitles:@"Settings", nil];
+        [alertView show];
+        
+     
+    }
 
+
+}
+- (void)alertView:(UIAlertView *)alertView
+clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex == [alertView cancelButtonIndex]){
+        //cancel clicked ...do your action
+    }else{
+        //reset clicked
+                    NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+                    [[UIApplication sharedApplication] openURL:url];
+    }
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -240,6 +272,14 @@
 }
 
 -(void)surveyCompletionStatusUpdated:(NSNotification *)notification{
+    
+    NSString *filePath = [self dataFilePath];
+    NSNumber *completed = [notification.userInfo objectForKey:@"isCompleted"];
+    NSArray *pListDataArray = @[@YES,completed];
+    [pListDataArray writeToFile:filePath atomically:YES];
+    
+}
+-(void)initalSurveyCompletionStatusUpdated:(NSNotification *)notification{
     
     NSString *filePath = [self dataFilePath];
     NSNumber *completed = [notification.userInfo objectForKey:@"isCompleted"];

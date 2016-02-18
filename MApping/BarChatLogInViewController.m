@@ -22,7 +22,8 @@
     self.logInView.emailAsUsername = true;
     [self.logInView.logInButton setTitle:@"Log In" forState:UIControlStateNormal];
     [self.logInView setLogo:[[UIImageView alloc]initWithImage:[UIImage imageNamed:@"logo"]]];
-    [self.logInView.signUpButton setBackgroundImage:[UIImage imageNamed:@"SignUpTextRight"] forState:UIControlStateNormal];
+    
+    //[self.logInView.signUpButton setBackgroundImage:[UIImage imageNamed:@"SignUpTextRight"] forState:UIControlStateNormal];
     [self.logInView.logInButton setBackgroundImage:[UIImage imageNamed:@"SignUpandLogIn"] forState:UIControlStateNormal];
     self.logInView.signUpButton.clipsToBounds = YES;
     [self.logInView addSubview:imgView];

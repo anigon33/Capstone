@@ -18,6 +18,7 @@
 #import "DetailsViewController.h"
 #import "AppDelegate.h"
 #import "CustomerReviewViewController.h"
+#import "AdditionalQuestionsViewController.h"
 @interface ViewController () <CLLocationManagerDelegate, MKMapViewDelegate,UINavigationControllerDelegate, PFSignUpViewControllerDelegate, PFLogInViewControllerDelegate>
 @property (nonatomic, strong) NSArray *locations;
 @property (nonatomic, strong) PFObject *annotationTapped;
@@ -58,42 +59,23 @@
     //[self refreshAnnotations];
     
     
-    if (![PFUser currentUser]) { // No user logged in
-        // Create the log in view controller
-        BarChatLogInViewController *logInViewController = [[BarChatLogInViewController alloc] init];
-        [logInViewController setDelegate:self]; // Set ourselves as the delegate
-        logInViewController.fields = (PFLogInFieldsUsernameAndPassword
-                                      | PFLogInFieldsLogInButton
-                                      | PFLogInFieldsSignUpButton
-                                      | PFLogInFieldsPasswordForgotten);
         
-        // Create the sign up view controller
-        BarChatSignUpViewController *signUpViewController = [[BarChatSignUpViewController alloc] init];
-        [signUpViewController setDelegate:self]; // Set ourselves as the delegate
-        signUpViewController.fields = (PFSignUpFieldsUsernameAndPassword
-                                      | PFSignUpFieldsSignUpButton);
-        
-        // Assign our sign up controller to be displayed from the login controller
-        [logInViewController setSignUpController:signUpViewController];
-        
-        
-        // Present the log in view controller
-        [self presentViewController:signUpViewController animated:YES completion:NULL];
-        
-                
-    
-
-        
-    }
-    
 }
 -(void)viewDidAppear:(BOOL)animated{
     self.myMapView.showsUserLocation = YES;
 
     [self refreshAnnotations];
     
-    if (self.appDelegate.incompleteSurvey) {
-        UIStoryboard *st = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *st = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    if (self.appDelegate.personalSurveyIsInComplete) {
+        AdditionalQuestionsViewController *additionalQuestionsViewController = [st instantiateViewControllerWithIdentifier:@"AdditionQuestionsViewController"];
+        [additionalQuestionsViewController view];
+        additionalQuestionsViewController.presentedModally = YES;
+        [additionalQuestionsViewController setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        [self presentViewController:additionalQuestionsViewController animated:YES completion:nil];
+
+    } else if (self.appDelegate.establishmentSurveyIsInComplete){
         
         CustomerReviewViewController *customerReviewController = [st instantiateViewControllerWithIdentifier:@"CustomerReviewViewController"];
         [customerReviewController view];
@@ -128,41 +110,6 @@
     self.userLocation = (CLLocation*)[[notif userInfo] valueForKey:@"newLocationResult"];
 }
 
--(void) logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user{
-    if ([[[PFUser currentUser] valueForKey:@"emailVerified"] isEqualToNumber:[NSNumber numberWithBool:NO]]) {
-        NSString *title = @"Oops!";
-        NSString *message = @"Please verify email before procedding";
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                            message:message
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-        [alertView show];
-        
-    }else {
-    
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-    }
-}
-
--(void) signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user{
-    if ([[[PFUser currentUser] valueForKey:@"emailVerified"] isEqualToNumber:[NSNumber numberWithBool:NO]]) {
-        NSString *title = @"Oops!";
-        NSString *message = @"Please verify email before procedding";
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                            message:message
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
-        [alertView show];
-        
-    }else {
-        
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-        [self performSegueWithIdentifier:@"surveySegue" sender:self];
-       
-    }
-}
 
 - (NSMutableArray *)createAnnotations
 {

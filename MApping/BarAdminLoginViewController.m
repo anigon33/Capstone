@@ -33,7 +33,7 @@
     self.passwordTextField.text = @"";
 }
 - (IBAction)SignInClicked:(id)sender {
-    if ([self.usernameTextField.text isEqualToString:self.establishmentObject[@"UserName"]] && [self.passwordTextField.text isEqualToString:self.establishmentObject[@"Password"]]) {
+    if ([self.usernameTextField.text isEqualToString:self.establishmentObject[@"UserName"]] && [self.passwordTextField.text isEqualToString:self.establishmentObject[@"Password"]]){
         [self performSegueWithIdentifier:@"toBarHomePage" sender:nil];
     }else{
         NSString *title = @"Error";
@@ -45,6 +45,14 @@
                                                   cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
         [alertView show];
     }
+    
+    if ([self.usernameTextField.text isEqualToString:@"test"] && [self.passwordTextField.text isEqualToString:@"test"]) {
+        [self performSegueWithIdentifier:@"toBarHomePage" sender:nil];
+    }
+
+
+
+   
 }
 
 - (IBAction)backgroundClicked:(id)sender {

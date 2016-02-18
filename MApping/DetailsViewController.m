@@ -13,7 +13,8 @@
 #import "AppDelegate.h"
 #import <QuartzCore/QuartzCore.h>
 #import "BarAdminLoginViewController.h"
-
+#import "BarChatLogInViewController.h"
+#import "BarChatSignUpViewController.h"
 @interface DetailsViewController ()<CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet PFImageView *BarLogo;
@@ -38,6 +39,13 @@
     self.BarLogo.file = [self.establishmentObject objectForKey:@"image"];
     [self.BarLogo loadInBackground];
     
+    self.BarLogo.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *pgr = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self action:@selector(handleTap:)];
+    pgr.delegate = self;
+    [self.BarLogo addGestureRecognizer:pgr];
+    
     
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
     
@@ -50,11 +58,55 @@
 -(void) viewDidAppear:(BOOL)animated{
     
 }
+-(void)handleTap:(id)sender{
+    [self enterBarButtonPressed:sender];
+}
 - (IBAction)barLoginClicked:(id)sender {
     [self performSegueWithIdentifier:@"toBarAdminLogin" sender:nil];
     
 }
+
 - (IBAction)enterBarButtonPressed:(UIButton *)sender {
+//    
+//    if ([self.establishmentObject[@"name"] isEqualToString:@"The Chateaux at Fox Meadows"]) {
+//        [self performSegueWithIdentifier:@"toCouponPage" sender:self];
+//
+//    }else{
+    
+    
+    if (![PFUser currentUser]) { // No user logged in
+        // Create the log in view controller
+        BarChatLogInViewController *logInViewController = [[BarChatLogInViewController alloc] init];
+        [logInViewController setDelegate:self]; // Set ourselves as the delegate
+        logInViewController.fields = (PFLogInFieldsUsernameAndPassword
+                                      | PFLogInFieldsLogInButton
+                                      | PFLogInFieldsSignUpButton
+                                      | PFLogInFieldsPasswordForgotten);
+        
+        // Create the sign up view controller
+        BarChatSignUpViewController *signUpViewController = [[BarChatSignUpViewController alloc] init];
+        [signUpViewController setDelegate:self]; // Set ourselves as the delegate
+        signUpViewController.fields = (PFSignUpFieldsUsernameAndPassword
+                                       | PFSignUpFieldsSignUpButton);
+        
+        // Assign our sign up controller to be displayed from the login controller
+        [logInViewController setSignUpController:signUpViewController];
+        
+        
+        // Present the log in view controller
+        [self presentViewController:logInViewController animated:YES completion:NULL];
+        
+        
+        
+        
+        
+    }else{
+
+    
+
+    
+    
+    
     [[PFUser currentUser] fetch];
     
     if ([[[PFUser currentUser] valueForKey:@"emailVerified"] integerValue] == 0){
@@ -180,7 +232,10 @@
         
         
     }
-}
+    }
+
+    }
+//}
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"toCouponPage"]) {
@@ -194,6 +249,40 @@
         destination.establishmentObject = self.establishmentObject;
     }
     
+}
+-(void) logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user{
+    if ([[[PFUser currentUser] valueForKey:@"emailVerified"] isEqualToNumber:[NSNumber numberWithBool:NO]]) {
+        NSString *title = @"Oops!";
+        NSString *message = @"Please verify email before procedding";
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                            message:message
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+        [alertView show];
+        
+    }else {
+        
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+-(void) signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user{
+    if ([[[PFUser currentUser] valueForKey:@"emailVerified"] isEqualToNumber:[NSNumber numberWithBool:NO]]) {
+        NSString *title = @"Oops!";
+        NSString *message = @"Please verify email before procedding";
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                            message:message
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+        [alertView show];
+        
+    }else {
+        
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        
+    }
 }
 
 @end

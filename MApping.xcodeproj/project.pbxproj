@@ -11,6 +11,7 @@
 		E00DF9401B138FC8006BD131 /* spacetestSMALL_512kb.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = E00DF93F1B138FC8006BD131 /* spacetestSMALL_512kb.mp4 */; };
 		E03D6BE21AB751F800E3EFB6 /* BarListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E03D6BE11AB751F800E3EFB6 /* BarListTableViewController.m */; };
 		E05C73D71ABA64C400FE8309 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E05C73D61ABA64C400FE8309 /* DetailsViewController.m */; };
+		E06B1D981BD8941800256040 /* AdditionalQuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E06B1D971BD8941800256040 /* AdditionalQuestionsViewController.m */; };
 		E06FD8081B1B871F00551BF5 /* PayWithTweetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E06FD8071B1B871F00551BF5 /* PayWithTweetViewController.m */; };
 		E07130B31AD857EC00C95E29 /* CouponRedeemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E07130B21AD857EC00C95E29 /* CouponRedeemViewController.m */; };
 		E079E01A1ACAD7E100D5A6E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E079E0181ACAD7E100D5A6E2 /* Main.storyboard */; };
@@ -99,6 +100,8 @@
 		E03D6BE11AB751F800E3EFB6 /* BarListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BarListTableViewController.m; sourceTree = "<group>"; };
 		E05C73D51ABA64C400FE8309 /* DetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
 		E05C73D61ABA64C400FE8309 /* DetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
+		E06B1D961BD8941800256040 /* AdditionalQuestionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdditionalQuestionsViewController.h; sourceTree = "<group>"; };
+		E06B1D971BD8941800256040 /* AdditionalQuestionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdditionalQuestionsViewController.m; sourceTree = "<group>"; };
 		E06FD8061B1B871F00551BF5 /* PayWithTweetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PayWithTweetViewController.h; sourceTree = "<group>"; };
 		E06FD8071B1B871F00551BF5 /* PayWithTweetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PayWithTweetViewController.m; sourceTree = "<group>"; };
 		E07130B11AD857EC00C95E29 /* CouponRedeemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouponRedeemViewController.h; sourceTree = "<group>"; };
@@ -434,8 +437,10 @@
 				E07130B11AD857EC00C95E29 /* CouponRedeemViewController.h */,
 				E07130B21AD857EC00C95E29 /* CouponRedeemViewController.m */,
 				E0DA1B701AB38B0100D23CD7 /* AppDelegate.h */,
-				E07C93451BC9B08E0089A30D /* CustomCellView.xib */,
 				E0DA1B711AB38B0100D23CD7 /* AppDelegate.m */,
+				E07C93451BC9B08E0089A30D /* CustomCellView.xib */,
+				E06B1D961BD8941800256040 /* AdditionalQuestionsViewController.h */,
+				E06B1D971BD8941800256040 /* AdditionalQuestionsViewController.m */,
 				E07C93421BC9AA570089A30D /* CustomTableViewCell.h */,
 				E07C93431BC9AA570089A30D /* CustomTableViewCell.m */,
 				E07E0C611AC49CCD00FD44EA /* AdditionalSurveyQuestionsViewController.h */,
@@ -664,6 +669,7 @@
 				E0C8EA721ABF9A6200E9456E /* NSManagedObjectContext+MagicalObserving.m in Sources */,
 				E0C8EA7E1ABF9A6200E9456E /* MagicalRecord+ShorthandSupport.m in Sources */,
 				E0C8EA6B1ABF9A6200E9456E /* NSString+MagicalDataImport.m in Sources */,
+				E06B1D981BD8941800256040 /* AdditionalQuestionsViewController.m in Sources */,
 				E0C8EA691ABF9A6200E9456E /* NSObject+MagicalDataImport.m in Sources */,
 				E0C8EA7A1ABF9A6200E9456E /* MagicalRecord+ErrorHandling.m in Sources */,
 				E0C8EA831AC0CD9200E9456E /* User.m in Sources */,
