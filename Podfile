@@ -3,6 +3,7 @@
 
 target 'MApping' do
 pod 'Canvas'
+
 end
 
 target 'MAppingTests' do

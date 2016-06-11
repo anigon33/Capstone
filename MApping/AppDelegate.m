@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "CoreData+MagicalRecord.h"
 #import "EstablishmentRegion.h"
 #import "CustomerReviewViewController.h"
 #import "ViewController.h"
@@ -26,6 +25,14 @@
    
     
     //[Parse enableLocalDatastore];
+    
+    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+        configuration.applicationId = @"sZre86lG4ulrSGqA50KmG9Fef1nv9IUKwmtc8aC6";
+        configuration.clientKey = @"EqZMxxzkIszmTyplXiDgRFiJZY5AyQCDXTR8nPlI";
+        configuration.server = @"http://parseserver.icju2mikqa.us-east-1.elasticbeanstalk.com/parse";
+    }]];
+    
+    
     [Parse setApplicationId:@"sZre86lG4ulrSGqA50KmG9Fef1nv9IUKwmtc8aC6"
                   clientKey:@"EqZMxxzkIszmTyplXiDgRFiJZY5AyQCDXTR8nPlI"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
