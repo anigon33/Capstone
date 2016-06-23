@@ -32,9 +32,9 @@
         configuration.server = @"http://parseserver.icju2mikqa.us-east-1.elasticbeanstalk.com/parse";
     }]];
     
-    
-    [Parse setApplicationId:@"sZre86lG4ulrSGqA50KmG9Fef1nv9IUKwmtc8aC6"
-                  clientKey:@"EqZMxxzkIszmTyplXiDgRFiJZY5AyQCDXTR8nPlI"];
+//    
+//    [Parse setApplicationId:@"sZre86lG4ulrSGqA50KmG9Fef1nv9IUKwmtc8aC6"
+//                  clientKey:@"EqZMxxzkIszmTyplXiDgRFiJZY5AyQCDXTR8nPlI"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     
@@ -99,6 +99,7 @@
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         pListDataArray = [[NSArray alloc] initWithContentsOfFile:filePath];
         
+        if ([pListDataArray count] > 1) {
         if([[pListDataArray firstObject]boolValue] == NO){
             // Load survey View Controller
             
@@ -106,6 +107,7 @@
             
         }else if ([pListDataArray objectAtIndex:1] == NO){
             self.establishmentSurveyIsInComplete = YES;
+        }
         }
     }
     return YES;
@@ -127,7 +129,7 @@
         self.latestLocation = newLocation;
         
         
-        NSLog(@"current location = %@", [locations lastObject]);
+        //NSLog(@"current location = %@", [locations lastObject]);
         if ([PFUser currentUser] ==nil) {
             
         }else{

@@ -67,12 +67,11 @@
 }
 
 - (IBAction)enterBarButtonPressed:(UIButton *)sender {
-//    
-//    if ([self.establishmentObject[@"name"] isEqualToString:@"The Chateaux at Fox Meadows"]) {
-//        [self performSegueWithIdentifier:@"toCouponPage" sender:self];
-//
-//    }else{
-    
+    //
+    //    if ([self.establishmentObject[@"name"] isEqualToString:@"The Chateaux at Fox Meadows"]) {
+    //        [self performSegueWithIdentifier:@"toCouponPage" sender:self];
+    //
+    //    }else{
     
     if (![PFUser currentUser]) { // No user logged in
         // Create the log in view controller
@@ -96,32 +95,23 @@
         // Present the log in view controller
         [self presentViewController:logInViewController animated:YES completion:NULL];
         
-        
-        
-        
-        
     }else{
-
-    
-
-    
-    
-    
-    [[PFUser currentUser] fetch];
-    
-    if ([[[PFUser currentUser] valueForKey:@"emailVerified"] integerValue] == 0){
-        NSString *title = @"Whoops";
-        NSString *message = @"Please verify your email before getting great deals!";
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                            message:message
-                                                           delegate:self
-                                                  cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+        [[PFUser currentUser] fetch];
         
-        
-        [alertView show];
-        
-    }else{
+        //    if ([[[PFUser currentUser] valueForKey:@"emailVerified"] integerValue] == 0){
+        //        NSString *title = @"Whoops";
+        //        NSString *message = @"Please verify your email before getting great deals!";
+        //
+        //        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+        //                                                            message:message
+        //                                                           delegate:self
+        //                                                  cancelButtonTitle:@"Cancel" otherButtonTitles:nil, nil];
+        //
+        //
+        //        [alertView show];
+        //
+        //    }else{
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         
         if (appDelegate.locationAccurate) {
@@ -140,15 +130,11 @@
             barsAroundCurrentLocation = [query findObjects];
             [self.spinner stopAnimating];
             
-            if (barsAroundCurrentLocation.count != 0){
-                
-                
-                
+            if (barsAroundCurrentLocation.count != 0) {
                 for (PFObject *bar in barsAroundCurrentLocation) {
                     
                     if ([self.establishmentObject[@"name"] isEqualToString:bar[@"name"]]) {
                         barFound = YES;
-                        NSLog(@"Test");
                         if (appDelegate.visitObject == nil) {
                             appDelegate.visitObject = [PFObject objectWithClassName:@"Visit"];
                             [appDelegate.visitObject setObject:[NSDate date] forKey:@"start"];
@@ -157,11 +143,7 @@
                             [appDelegate.visitObject setObject:self.establishmentObject forKey:@"establishments"];
                             [appDelegate.visitObject saveInBackground];
                         }
-                        
                         [self performSegueWithIdentifier:@"toCouponPage" sender:self];
-                        
-                        
-                        
                     }
                     if(barFound == NO){
                         [UIView animateWithDuration:0.1 animations:^{
@@ -193,18 +175,11 @@
                                 }];
                             }];
                         }];
-                        
-                        
                     }
                 }
-                
-            }
-            
-            
-            else{
+            } else {
                 NSString *title = @"Oops!";
                 NSString *message = @"Coup' users must be inside each bar to see the specials, so get over there already!!";
-                
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                                     message:message
                                                                    delegate:self
@@ -212,11 +187,8 @@
                 
                 
                 [alertView show];
-                
             }
-            
-            
-        }else{
+        } else {
             NSString *title = @"Whoa!";
             NSString *message = @"Hold on let us catch up! Try again soon";
             
@@ -229,19 +201,15 @@
             [alertView show];
             
         }
-        
-        
     }
-    }
+}
 
-    }
-//}
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"toCouponPage"]) {
         
-    CouponViewController *destination = segue.destinationViewController;
-    destination.establishmentObject = self.establishmentObject;
+        CouponViewController *destination = segue.destinationViewController;
+        destination.establishmentObject = self.establishmentObject;
         
     }
     if ([segue.identifier isEqualToString:@"toBarAdminLogin"]) {

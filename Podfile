@@ -3,7 +3,9 @@
 
 target 'MApping' do
 pod 'Canvas'
-
+pod 'Parse'
+pod 'ParseUI'
+pod 'ParseFacebookUtilsV4'
 end
 
 target 'MAppingTests' do
