@@ -10,6 +10,7 @@
 #import "EstablishmentRegion.h"
 #import "CustomerReviewViewController.h"
 #import "ViewController.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @interface AppDelegate ();
 @property (strong, nonatomic) CLCircularRegion *region;
@@ -25,16 +26,20 @@
    
     
     //[Parse enableLocalDatastore];
-    
+//    
     [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
         configuration.applicationId = @"sZre86lG4ulrSGqA50KmG9Fef1nv9IUKwmtc8aC6";
         configuration.clientKey = @"EqZMxxzkIszmTyplXiDgRFiJZY5AyQCDXTR8nPlI";
         configuration.server = @"http://parseserver.icju2mikqa.us-east-1.elasticbeanstalk.com/parse";
     }]];
-    
-//    
-//    [Parse setApplicationId:@"sZre86lG4ulrSGqA50KmG9Fef1nv9IUKwmtc8aC6"
-//                  clientKey:@"EqZMxxzkIszmTyplXiDgRFiJZY5AyQCDXTR8nPlI"];
+    // Use this to test on local host before archiving to AWS
+//    [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
+//        configuration.applicationId = @"sZre86lG4ulrSGqA50KmG9Fef1nv9IUKwmtc8aC6";
+//        configuration.clientKey = @"EqZMxxzkIszmTyplXiDgRFiJZY5AyQCDXTR8nPlI";
+//        configuration.server = @"http://localhost:1337/parse";
+//    }]];
+//
+
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     
@@ -110,6 +115,13 @@
         }
         }
     }
+    
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
+    
+    
+    
+    
     return YES;
 }
 
@@ -266,6 +278,19 @@ clickedButtonAtIndex:(NSInteger)buttonIndex{
     }
     
 }
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    
+    BOOL handled = [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                                  openURL:url
+                                                        sourceApplication:sourceApplication
+                                                               annotation:annotation
+                    ];
+    // Add any custom logic here.
+    return handled;
+}
+
+
 -(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
     if ([viewController isKindOfClass:[UINavigationController class]])
     {

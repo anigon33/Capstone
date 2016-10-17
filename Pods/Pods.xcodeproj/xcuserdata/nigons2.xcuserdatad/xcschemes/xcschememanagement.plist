@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FBSDKShareKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Parse.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -62,6 +67,16 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>57E7E57C1DE8A4FF334FE82FCEBE9867</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6E7B2CF2F9D161E4DB2C0174D7A3D9CA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>7E61C9A8C176278C6C99C2C59E9C152E</key>
 		<dict>
 			<key>primary</key>
@@ -78,11 +93,6 @@
 			<true/>
 		</dict>
 		<key>A8526AA34ABFB99A5D4677997F6CC1B9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>B873F668E75B2ABFB7BB6AB23DE1AA72</key>
 		<dict>
 			<key>primary</key>
 			<true/>

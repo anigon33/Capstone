@@ -6,6 +6,9 @@ pod 'Canvas'
 pod 'Parse'
 pod 'ParseUI'
 pod 'ParseFacebookUtilsV4'
+pod 'FBSDKCoreKit'
+pod 'FBSDKLoginKit'
+pod 'FBSDKShareKit'
 end
 
 target 'MAppingTests' do

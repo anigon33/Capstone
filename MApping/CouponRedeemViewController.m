@@ -11,10 +11,14 @@
 #import "PayWithTweetViewController.h"
 #import "AvViewController.h"
 #import "CustomerReviewViewController.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKShareKit/FBSDKShareKit.h>
+
 @interface CouponRedeemViewController ()<UIGestureRecognizerDelegate>
 @property BOOL locked;
-
 @property (weak, nonatomic) IBOutlet UIView *lockedView;
+@property (weak, nonatomic) IBOutlet UIView *LikeContainerView;
+
 @property (strong, nonatomic) IBOutlet UILongPressGestureRecognizer *longPressGesture;
 @property (weak, nonatomic) IBOutlet UIImageView *lockedCoupon;
 
@@ -30,6 +34,31 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    FBSDKLikeControl *likeButton = [[FBSDKLikeControl alloc] init];
+    likeButton.objectID = @"https://www.facebook.com/Google";
+    likeButton.center = self.LikeContainerView.center;
+    [self.LikeContainerView addSubview:likeButton];
+
+//    
+//    self.LikeButtonView.objectID = @"https://www.facebook.com/Google";
+//    
+    [likeButton addTarget:self action:@selector(likeButtonPressed) forControlEvents:UIControlEventValueChanged];
+    
+    
+   // self.LikeButtonView.transform = CGAffineTransformMakeScale(2,2);
+   // self.LikeButtonView.likeControlHorizontalAlignment = FBSDKLikeControlHorizontalAlignmentCenter;
+    
+    
+   
+//    
+//    NSLayoutConstraint *centerConstraint = [NSLayoutConstraint constraintWithItem:self.button attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.lockedView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
+//    
+//    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:self.button attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.lockedView attribute:NSLayoutAttributeTop multiplier:1.0 constant:60.0];
+//    
+//    centerConstraint.active = YES;
+//    topConstraint.active = YES;
+//    [self.view addConstraint:centerConstraint];
+//    [self.view addConstraint:topConstraint];
     
     
     self.longPressGesture.allowableMovement = 50;
@@ -82,6 +111,13 @@
             self.returnedFromTweetBool = NO;
         }
     }
+}
+-(void) likeButtonPressed{
+    
+    
+    
+    self.locked = NO;
+    self.lockedView.hidden = YES;
 }
 -(void)viewDidAppear:(BOOL)animated{
     
