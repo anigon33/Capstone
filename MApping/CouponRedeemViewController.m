@@ -38,12 +38,14 @@
     likeButton.objectID = @"https://www.facebook.com/Google";
     likeButton.center = self.LikeContainerView.center;
     [self.LikeContainerView addSubview:likeButton];
+    
+
 
 //    
 //    self.LikeButtonView.objectID = @"https://www.facebook.com/Google";
 //    
-    [likeButton addTarget:self action:@selector(likeButtonPressed) forControlEvents:UIControlEventValueChanged];
-    
+    [likeButton addTarget:self action:@selector(likeButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+        
     
    // self.LikeButtonView.transform = CGAffineTransformMakeScale(2,2);
    // self.LikeButtonView.likeControlHorizontalAlignment = FBSDKLikeControlHorizontalAlignmentCenter;
@@ -112,12 +114,14 @@
         }
     }
 }
+
 -(void) likeButtonPressed{
     
     
     
     self.locked = NO;
     self.lockedView.hidden = YES;
+    self.returnedFromTweetBool = YES;
 }
 -(void)viewDidAppear:(BOOL)animated{
     

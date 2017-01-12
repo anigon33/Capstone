@@ -190,7 +190,7 @@
                 }
             } else {
                 NSString *title = @"Whoa!";
-                NSString *message = @"Hold on let us catch up! Try again soon";
+                NSString *message = @"Hold on let us catch up! Try again soon. Make sure BarCoup can access you're location in settings.";
                 
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                                     message:message
