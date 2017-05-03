@@ -67,11 +67,11 @@
 }
 
 - (IBAction)enterBarButtonPressed:(UIButton *)sender {
-    //
-    //    if ([self.establishmentObject[@"name"] isEqualToString:@"The Chateaux at Fox Meadows"]) {
-    //        [self performSegueWithIdentifier:@"toCouponPage" sender:self];
-    //
-    //    }else{
+//    
+//        if ([self.establishmentObject[@"name"] isEqualToString:@"The Chateaux at Fox Meadows"]) {
+//            [self performSegueWithIdentifier:@"toCouponPage" sender:self];
+//    
+//        }else{
     
     if (![PFUser currentUser]) { // No user logged in
         // Create the log in view controller
@@ -204,7 +204,7 @@
         }
     }
 }
-
+//}
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"toCouponPage"]) {
